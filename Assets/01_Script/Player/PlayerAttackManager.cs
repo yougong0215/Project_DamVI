@@ -10,10 +10,18 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     public PlayerStatues PlayerS
     {
         get => playerStat;
+        set
+        {
+            playerStat = value;
+        }
     }
     public PlayerPripoty PlayerP
     {
         get => playerpri;
+        set
+        {
+            playerpri = value;
+        }
     }
     Collider[] hit;
     void Start()

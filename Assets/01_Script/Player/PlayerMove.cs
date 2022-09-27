@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
 
     [Header("카메라 혹은 락걸때")]
     [SerializeField] Transform LookObject;
-    [SerializeField] Transform ArrowLoock;
+    [SerializeField] Transform ArrowLook;
     Vector2 _direction;
 
     [Header("이동 값")]
@@ -19,13 +19,14 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float _inpuseMoveSpeed = 5;
 
     [Header("기타 상태 확인용 컴포넌트")]
-    [SerializeField] 
-    Rigidbody _rigid;
+    [SerializeField] Animator _ani;
+    [SerializeField] Rigidbody _rigid;
     float _sense = 0.5f;
 
     private void OnEnable()
     {
        _rigid = GetComponent<Rigidbody>();
+       _ani = GetComponent<Animator>();
     }
 
 
@@ -35,7 +36,7 @@ public class PlayerMove : MonoBehaviour
         {
             Move();
         }
-        if(PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming)
+        if(PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming && ArrowLook != null)
         {
             ZoomMove();
         }
@@ -49,7 +50,7 @@ public class PlayerMove : MonoBehaviour
         //ArrowLoock.SetParent(null);
 
         transform.localEulerAngles = new Vector3(0, _originrayY, 0);
-        ArrowLoock.localEulerAngles = new Vector3(_originrayX, 0, 0);
+        ArrowLook.localEulerAngles = new Vector3(_originrayX, 0, 0);
 
 
         _originrayY += Input.GetAxis("Mouse X") * _sense;
@@ -68,6 +69,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
+        
+
         _originrayY = transform.localEulerAngles.y;
         //ArrowLoock.SetParent(transform);
         Vector3 dirs = LookObject.transform.localRotation * Vector3.forward;
@@ -93,13 +96,18 @@ public class PlayerMove : MonoBehaviour
         if (_direction == Vector2.zero)
         {
             //_ani.SetBool("Walk", false);
+           
+
+
+            _ani.SetBool("Move", false);
             return;
         }
         else if (_direction != Vector2.zero)
         {
             //_ani.SetBool("Walk", true);
         }
-        
+        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Move;
+        _ani.SetBool("Move", true);
 
         float angle = Vector2.SignedAngle(new Vector2(Mathf.Cos(0 * Mathf.Deg2Rad), Mathf.Sin(0 * Mathf.Deg2Rad)), _direction);
         dirs.y = 0.0f;

@@ -1,0 +1,236 @@
+fileFormatVersion: 2
+guid: b6455a8a946cc2145863f1d7b23b0133
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: feadf72309fa1144fabc23010aa6bea7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body2
+    second: {fileID: 2100000, guid: 78da00b983bf38d4ea9572236554f592, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Handle
+    second: {fileID: 2100000, guid: 37afa536b248b794cafac1a6239f2921, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rope
+    second: {fileID: 2100000, guid: 6951c0e6ebe1d4f45bd4f114cb6282a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body3
+    second: {fileID: 2100000, guid: fca020e472d95e74aaad481ae00883c3, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Bow(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Light
+      parentName: Bow(Clone)
+      position: {x: -4.0762453, y: 5.903862, z: -1.005454}
+      rotation: {x: 0.52327543, y: -0.34203398, z: 0.72694236, w: 0.28416628}
+      scale: {x: 100.00001, y: 100, z: 100}
+    - name: Camera
+      parentName: Bow(Clone)
+      position: {x: -7.3588915, y: 4.958309, z: 6.925791}
+      rotation: {x: 0.0906284, y: 0.8937962, z: -0.20997299, w: 0.38577998}
+      scale: {x: 100, y: 100.00001, z: 99.99999}
+    - name: Cylinder.006
+      parentName: Bow(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cube.001
+      parentName: Bow(Clone)
+      position: {x: 6.113048e-17, y: 0.58802646, z: -0.787946}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 11.388713, y: 14.768568, z: 28.467434}
+    - name: Cube
+      parentName: Bow(Clone)
+      position: {x: 6.113048e-17, y: 0.8264469, z: -0.9024196}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 10.986721, y: 22.847534, z: 22.847534}
+    - name: Cube.002
+      parentName: Bow(Clone)
+      position: {x: -3.2498073e-17, y: 0.33855852, z: -0.6910038}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 8.618986, y: 8.618986, z: 50.187447}
+    - name: Cube.003
+      parentName: Bow(Clone)
+      position: {x: -1.321927e-17, y: 1.2667127, z: -0.5149679}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 5.5203795, y: 5.5203795, z: 70.790955}
+    - name: Cube.004
+      parentName: Bow(Clone)
+      position: {x: -1.321927e-17, y: 1.2731793, z: -0.5930708}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 6.89402, y: 5.399929, z: 43.73899}
+    - name: Cube.005
+      parentName: Bow(Clone)
+      position: {x: -1.321927e-17, y: 2.0226278, z: -0.4908164}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 5.537782, y: 5.537782, z: 100}
+    - name: Cube.006
+      parentName: Bow(Clone)
+      position: {x: -1.321927e-17, y: 2.0226278, z: -0.34116662}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 5.8004885, y: 3.4683504, z: 12.369985}
+    - name: Cube.007
+      parentName: Bow(Clone)
+      position: {x: -1.321927e-17, y: 3.501298, z: -0.032978073}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 13.932734, y: 10.08383, z: 100}
+    - name: Cube.008
+      parentName: Bow(Clone)
+      position: {x: 0.0000001346744, y: -0.5798341, z: -0.78794575}
+      rotation: {x: 0.000000053385076, y: 0.7071069, z: -0.7071067, w: -0.000000053385076}
+      scale: {x: 11.388713, y: 14.768568, z: 28.467434}
+    - name: Cube.009
+      parentName: Bow(Clone)
+      position: {x: 0.000000098673915, y: -0.8182543, z: -0.9024194}
+      rotation: {x: 0.00000005338508, y: 0.7071069, z: -0.7071067, w: -0.000000053385076}
+      scale: {x: 10.986721, y: 22.847534, z: 22.847534}
+    - name: Cube.010
+      parentName: Bow(Clone)
+      position: {x: 0.00000017234301, y: -0.33036625, z: -0.6910035}
+      rotation: {x: 0.00000005338508, y: 0.7071069, z: -0.7071067, w: -0.000000053385076}
+      scale: {x: 8.618986, y: 8.618986, z: 50.187447}
+    - name: Cube.011
+      parentName: Bow(Clone)
+      position: {x: 0.000000032195633, y: -1.2585202, z: -0.51496786}
+      rotation: {x: 0.000000053385076, y: 0.7071069, z: -0.7071067, w: -0.00000005338508}
+      scale: {x: 5.5203795, y: 5.5203795, z: 70.790955}
+    - name: Cube.012
+      parentName: Bow(Clone)
+      position: {x: 0.000000031219198, y: -1.2649869, z: -0.59307075}
+      rotation: {x: 0.000000053385076, y: 0.7071069, z: -0.7071067, w: -0.00000005338508}
+      scale: {x: 6.89402, y: 5.399929, z: 43.73899}
+    - name: Cube.013
+      parentName: Bow(Clone)
+      position: {x: -0.00000008194438, y: -2.0144353, z: -0.49081656}
+      rotation: {x: 0.000000053385076, y: 0.7071069, z: -0.7071067, w: -0.00000005338508}
+      scale: {x: 5.537782, y: 5.537782, z: 100}
+    - name: Cube.014
+      parentName: Bow(Clone)
+      position: {x: -0.000000081944385, y: -2.0144353, z: -0.34116676}
+      rotation: {x: 0.000000053385076, y: 0.7071069, z: -0.7071067, w: -0.000000053385076}
+      scale: {x: 5.8004885, y: 3.4683504, z: 12.369985}
+    - name: Cube.015
+      parentName: Bow(Clone)
+      position: {x: -0.00000030521736, y: -3.4931054, z: -0.032978594}
+      rotation: {x: 0.000000053385076, y: 0.7071069, z: -0.7071067, w: -0.00000005338508}
+      scale: {x: 13.932734, y: 10.08383, z: 100}
+    - name: Cylinder
+      parentName: Bow(Clone)
+      position: {x: 0.08258872, y: 0.02524045, z: 0.10763117}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 0.58284354, y: 0.58284354, z: 329.28897}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
