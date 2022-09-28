@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CameraCol : MonoBehaviour
 {
-    private Transform _player;
+
     [SerializeField] CinemachineVirtualCamera _vcam;
     [SerializeField] float _originrayX;
     [SerializeField] float _originrayY;
@@ -11,7 +11,7 @@ public class CameraCol : MonoBehaviour
 
 
 
-
+    private Transform _player;
     public Transform Player
     {
         get
