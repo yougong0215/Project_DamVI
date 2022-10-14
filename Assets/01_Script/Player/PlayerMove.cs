@@ -32,13 +32,28 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if(PlayerAttackManager.Instance.PlayerP == PlayerPripoty.none || PlayerAttackManager.Instance.PlayerP == PlayerPripoty.Move)
+        if(PlayerAttackManager.Instance.PlayerP == PlayerPripoty.none)
         {
             Move();
+            Jump();
         }
+        if(PlayerAttackManager.Instance.PlayerP == PlayerPripoty.Move)
+        {
+            Run();
+            Jump();
+        }
+
         if(PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming && ArrowLook != null)
         {
             ZoomMove();
+        }
+        if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.Fight)
+        {
+            MoveDir();
+            if (_direction != Vector2.zero)
+            {
+                NormalMove(0.2f);
+            }
         }
     }
 
@@ -67,14 +82,8 @@ public class PlayerMove : MonoBehaviour
         transform.Translate(dir * Time.deltaTime * _moveSpeed * 0.05f);
     }
 
-    private void Move()
+    private void MoveDir()
     {
-        
-
-        _originrayY = transform.localEulerAngles.y;
-        //ArrowLoock.SetParent(transform);
-        Vector3 dirs = LookObject.transform.localRotation * Vector3.forward;
-        _direction = Vector2.zero;
         if (Input.GetKey(KeyCode.W))
         {
             _direction += new Vector2(Mathf.Cos(0 * Mathf.Deg2Rad), Mathf.Sin(0 * Mathf.Deg2Rad));
@@ -91,22 +100,71 @@ public class PlayerMove : MonoBehaviour
         {
             _direction += new Vector2(Mathf.Cos(90 * Mathf.Deg2Rad), Mathf.Sin(90 * Mathf.Deg2Rad));
         }
+    }
+
+
+    private void Run()
+    {
+
+
+        _originrayY = transform.localEulerAngles.y;
+        //ArrowLoock.SetParent(transform);
+        _direction = Vector2.zero;
+
+
+        MoveDir();
+
+        _direction.Normalize();
+
+        if (_direction == Vector2.zero)
+        {
+
+            _ani.SetInteger("Run", 0);
+            return;
+        }
+        else
+        {
+            _ani.SetInteger("Run", 1);
+        }
+
+
+        NormalMove(1);
+
+        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Move;
+        PlayerAttackManager.Instance.SetDelayZero();
+    }
+
+
+    private void Move()
+    {
+        
+
+        _originrayY = transform.localEulerAngles.y;
+        //ArrowLoock.SetParent(transform);
+        _direction = Vector2.zero;
+
+
+        MoveDir();
+        
         _direction.Normalize();
         
         if (_direction == Vector2.zero)
         {
-            //_ani.SetBool("Walk", false);
-           
-
-
+            
             _ani.SetBool("Move", false);
             return;
         }
-        else if (_direction != Vector2.zero)
-        {
-            //_ani.SetBool("Walk", true);
-        }
-        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Move;
+
+        NormalMove(0.5f);
+
+        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
+        PlayerAttackManager.Instance.SetDelayZero();
+    }
+
+
+    void NormalMove(float speed)
+    {
+        Vector3 dirs = LookObject.transform.localRotation * Vector3.forward;
         _ani.SetBool("Move", true);
 
         float angle = Vector2.SignedAngle(new Vector2(Mathf.Cos(0 * Mathf.Deg2Rad), Mathf.Sin(0 * Mathf.Deg2Rad)), _direction);
@@ -116,12 +174,20 @@ public class PlayerMove : MonoBehaviour
 
         float cameraAngle = Vector3.SignedAngle(Vector3.forward, dirs, Vector3.up);
         transform.rotation = Quaternion.Euler(Vector3.up * (cameraAngle + angle));
-        
+
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(a * Vector3.forward), Time.deltaTime * 3);
-        transform.Translate(Vector3.forward * Time.deltaTime * _moveSpeed);
+        transform.Translate(Vector3.forward * Time.deltaTime * _moveSpeed * speed);
         if (Input.GetMouseButtonDown(1))
         {
             _rigid.AddForce(new Vector3(_direction.x, 0, _direction.y) * _inpuseMoveSpeed, ForceMode.Impulse);
+        }
+    }
+
+    void Jump()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            _rigid.AddForce(new Vector3(0, 1, 0) * 250, ForceMode.Impulse);
         }
     }
 }

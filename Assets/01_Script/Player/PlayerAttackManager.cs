@@ -5,11 +5,19 @@ using UnityEngine;
 public class PlayerAttackManager : Singleton<PlayerAttackManager>
 {
     [Header("Enum 들")]
-    [SerializeField] PlayerStatues playerStat;
-    [SerializeField] PlayerPripoty playerpri;
+    [SerializeField] public PlayerStatues playerStat;
+    [SerializeField] public PlayerPripoty playerpri;
 
     [Header("에니메이션")]
     [SerializeField] Animator _ani;
+
+    [Header("적들")]
+    [SerializeField] Collider[] hit;
+
+    [SerializeField] private int _playerAttackValue;
+
+
+
 
     private Transform _player;
     public Transform Player
@@ -40,32 +48,61 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
             playerpri = value;
         }
     }
-    Collider[] hit;
+
+
+    float Delay = 0;
 
     void Start()
     {
         playerpri = PlayerPripoty.none;
         playerStat = PlayerStatues.Idle;
-        hit = Physics.OverlapBox(transform.position, new Vector3(4, 4, 4), Quaternion.identity, 1 << (LayerMask.NameToLayer("InterectionObj")));
         _ani = Player.GetComponent<Animator>();
     }
 
-
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z +1f), new Vector3(1.5f, 1.5f, 1.5f));
+    }
 
     // Update is called once per frame
     void Update()
     {
+       
+
+        Debug.Log(PlayerP);
+        Attack();
+        RunState();
+    }
+
+    void RunState()
+    {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            if(PlayerP != PlayerPripoty.Fight)
+                 PlayerP = PlayerPripoty.Move;
+        }
+    }
+
+    void Attack()
+    {
         if (Input.GetMouseButtonDown(0) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
         {
-            playerpri = PlayerPripoty.Fight;
             _ani.SetTrigger("Attack");
-            //CameraManager.Instance.CiemanchineChange("ArrowView");
+            SetDelayZero();
         }
-        //if(Input.GetMouseButtonUp(0))
+        Debug.Log(Delay);
+        if (Delay >= 0.34f)
         {
-            //playerpri = PlayerPripoty.none;
-            //CameraManager.Instance.PlayerViewChange();
+            PlayerP = PlayerPripoty.none;
+            PlayerS = PlayerStatues.Idle;
         }
+        Delay += Time.deltaTime;
+    }
+
+    public void SetDelayZero()
+    {
+        Delay = 0;
     }
 
     public void SetStateNone()
@@ -74,5 +111,12 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         playerStat = PlayerStatues.Idle;
     }
     
+    public void AbleDamage(Vector3 size)
+    {
+        if (size == Vector3.zero)
+        {
+            size = new Vector3(1.5f, 1.5f, 1.5f);
+        }
 
+    }
 }

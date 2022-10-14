@@ -858,8 +858,10 @@ GameObject:
   - component: {fileID: 488716752}
   - component: {fileID: 488716751}
   - component: {fileID: 488716755}
+  - component: {fileID: 488716756}
+  - component: {fileID: 488716757}
   m_Layer: 16
-  m_Name: Cube
+  m_Name: EnemyCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -958,6 +960,44 @@ MonoBehaviour:
   _name: "\uC0CC\uC988"
   _Info: "\uC640 \uC0CC\uC988 \uC544\uC2DC\uB294\uAD6C\uB098 \uC774\uAC70 \uC815\uB9D0
     \uC5B4\uB835\uC2B5\uB124\uB2E4"
+--- !u!114 &488716756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488716750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b36b43595683bd4192b138ad5925cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 30
+  ATK: 3
+  _reviveCount: 0
+  _detectionLength: 5
+  BossMonster: 0
+  _superArrmor: 0
+  _stunTime: 0
+  _DelayTime: 0
+  _playerStat: 0
+  _rigid: {fileID: 0}
+--- !u!54 &488716757
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488716750}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &490656097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8309725672202082137, guid: b2f80edb8f1a92442b725bbb41cf6eed, type: 3}
@@ -1477,6 +1517,8 @@ MonoBehaviour:
   playerStat: 0
   playerpri: 0
   _ani: {fileID: 0}
+  hit: []
+  _playerAttackValue: 0
 --- !u!114 &743890927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2137,8 +2179,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821899302}
-  m_LocalRotation: {x: 0.3826835, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 3, z: -3}
+  m_LocalRotation: {x: 0.31622776, y: -0, z: -0, w: 0.9486833}
+  m_LocalPosition: {x: 0, y: 3, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2573,8 +2615,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.3826835, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 4.5, z: -3}
+  m_LocalRotation: {x: 0.31622776, y: 0, z: 0, w: 0.9486833}
+  m_LocalPosition: {x: 0, y: 4.5, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3782,7 +3824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c6b79e1b6b4318943ac39acfe1074088, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c6b79e1b6b4318943ac39acfe1074088, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3861,9 +3903,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581756085}
   serializedVersion: 2
-  m_Mass: 10000
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 60
+  m_Drag: 0.1
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -3917,6 +3959,8 @@ MonoBehaviour:
   playerStat: 0
   playerpri: 0
   _ani: {fileID: 0}
+  hit: []
+  _playerAttackValue: 0
 --- !u!4 &1582638078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5706436571137242428, guid: b2f80edb8f1a92442b725bbb41cf6eed, type: 3}
@@ -4011,7 +4055,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0, y: 0, z: 0}
   VerticalArmLength: 3
   CameraSide: 0.186
-  CameraDistance: 3
+  CameraDistance: 4
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0
@@ -4349,15 +4393,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1815996702618674821, guid: 51e6752fb1b8e6042b9835e922af930f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3
+      value: 4.39
       objectReference: {fileID: 0}
     - target: {fileID: 1815996702618674821, guid: 51e6752fb1b8e6042b9835e922af930f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1815996702618674821, guid: 51e6752fb1b8e6042b9835e922af930f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: -4.29
       objectReference: {fileID: 0}
     - target: {fileID: 1815996702618674821, guid: 51e6752fb1b8e6042b9835e922af930f, type: 3}
       propertyPath: m_LocalRotation.w

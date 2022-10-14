@@ -42,7 +42,7 @@ public class CameraCol : MonoBehaviour
 
 
         transform.position = Player.position + new Vector3(0.000000000000001f, 1.4f, 0);
-        if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.none || PlayerAttackManager.Instance.PlayerP == PlayerPripoty.Move)
+        if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.none || PlayerAttackManager.Instance.PlayerP == PlayerPripoty.Move || PlayerAttackManager.Instance.PlayerP == PlayerPripoty.Fight)
         {
             CameraAltitude();
         }
