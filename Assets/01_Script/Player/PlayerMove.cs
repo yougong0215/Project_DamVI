@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 
+    float h, v;
+    Vector3 dir;
+
     float _originrayX, _originrayY;
 
     [Header("카메라 혹은 락걸때")]
@@ -32,7 +35,20 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if(PlayerAttackManager.Instance.PlayerP == PlayerPripoty.none)
+
+
+         h = Input.GetAxis("Horizontal");
+         v = Input.GetAxis("Vertical");
+         dir = new Vector3(h, 0, v);
+
+        if (dir == Vector3.zero)
+        {
+            _ani.SetBool("Move", false);
+            _ani.SetInteger("Run", 0);
+            return;
+        }
+
+        if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.none)
         {
             Move();
             Jump();
@@ -50,18 +66,12 @@ public class PlayerMove : MonoBehaviour
         if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.Fight)
         {
             MoveDir();
-            if (_direction != Vector2.zero)
-            {
-                NormalMove(0.2f);
-            }
+            NormalMove(0.2f);
         }
     }
 
     private void ZoomMove()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        Vector3 dir = new Vector3(h, 0, v);
         //ArrowLoock.SetParent(null);
 
         transform.localEulerAngles = new Vector3(0, _originrayY, 0);
@@ -118,7 +128,7 @@ public class PlayerMove : MonoBehaviour
 
         if (_direction == Vector2.zero)
         {
-
+            _ani.SetBool("Move", false);
             _ani.SetInteger("Run", 0);
             return;
         }
@@ -177,10 +187,19 @@ public class PlayerMove : MonoBehaviour
 
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(a * Vector3.forward), Time.deltaTime * 3);
         transform.Translate(Vector3.forward * Time.deltaTime * _moveSpeed * speed);
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Fight)
         {
             _rigid.AddForce(new Vector3(_direction.x, 0, _direction.y) * _inpuseMoveSpeed, ForceMode.Impulse);
         }
+    }
+
+    public Vector3 GetDirs()
+    {
+        return LookObject.transform.localRotation * Vector3.forward;
+    }
+    public Vector2 GetDirecction()
+    {
+        return _direction;
     }
 
     void Jump()

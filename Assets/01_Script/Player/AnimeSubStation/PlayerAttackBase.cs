@@ -19,7 +19,13 @@ public class PlayerAttackBase : StateMachineBehaviour
     [SerializeField] protected bool Grabing;
 
     [Header("넉백 방향")]
-    [SerializeField] protected Vector3 NuckBack;
+    [SerializeField] protected Vector3 NuckBack = new Vector3(2,3,1);
+
+    [Header("기절 시간")]
+    [SerializeField] protected float stun = 0.2f;
+
+    [Header("시간 딜레이")]
+    [SerializeField] protected float Delay = 0.2f;
 
     private Transform _player;
     public Transform Player
@@ -50,7 +56,7 @@ public class PlayerAttackBase : StateMachineBehaviour
         {
             if (hit[i].gameObject.GetComponent<EnemyBase>())
             {
-                hit[i].GetComponent<EnemyBase>().DamagedForPlayer(1, 0.2f, new Vector3(2,3,1), false);
+                hit[i].GetComponent<EnemyBase>().DamagedCool(1, stun, NuckBack, Grabing, Delay);
                 PlayerAttackManager.Instance.SetDelayZero();
             }
         }
@@ -78,8 +84,13 @@ public class PlayerAttackBase : StateMachineBehaviour
     /// </summary>
     public virtual void ScanEnemys()
     {
+
+        float angle = Vector2.SignedAngle(new Vector2(Mathf.Cos(0 * Mathf.Deg2Rad), Mathf.Sin(0 * Mathf.Deg2Rad)), Player.GetComponent<PlayerMove>().GetDirecction());
+        float cameraAngle = Vector3.SignedAngle(Vector3.forward, Player.GetComponent<PlayerMove>().GetDirs(), Vector3.up);
         hit = Physics.OverlapBox(new Vector3(Player.position.x, Player.position.y + 1f, Player.position.z + 1f)
-        , size, Quaternion.identity, 1 << (LayerMask.NameToLayer("InterectionObj")));
+        , size, Quaternion.Euler(Vector3.up * (cameraAngle + angle)), 1 << (LayerMask.NameToLayer("InterectionObj")));
+            //Gizmos.color = Color.red;
+            //Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z + 1f), new Vector3(1.5f, 1.5f, 1.5f));
     }
 
     public virtual void OnDamageEffectStart()

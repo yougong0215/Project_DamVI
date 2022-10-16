@@ -59,12 +59,6 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         _ani = Player.GetComponent<Animator>();
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z +1f), new Vector3(1.5f, 1.5f, 1.5f));
-    }
-
     // Update is called once per frame
     void Update()
     {

@@ -85,6 +85,10 @@ public abstract class EnemyBase : MonoBehaviour
 
     }
 
+    public virtual void DamagedCool(int ATK, float stuntime, Vector3 NuckBack, bool Grab, float DelayTime)
+    {
+        StartCoroutine(DamagedForPlayer(ATK , stuntime, NuckBack, Grab, DelayTime));
+    }
 
 
     /// <summary>
@@ -92,8 +96,9 @@ public abstract class EnemyBase : MonoBehaviour
     /// 계산된 데미지를 불러와야
     /// </summary>
     /// <param name="ATK"></param> 
-    public virtual void DamagedForPlayer(int ATK, float stuntime, Vector3 NuckBack, bool Grab)
+    public virtual IEnumerator DamagedForPlayer(int ATK, float stuntime, Vector3 NuckBack, bool Grab, float DelayTIme)
     {
+        yield return new WaitForSeconds(DelayTIme);
         if (_playerStat != PlayerAttackManager.Instance.playerStat)
         {
             _rigid.velocity = new Vector3(0, 0, 0);
