@@ -43,6 +43,7 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Debug.Log(stateInfo);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Fight;
         //SetSize();
         SetStateAttack();
@@ -86,9 +87,9 @@ public class PlayerAttackBase : StateMachineBehaviour
     {
 
         float angle = Vector2.SignedAngle(new Vector2(Mathf.Cos(0 * Mathf.Deg2Rad), Mathf.Sin(0 * Mathf.Deg2Rad)), Player.GetComponent<PlayerMove>().GetDirecction());
-        float cameraAngle = Vector3.SignedAngle(Vector3.forward, Player.GetComponent<PlayerMove>().GetDirs(), Vector3.up);
+        //float cameraAngle = Vector3.SignedAngle(Vector3.forward, Player.GetComponent<PlayerMove>().GetDirs(), Vector3.up);
         hit = Physics.OverlapBox(new Vector3(Player.position.x, Player.position.y + 1f, Player.position.z + 1f)
-        , size, Quaternion.Euler(Vector3.up * (cameraAngle + angle)), 1 << (LayerMask.NameToLayer("InterectionObj")));
+        , size, Quaternion.Euler(Vector3.up * (angle)), 1 << (LayerMask.NameToLayer("InterectionObj")));
             //Gizmos.color = Color.red;
             //Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z + 1f), new Vector3(1.5f, 1.5f, 1.5f));
     }

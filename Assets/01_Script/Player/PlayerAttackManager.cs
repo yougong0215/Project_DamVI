@@ -73,7 +73,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     {
         if(Input.GetKey(KeyCode.LeftShift))
         {
-            if(PlayerP != PlayerPripoty.Fight)
+            if(PlayerP != PlayerPripoty.Fight && PlayerP != PlayerPripoty.doged)
                  PlayerP = PlayerPripoty.Move;
         }
     }
@@ -85,7 +85,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
             _ani.SetTrigger("Attack");
             SetDelayZero();
         }
-        Debug.Log(Delay);
+       // Debug.Log(Delay);
         if (Delay >= 0.34f)
         {
             PlayerP = PlayerPripoty.none;

@@ -16,9 +16,9 @@ MonoBehaviour:
   Effect: []
   _state: 12
   Grabing: 0
-  NuckBack: {x: 2, y: 4, z: 1}
+  NuckBack: {x: 0, y: 1, z: 0}
   stun: 0.2
-  Delay: 0.05
+  Delay: 0.5
 --- !u!1101 &-8128848630397744076
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -106,19 +106,19 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5528915664474927057}
-    m_Position: {x: 270, y: -400, z: 0}
+    m_Position: {x: 250, y: -430, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4263022201098703296}
-    m_Position: {x: 280, y: 130, z: 0}
+    m_Position: {x: 260, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6350273719236894181}
-    m_Position: {x: 720, y: 440, z: 0}
+    m_Position: {x: 780, y: 450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3689448818456750319}
     m_Position: {x: 1170, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3706726979690473788}
-    m_Position: {x: 1070, y: -400, z: 0}
+    m_Position: {x: 1090, y: -430, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1988878794336609901}
     m_Position: {x: 510, y: 160, z: 0}
@@ -140,7 +140,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GreatSword_Attack01_Inplace
-  m_Speed: 1.1
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1282316860015214915}
@@ -225,34 +225,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.2824936
+  m_TransitionDuration: 1
   m_TransitionOffset: 0.0427179
-  m_ExitTime: 0.8
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1101 &-3764917422739632573
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Attack
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -5528915664474927057}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.35523748
-  m_TransitionOffset: 0
-  m_ExitTime: 0.36053598
+  m_ExitTime: 0.45
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -270,13 +245,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f244eab13aca7489324ea3ecc1d2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 4, y: 4, z: 4}
+  size: {x: 4, y: 1, z: 4}
   Effect: []
   _state: 17
   Grabing: 0
-  NuckBack: {x: 0, y: 20, z: 0}
+  NuckBack: {x: 0, y: 10, z: 0}
   stun: 0.2
-  Delay: 0.3
+  Delay: 0.4
 --- !u!1102 &-3689448818456750319
 AnimatorState:
   serializedVersion: 6
@@ -285,7 +260,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GreatSword_Attack06_Inplace
-  m_Speed: 1.1
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -91727216650024722}
@@ -364,7 +339,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GreatSword_Strafe_Run_F_End_Inplace
-  m_Speed: 2
+  m_Speed: 12
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3229207802846750690}
@@ -396,13 +371,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd764b6bf7dc7c47a15a3bece4b178e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 1.5, y: 1.5, z: 1.5}
+  size: {x: 1.5, y: 0.5, z: 1.5}
   Effect: []
   _state: 13
   Grabing: 0
-  NuckBack: {x: 2, y: 4, z: 1}
+  NuckBack: {x: 0, y: 6, z: 0}
   stun: 0.2
-  Delay: 0.05
+  Delay: 0.5
 --- !u!114 &-2941964965096477484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -419,9 +394,9 @@ MonoBehaviour:
   Effect: []
   _state: 11
   Grabing: 0
-  NuckBack: {x: 2, y: 4, z: 1}
+  NuckBack: {x: 0, y: 1, z: 0}
   stun: 0.2
-  Delay: 0.05
+  Delay: 0.5
 --- !u!1102 &-2846800812769389976
 AnimatorState:
   serializedVersion: 6
@@ -465,9 +440,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 1
   m_TransitionOffset: 0
-  m_ExitTime: 0.7
+  m_ExitTime: 0.4
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -567,7 +542,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.13
   m_TransitionOffset: 0
-  m_ExitTime: 0.45
+  m_ExitTime: 0.3
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -673,7 +648,7 @@ AnimatorStateMachine:
     m_Position: {x: 260, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6654523599481892803}
-    m_Position: {x: 570, y: 120, z: 0}
+    m_Position: {x: 650, y: 110, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -6396533702579203614}
@@ -807,11 +782,10 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GreatSword_Attack09_Inplace
-  m_Speed: 1.1
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -893989804766036927}
-  - {fileID: -3764917422739632573}
   - {fileID: 9216018935804895734}
   m_StateMachineBehaviours:
   - {fileID: 8690737899480873406}
@@ -837,7 +811,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GreatSword_Strafe_Run_F_Start_Inplace
-  m_Speed: 2
+  m_Speed: 12
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1796152164102316294}
@@ -864,7 +838,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GreatSword_Attack02_Inplace
-  m_Speed: 1.1
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 9007681192080250376}
@@ -901,7 +875,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.9
+  m_ExitTime: 0.4
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -940,7 +914,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GreatSword_Attack04_Inplace
-  m_Speed: 1.1
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4997936794411957779}
@@ -1053,9 +1027,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 1
   m_TransitionOffset: 0
-  m_ExitTime: 0.7
+  m_ExitTime: 0.4
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -1077,9 +1051,9 @@ MonoBehaviour:
   Effect: []
   _state: 14
   Grabing: 0
-  NuckBack: {x: 2, y: 5, z: 1}
+  NuckBack: {x: 0, y: 1, z: 0}
   stun: 0.2
-  Delay: 0.05
+  Delay: 0.5
 --- !u!1101 &8501404609075968559
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1123,7 +1097,7 @@ MonoBehaviour:
   Grabing: 0
   NuckBack: {x: 5, y: 10, z: 5}
   stun: 0.2
-  Delay: 0.3
+  Delay: 0.6
 --- !u!1101 &9007681192080250376
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1163,9 +1137,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 1
   m_TransitionOffset: 0
-  m_ExitTime: 0.8
+  m_ExitTime: 0.5
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

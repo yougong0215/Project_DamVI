@@ -18,7 +18,8 @@ public enum PlayerPripoty
     Fight = 2,
     hit = 3,
     aiming = 4,
-    evasion = 5
+    evasion = 5,
+    doged = 6
 }
 public enum PlayerStatues
 {

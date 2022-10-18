@@ -7,8 +7,12 @@ public class PlayerMove : MonoBehaviour
 
     float h, v;
     Vector3 dir;
-
+    Vector3 dirs;
     float _originrayX, _originrayY;
+    float angle;
+    float cameraAngle;
+
+    bool isDoged = false;
 
     [Header("카메라 혹은 락걸때")]
     [SerializeField] Transform LookObject;
@@ -28,6 +32,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnEnable()
     {
+        isDoged = false;
        _rigid = GetComponent<Rigidbody>();
        _ani = GetComponent<Animator>();
     }
@@ -37,9 +42,26 @@ public class PlayerMove : MonoBehaviour
     {
 
 
-         h = Input.GetAxis("Horizontal");
-         v = Input.GetAxis("Vertical");
-         dir = new Vector3(h, 0, v);
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
+        dir = new Vector3(h, 0, v);
+
+        if (PlayerAttackManager.Instance.playerpri != PlayerPripoty.doged)
+        {
+
+
+            dirs = LookObject.transform.localRotation * Vector3.forward;
+            angle = Vector2.SignedAngle(new Vector2(Mathf.Cos(0 * Mathf.Deg2Rad), Mathf.Sin(0 * Mathf.Deg2Rad)), _direction);
+            dirs.y = 0.0f;
+            dirs.Normalize();
+
+
+            cameraAngle = Vector3.SignedAngle(Vector3.forward, dirs, Vector3.up);
+        }
+        else
+        {
+            //transform.rotation = Quaternion.Euler(Vector3.up * (cameraAngle));
+        }
 
         if (dir == Vector3.zero)
         {
@@ -47,7 +69,19 @@ public class PlayerMove : MonoBehaviour
             _ani.SetInteger("Run", 0);
             return;
         }
+        if (isDoged == false && Input.GetMouseButtonDown(1) && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Fight && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.none)
+        {
+            StartCoroutine(Doged());
+            StartCoroutine(DogedTransler());
+            dirs.y = 0;
+            Vector3 direction = dirs;
 
+            var quaternion = Quaternion.Euler(0, transform.localEulerAngles.y, 0);
+            Vector3 newDirection = quaternion * direction;
+
+
+            _rigid.AddForce(newDirection * _inpuseMoveSpeed, ForceMode.VelocityChange);
+        }
         if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.none)
         {
             Move();
@@ -112,6 +146,18 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private IEnumerator Doged()
+    {
+        isDoged = true;
+        yield return new WaitForSeconds(1.4f);
+        isDoged = false;
+    }
+    private IEnumerator DogedTransler()
+    {
+        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.doged;
+        yield return new WaitForSeconds(0.4f);
+        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
+    }
 
     private void Run()
     {
@@ -174,23 +220,12 @@ public class PlayerMove : MonoBehaviour
 
     void NormalMove(float speed)
     {
-        Vector3 dirs = LookObject.transform.localRotation * Vector3.forward;
         _ani.SetBool("Move", true);
 
-        float angle = Vector2.SignedAngle(new Vector2(Mathf.Cos(0 * Mathf.Deg2Rad), Mathf.Sin(0 * Mathf.Deg2Rad)), _direction);
-        dirs.y = 0.0f;
-        dirs.Normalize();
-
-
-        float cameraAngle = Vector3.SignedAngle(Vector3.forward, dirs, Vector3.up);
         transform.rotation = Quaternion.Euler(Vector3.up * (cameraAngle + angle));
 
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(a * Vector3.forward), Time.deltaTime * 3);
         transform.Translate(Vector3.forward * Time.deltaTime * _moveSpeed * speed);
-        if (Input.GetMouseButtonDown(1) && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Fight)
-        {
-            _rigid.AddForce(new Vector3(_direction.x, 0, _direction.y) * _inpuseMoveSpeed, ForceMode.Impulse);
-        }
     }
 
     public Vector3 GetDirs()
@@ -206,7 +241,7 @@ public class PlayerMove : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            _rigid.AddForce(new Vector3(0, 1, 0) * 250, ForceMode.Impulse);
+            _rigid.AddForce(new Vector3(0, 1, 0) * _inpuseMoveSpeed, ForceMode.VelocityChange);
         }
     }
 }
