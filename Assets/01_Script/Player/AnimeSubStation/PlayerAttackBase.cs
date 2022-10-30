@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerAttackBase : StateMachineBehaviour
 {
+    enum AttackState
+    {
+        mello,
+        Range
+    }
+
+
 
     [Header("공격범위")]
     [SerializeField] protected Vector3 size = new Vector3(1.5f, 1.5f, 1.5f);
@@ -27,6 +34,10 @@ public class PlayerAttackBase : StateMachineBehaviour
     [Header("시간 딜레이")]
     [SerializeField] protected float Delay = 0.2f;
 
+    [Header("근접공격 원거러 공격 구분")]
+    [SerializeField] AttackState state = AttackState.mello;
+    [SerializeField] GameObject _bullet = null;
+
     private Transform _player;
     public Transform Player
     {
@@ -43,11 +54,13 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.SetInteger("Attack", 0);
+
         Debug.Log(stateInfo);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Fight;
         //SetSize();
         SetStateAttack();
-        OnDamageEffectStart();
+        OnDamageEffectStart(animator, stateInfo, layerIndex);
         ScanEnemys();
     }
 
@@ -55,16 +68,31 @@ public class PlayerAttackBase : StateMachineBehaviour
     {
         for (int i = 0; hit.Length > i; i++)
         {
-            if (hit[i].gameObject.GetComponent<EnemyBase>())
+            if(state == AttackState.mello || _bullet == null)
             {
-                hit[i].GetComponent<EnemyBase>().DamagedCool(1, stun, NuckBack, Grabing, Delay);
-                PlayerAttackManager.Instance.SetDelayZero();
+                if (hit[i].gameObject.GetComponent<EnemyBase>())
+                {
+                    hit[i].GetComponent<EnemyBase>().DamagedCool(1, stun, NuckBack, Grabing, Delay);
+                    PlayerAttackManager.Instance.SetDelayZero();
+                    OnDamagedEnemyMelloAttack(animator, stateInfo, layerIndex, hit);
+                }
+
+            }
+            else if (state == AttackState.Range || _bullet !=null)
+            {
+                OndamagedEnemyRangeAttack(animator, stateInfo, layerIndex, _bullet, Delay);
             }
         }
+        PlayerAttackManager.Instance.SetDelayZero();
+        OnDamageEffectHold(animator, stateInfo, layerIndex);
     }
+
+
+
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
+        OnDamageEffectEnd(animator, stateInfo, layerIndex);
     }
 
     /// <summary>
@@ -87,24 +115,31 @@ public class PlayerAttackBase : StateMachineBehaviour
     {
 
         float angle = Vector2.SignedAngle(new Vector2(Mathf.Cos(0 * Mathf.Deg2Rad), Mathf.Sin(0 * Mathf.Deg2Rad)), Player.GetComponent<PlayerMove>().GetDirecction());
-        //float cameraAngle = Vector3.SignedAngle(Vector3.forward, Player.GetComponent<PlayerMove>().GetDirs(), Vector3.up);
         hit = Physics.OverlapBox(new Vector3(Player.position.x, Player.position.y + 1f, Player.position.z + 1f)
         , size, Quaternion.Euler(Vector3.up * (angle)), 1 << (LayerMask.NameToLayer("InterectionObj")));
-            //Gizmos.color = Color.red;
-            //Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z + 1f), new Vector3(1.5f, 1.5f, 1.5f));
     }
 
-    public virtual void OnDamageEffectStart()
+    public virtual IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+    }
+
+    public virtual void OnDamagedEnemyMelloAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider[] col)
     {
 
     }
 
-    public virtual void OnDamageEffectHold()
+    public virtual void OnDamageEffectStart(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
     }
 
-    public virtual void OnDamageEffectEnd()
+    public virtual void OnDamageEffectHold(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+
+    }
+
+    public virtual void OnDamageEffectEnd(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
     }

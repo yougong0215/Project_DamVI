@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class CameraCollision : MonoBehaviour
 {
+    // Made by GmSoft ( You Jae Hyun )
+
+
+    [Header("진짜 카메라와 위치용 가짜 카메라 셋팅")]
     [SerializeField] Transform _vcam;
     [SerializeField] Transform _vcamFake;
 
@@ -28,9 +32,6 @@ public class CameraCollision : MonoBehaviour
     RaycastHit hit;
     Vector3 _hitVec;
 
-    float x1, y1, z1, x2, y2, z2;
-    float Leng1, Leng2;
-
 
     private Transform _player;
     public Transform Player
@@ -55,7 +56,7 @@ public class CameraCollision : MonoBehaviour
     {
 
         // 플레이어 위치는 보통 발바닥임 + 1.4f
-        transform.position = Player.position + new Vector3(0, 1.4f, 0);
+        transform.position = Player.position + new Vector3(0.000000000000001f, 1.4f, 0);
 
         // 원래 있어야 할 위치로 이동하는 캠
         _hitVec = _vcamFake.transform.position;
@@ -70,7 +71,7 @@ public class CameraCollision : MonoBehaviour
             _hitVec = _vcamFake.transform.position;
         }
 
-        if (Physics.Raycast(transform.position, (_vcamFake.transform.position - transform.position).normalized, out hit, CameraMaxDistance))
+        if (Physics.Raycast(transform.position, (_vcamFake.transform.position - transform.position).normalized, out hit, CameraMaxDistance, 0))
         {
             _setPos = true;
             _vcam.transform.position = Vector3.Lerp(_vcamFake.transform.position, hit.point, Time.deltaTime * 500f);
@@ -95,8 +96,6 @@ public class CameraCollision : MonoBehaviour
         _setPos = false;
     }
 
-    int speed = 0;
-    float degree = 0;
 
 
 

@@ -28,17 +28,4 @@ public class PlayerAttackTwo : PlayerAttackBase
     //////////////////////////////////////////////////////////////////
 
 
-    public override void OnDamageEffectStart()
-    {
-        
-    }
-    public override void OnDamageEffectHold()
-    {
-
-    }
-
-    public override void OnDamageEffectEnd()
-    {
-
-    }
 }

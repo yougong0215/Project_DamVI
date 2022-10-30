@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
@@ -43,7 +42,7 @@ public abstract class EnemyBase : MonoBehaviour
         _DelayTime -= Time.deltaTime;
         _stunTime -= Time.deltaTime;
 
-        if(PlayerAttackManager.Instance.playerpri == PlayerPripoty.Move || PlayerAttackManager.Instance.playerpri == PlayerPripoty.none)
+        if (PlayerAttackManager.Instance.playerpri == PlayerPripoty.Move || PlayerAttackManager.Instance.playerpri == PlayerPripoty.none)
         {
             _playerStat = PlayerStatues.Idle;
         }
@@ -57,19 +56,19 @@ public abstract class EnemyBase : MonoBehaviour
     private void EnemyDetectionLength()
     {
 
-            float Length = Mathf.Sqrt(Mathf.Pow(transform.position.x - Player.position.x, 2) + Mathf.Pow(transform.position.z - Player.position.z, 2));
-            if (_stunTime <= 0 && _DelayTime <= 0)
+        float Length = Mathf.Sqrt(Mathf.Pow(transform.position.x - Player.position.x, 2) + Mathf.Pow(transform.position.z - Player.position.z, 2));
+        if (_stunTime <= 0 && _DelayTime <= 0)
+        {
+            if (Length <= _detectionLength)
             {
-                if (Length <= _detectionLength)
-                {
-                    EnemyDetection();
-                }
-                else
-                {
-                    IdleEnemy();
-                }
+                EnemyDetection();
             }
-        
+            else
+            {
+                IdleEnemy();
+            }
+        }
+
     }
 
     protected virtual void IdleEnemy()
@@ -87,7 +86,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     public virtual void DamagedCool(int ATK, float stuntime, Vector3 NuckBack, bool Grab, float DelayTime)
     {
-        StartCoroutine(DamagedForPlayer(ATK , stuntime, NuckBack, Grab, DelayTime));
+        StartCoroutine(DamagedForPlayer(ATK, stuntime, NuckBack, Grab, DelayTime));
     }
 
 
@@ -99,35 +98,34 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual IEnumerator DamagedForPlayer(int ATK, float stuntime, Vector3 NuckBack, bool Grab, float DelayTIme)
     {
         yield return new WaitForSeconds(DelayTIme);
-        if (_playerStat != PlayerAttackManager.Instance.playerStat)
+        _rigid.velocity = new Vector3(0, 0, 0);
+        _playerStat = PlayerAttackManager.Instance.playerStat;
+
+        if (_superArrmor == false)
         {
-            _rigid.velocity = new Vector3(0, 0, 0);
-            _playerStat = PlayerAttackManager.Instance.playerStat;
-            if (_superArrmor == false)
+            _stunTime = stuntime;
+            StopAllCoroutines();
+            Vector3 force = (transform.position - Player.transform.position).normalized;
+            int Grabing = Grab ? -1 : 1;
+
+            _rigid.AddForce(new Vector3(force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
+
+        }
+
+        HP -= ATK;
+        if (HP <= 0)
+        {
+            if (_reviveCount > 0)
             {
-                _stunTime = stuntime;
-                StopAllCoroutines();
-                Vector3 force = (transform.position - Player.transform.position).normalized;
-                int Grabing = Grab ? -1 : 1;
-
-                _rigid.AddForce(new Vector3(force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
-
+                HP = ReviveEvent();
+                Debug.Log("응애");
             }
-
-            HP -= ATK;
-            if (HP <= 0)
+            else
             {
-                if (_reviveCount > 0)
-                {
-                    HP = ReviveEvent();
-                    Debug.Log("응애");
-                }
-                else
-                {
-                    DieEvent();
-                }
+                DieEvent();
             }
         }
+
     }
 
     public virtual void DamageEvent()

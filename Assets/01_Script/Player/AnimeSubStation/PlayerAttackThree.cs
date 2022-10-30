@@ -28,17 +28,5 @@ public class PlayerAttackThree : PlayerAttackBase
     //////////////////////////////////////////////////////////////////
 
 
-    public override void OnDamageEffectStart()
-    {
-        
-    }
-    public override void OnDamageEffectHold()
-    {
-
-    }
-
-    public override void OnDamageEffectEnd()
-    {
-
-    }
+   
 }

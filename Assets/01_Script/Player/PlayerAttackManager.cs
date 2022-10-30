@@ -66,30 +66,20 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
 
         Debug.Log(PlayerP);
         Attack();
-        RunState();
     }
 
-    void RunState()
-    {
-        if(Input.GetKey(KeyCode.LeftShift))
-        {
-            if(PlayerP != PlayerPripoty.Fight && PlayerP != PlayerPripoty.doged)
-                 PlayerP = PlayerPripoty.Move;
-        }
-    }
 
     void Attack()
     {
         if (Input.GetMouseButtonDown(0) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
         {
-            _ani.SetTrigger("Attack");
-            SetDelayZero();
+            _ani.SetInteger("Attack", 1);
+
         }
        // Debug.Log(Delay);
-        if (Delay >= 0.34f)
+        if (Delay >= 0.1f)
         {
-            PlayerP = PlayerPripoty.none;
-            PlayerS = PlayerStatues.Idle;
+            SetStateNone();
         }
         Delay += Time.deltaTime;
     }

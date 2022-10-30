@@ -27,17 +27,29 @@ public class PlayerAttackFour : PlayerAttackBase
     //
     //////////////////////////////////////////////////////////////////
 
+    public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+    }
 
-    public override void OnDamageEffectStart()
+    public override void OnDamagedEnemyMelloAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider[] col)
     {
 
     }
-    public override void OnDamageEffectHold()
+
+
+
+    public override void OnDamageEffectStart(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
     }
 
-    public override void OnDamageEffectEnd()
+    public override void OnDamageEffectHold(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        animator.SetInteger("Attack", 0);
+    }
+
+    public override void OnDamageEffectEnd(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
     }
