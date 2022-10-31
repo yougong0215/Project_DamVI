@@ -119,7 +119,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-            _rigid.AddForce(newDirection * _inpuseMoveSpeed * 2, ForceMode.VelocityChange);
+            _rigid.AddForce(newDirection * _inpuseMoveSpeed, ForceMode.VelocityChange);
         }
     }
 
