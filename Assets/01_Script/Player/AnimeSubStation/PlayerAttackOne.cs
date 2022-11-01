@@ -28,9 +28,10 @@ public class PlayerAttackOne : PlayerAttackBase
     //
     //////////////////////////////////////////////////////////////////
 
-    public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, GameObject obj, float delay)
+    public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
     {
         yield return new WaitForSeconds(delay);
+        Player.GetComponent<Weapon>().fire(WeaponType.Left);
     }
 
     public override void OnDamagedEnemyMelloAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider[] col)

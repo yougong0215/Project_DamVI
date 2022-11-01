@@ -16,6 +16,7 @@ public class CameraManager : Singleton<CameraManager>
         get => _currentCamera;
     }
 
+    public CinemachineVirtualCamera PlayerCam;
     public void CiemanchineChange(string a)
     {
         for(int i =0; i< _cinemachine.Count; i++)
@@ -58,5 +59,9 @@ public class CameraManager : Singleton<CameraManager>
             _cinemachine.Add(_cin[i].GetComponent<CinemachineVirtualCamera>());
         }
     }
-
+    IEnumerator ShakeCam(float time)
+    {
+    
+        PlayerCam.a
+    }
 }

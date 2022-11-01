@@ -9,6 +9,7 @@ public class PlayerAttackBase : StateMachineBehaviour
         mello,
         Range
     }
+    MonoBehaviour mono = new MonoBehaviour();
 
 
 
@@ -36,7 +37,8 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     [Header("근접공격 원거러 공격 구분")]
     [SerializeField] AttackState state = AttackState.mello;
-    [SerializeField] GameObject _bullet = null;
+
+    bool isstart = false;
 
     private Transform _player;
     public Transform Player
@@ -54,7 +56,10 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        mono = Player.GetComponent<MonoBehaviour>();
         animator.SetInteger("Attack", 0);
+
+        isstart = false;
 
         Debug.Log(stateInfo);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Fight;
@@ -62,13 +67,14 @@ public class PlayerAttackBase : StateMachineBehaviour
         SetStateAttack();
         OnDamageEffectStart(animator, stateInfo, layerIndex);
         ScanEnemys();
+
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         for (int i = 0; hit.Length > i; i++)
         {
-            if(state == AttackState.mello || _bullet == null)
+            if(state == AttackState.mello)
             {
                 if (hit[i].gameObject.GetComponent<EnemyBase>())
                 {
@@ -78,9 +84,10 @@ public class PlayerAttackBase : StateMachineBehaviour
                 }
 
             }
-            else if (state == AttackState.Range || _bullet !=null)
+            else if (state == AttackState.Range && isstart == false)
             {
-                OndamagedEnemyRangeAttack(animator, stateInfo, layerIndex, _bullet, Delay);
+                isstart = true;
+                mono.StartCoroutine(OndamagedEnemyRangeAttack(animator, stateInfo, layerIndex, Delay));
             }
         }
         PlayerAttackManager.Instance.SetDelayZero();
@@ -119,9 +126,9 @@ public class PlayerAttackBase : StateMachineBehaviour
         , size, Quaternion.Euler(Vector3.up * (angle)), 1 << (LayerMask.NameToLayer("InterectionObj")));
     }
 
-    public virtual IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, GameObject obj, float delay)
+    public virtual IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return null;
     }
 
     public virtual void OnDamagedEnemyMelloAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider[] col)

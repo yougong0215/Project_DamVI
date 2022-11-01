@@ -48,3 +48,8 @@ public enum PlayerStatues
     /// </summary>
     EquidAttack = 20,
 }
+public enum WeaponType
+{
+    Left,
+    Right
+}
