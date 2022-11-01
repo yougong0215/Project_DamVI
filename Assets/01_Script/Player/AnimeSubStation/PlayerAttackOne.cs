@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerAttackOne : PlayerAttackBase
 {
@@ -37,11 +38,10 @@ public class PlayerAttackOne : PlayerAttackBase
 
     }
 
-
-
     public override void OnDamageEffectStart(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        //test code
+        
     }
 
     public override void OnDamageEffectHold(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

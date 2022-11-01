@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-
+        Debug.Log(_dogedCount);
 
         PrimaryCamSet();
         MoveDir();
@@ -101,6 +101,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (isDoged == false && Input.GetMouseButtonDown(1) && _dogedCount > 0)
         {
+
+            _ani.SetBool("Move", false);
+            _ani.SetBool("Run", false);
             StartCoroutine(Doged());
             StartCoroutine(DogedTransler());
             dirs.y = 0;
@@ -187,7 +190,7 @@ public class PlayerMove : MonoBehaviour
         _originrayY = transform.localEulerAngles.y;
 
         _ani.SetBool("Move", true);
-        if (_direction != Vector2.zero)
+        if (_direction != Vector2.zero && isDoged == false)
         {
 
 
@@ -244,7 +247,7 @@ public class PlayerMove : MonoBehaviour
         _ani.SetBool("Doged", false);
         StopCoroutine(DogedCountUp());
         StartCoroutine(DogedCountUp());
-        yield return new WaitForSeconds(0.85f);
+        yield return new WaitForSeconds(0.75f);
         isDoged = false;
     }
 

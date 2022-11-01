@@ -72,27 +72,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &-4854927868229028371
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ebcb612d3ef3454a8a673509fa5e0d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: {x: 1.5, y: 1.5, z: 1.5}
-  Effect: []
-  _state: 11
-  Grabing: 0
-  NuckBack: {x: 2, y: 3, z: 1}
-  stun: 0.2
-  Delay: 0.2
-  state: 1
-  _bullet: {fileID: 0}
 --- !u!1107 &-3459884429089171534
 AnimatorStateMachine:
   serializedVersion: 6
@@ -231,7 +210,7 @@ AnimatorState:
   - {fileID: 2602145397642818290}
   - {fileID: -6181671704303263082}
   m_StateMachineBehaviours:
-  - {fileID: -4854927868229028371}
+  - {fileID: 1399431865869994250}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -386,31 +365,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Move
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Jump
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Run
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Doged
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -519,6 +498,27 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &1399431865869994250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd2eb74d9136392489b3cf73d3831dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 1.5, y: 1.5, z: 1.5}
+  Effect: []
+  _state: 0
+  Grabing: 0
+  NuckBack: {x: 2, y: 3, z: 1}
+  stun: 0.2
+  Delay: 0.2
+  state: 0
+  _bullet: {fileID: 0}
 --- !u!1102 &1484784583609866795
 AnimatorState:
   serializedVersion: 6
