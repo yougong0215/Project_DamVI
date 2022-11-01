@@ -59,9 +59,12 @@ public class CameraManager : Singleton<CameraManager>
             _cinemachine.Add(_cin[i].GetComponent<CinemachineVirtualCamera>());
         }
     }
+
+    
+
     IEnumerator ShakeCam(float time)
     {
-    
-        PlayerCam.a
+        yield return null;
+        //PlayerCam.a
     }
 }
