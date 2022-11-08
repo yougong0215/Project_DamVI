@@ -257,7 +257,11 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(2);
         _dogedCount = 2;
     }
-
+    
+    public Vector3 ShootDir(Vector3 vec)
+    {
+        return (transform.position + new Vector3(0.1f,0,0)) - LookObject.position;
+    }
     private IEnumerator DogedTransler()
     {
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.doged;

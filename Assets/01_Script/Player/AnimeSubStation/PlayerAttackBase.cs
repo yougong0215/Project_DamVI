@@ -9,7 +9,7 @@ public class PlayerAttackBase : StateMachineBehaviour
         mello,
         Range
     }
-    MonoBehaviour mono = new MonoBehaviour();
+    MonoBehaviour mono;
 
 
 
@@ -56,10 +56,12 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        mono = Player.GetComponent<MonoBehaviour>();
+        
         animator.SetInteger("Attack", 0);
 
         isstart = false;
+        mono = Player.GetComponent<MonoBehaviour>();
+
 
         Debug.Log(stateInfo);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Fight;
@@ -72,9 +74,11 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        for (int i = 0; hit.Length > i; i++)
+
+        if (state == AttackState.mello && isstart == false)
         {
-            if(state == AttackState.mello)
+            isstart = true;
+            for (int i = 0; hit.Length > i; i++)
             {
                 if (hit[i].gameObject.GetComponent<EnemyBase>())
                 {
@@ -84,12 +88,15 @@ public class PlayerAttackBase : StateMachineBehaviour
                 }
 
             }
-            else if (state == AttackState.Range && isstart == false)
-            {
-                isstart = true;
-                mono.StartCoroutine(OndamagedEnemyRangeAttack(animator, stateInfo, layerIndex, Delay));
-            }
         }
+
+
+        if (state == AttackState.Range && isstart == false)
+        {
+            isstart = true;
+            mono.StartCoroutine(OndamagedEnemyRangeAttack(animator, stateInfo, layerIndex, 0.1f));
+        }
+
         PlayerAttackManager.Instance.SetDelayZero();
         OnDamageEffectHold(animator, stateInfo, layerIndex);
     }

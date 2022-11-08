@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class EnemyBase : MonoBehaviour
 {
     [Header("적 기본정보")]
+    [SerializeField] int MaxHP = 0;
     [SerializeField] int HP = 0;
+    [SerializeField] int Barrier = 0;
     [SerializeField] int ATK = 0;
     [SerializeField] int _reviveCount = 0;
     [SerializeField] int _detectionLength = 0;
@@ -17,11 +20,14 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] PlayerStatues _playerStat = PlayerStatues.Idle;
 
     [Header("적 프러퍼티")]
+    [SerializeField] NavMeshAgent _nav;
     [SerializeField] protected Rigidbody _rigid;
 
     private void OnEnable()
     {
+        _nav = GetComponent<NavMeshAgent>();
         _rigid = gameObject.GetComponent<Rigidbody>();
+        HP = MaxHP;
     }
 
     private Transform _player;
@@ -42,10 +48,32 @@ public abstract class EnemyBase : MonoBehaviour
         _DelayTime -= Time.deltaTime;
         _stunTime -= Time.deltaTime;
 
+        if(HP > MaxHP)
+        {
+            HP--;
+            Barrier++;
+        }
+
+        if (HP <= 0)
+        {
+            if (_reviveCount > 0)
+            {
+                HP = ReviveEvent();
+                Debug.Log("응애");
+            }
+            else
+            {
+                DieEvent();
+            }
+        }
+
+
+
         if (PlayerAttackManager.Instance.playerpri == PlayerPripoty.Move || PlayerAttackManager.Instance.playerpri == PlayerPripoty.none)
         {
             _playerStat = PlayerStatues.Idle;
         }
+        EnemyDetectionLength();
     }
 
 
@@ -61,11 +89,19 @@ public abstract class EnemyBase : MonoBehaviour
         {
             if (Length <= _detectionLength)
             {
-                EnemyDetection();
+                _nav.SetDestination(Player.position);
+                _nav.stoppingDistance = 2;
+
+                if(Length <= 3)
+                {
+                    EnemyDetection();
+                }
+
             }
             else
             {
                 IdleEnemy();
+                _nav.ResetPath();
             }
         }
 
@@ -98,7 +134,7 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual IEnumerator DamagedForPlayer(int ATK, float stuntime, Vector3 NuckBack, bool Grab, float DelayTIme)
     {
         yield return new WaitForSeconds(DelayTIme);
-        _rigid.velocity = new Vector3(0, 0, 0);
+        //_rigid.velocity = new Vector3(0, 0, 0);
         _playerStat = PlayerAttackManager.Instance.playerStat;
 
         if (_superArrmor == false)
@@ -108,22 +144,18 @@ public abstract class EnemyBase : MonoBehaviour
             Vector3 force = (transform.position - Player.transform.position).normalized;
             int Grabing = Grab ? -1 : 1;
 
-            _rigid.AddForce(new Vector3(force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
+            _rigid.AddForce(new Vector3(100, 100, 100), ForceMode.VelocityChange);//force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
 
         }
-
-        HP -= ATK;
-        if (HP <= 0)
+        if(Barrier >= 0) // 0보다 크거나 같으니까 무조건 참
         {
-            if (_reviveCount > 0)
-            {
-                HP = ReviveEvent();
-                Debug.Log("응애");
-            }
-            else
-            {
-                DieEvent();
-            }
+            Barrier -= ATK;
+        }
+
+        if(Barrier < 0)
+        {
+            HP += Barrier;
+            Barrier = 0;
         }
 
     }

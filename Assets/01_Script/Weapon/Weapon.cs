@@ -8,19 +8,16 @@ using UnityEngine.VFX;
 
 public class Weapon : MonoBehaviour
 {
-  
 
+    [SerializeField] List<Bullet> Type = new List<Bullet>();
 
 
     [SerializeField]
     private VisualEffect L_muzzleEffect;
     [SerializeField][Tooltip("Default")]
     private VisualEffect R_muzzleEffect;
-    // Start is called before the first frame update
-    void Awake()
-    {
 
-    }
+
 
     public void fire(WeaponType type)
     {
@@ -28,18 +25,23 @@ public class Weapon : MonoBehaviour
         {
             case WeaponType.Left:
                 L_muzzleEffect.Play();
+                Shoot(0);
                 break;
             case WeaponType.Right:
                 R_muzzleEffect.Play();
+                Shoot(0);
                 break;
         }
         
     }
 
-
-    // Update is called once per frame
-    void Update()
+    void Shoot(int i)
     {
-        
+        PoolAble b = PoolManager.Instance.Pop(Type[i].gameObject.name);
+        b.transform.position = transform.position;
+        b.transform.position += new Vector3(0, 1, 0);
     }
+
+
+    
 }
