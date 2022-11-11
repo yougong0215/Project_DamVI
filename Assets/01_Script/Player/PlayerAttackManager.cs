@@ -64,7 +64,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     {
        
 
-        Debug.Log(PlayerP);
+        //Debug.Log(PlayerP);
         Attack();
     }
 

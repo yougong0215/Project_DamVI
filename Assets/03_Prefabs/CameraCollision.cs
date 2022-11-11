@@ -84,9 +84,10 @@ public class CameraCollision : MonoBehaviour
             //Debug.DrawRay(transform.position, MainCamera.transform.position, Color.red);        
         }
 
-
+        
         transform.localEulerAngles = new Vector3(_originrayX, _originrayY, 0);
-
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         _originrayY += Input.GetAxis("Mouse X") * _sense * L;
         _originrayX += Input.GetAxisRaw("Mouse Y") * _sense * U;

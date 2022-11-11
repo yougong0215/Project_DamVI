@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     [Header("카메라 혹은 락걸때")]
     [SerializeField] Transform LookObject;
     [SerializeField] Transform ArrowLook;
+    [SerializeField] Transform _front;
     Vector2 _direction;
 
     [Header("이동 값")]
@@ -44,8 +45,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_dogedCount);
-
+        //Debug.Log(_dogedCount);
         PrimaryCamSet();
         MoveDir();
 
@@ -65,6 +65,7 @@ public class PlayerMove : MonoBehaviour
         // 구르기 같은 순간 이동
 
 
+        Debug.Log(_direction);
 
         if(dir != Vector3.zero && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight)
         {
@@ -99,25 +100,27 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void DogedUse()
     {
-        if (isDoged == false && Input.GetMouseButtonDown(1) && _dogedCount > 0)
+        if (isDoged == false && Input.GetKeyDown(KeyCode.LeftShift) && _dogedCount > 0)
         {
 
             _ani.SetBool("Move", false);
             _ani.SetBool("Run", false);
             StartCoroutine(Doged());
             StartCoroutine(DogedTransler());
-            dirs.y = 0;
-            Vector3 direction = dirs;
 
-            var quaternion = Quaternion.Euler(0, transform.localEulerAngles.y, 0);
-            Vector3 newDirection = quaternion * direction;
+            Vector3 direction = _front.transform.position - transform.position; // < x축기준
+
+            //direction.Normalize();
+            //Quaternion quaternion = Quaternion.Euler(0, transform.localEulerAngles.y, 0);
+            Vector3 newDirection =  direction;
             newDirection.Normalize();
+            //Vector3 newDirection = new Vector3(Mathf.Cos(transform.localEulerAngles.y), 0, Mathf.Sin(transform.localEulerAngles.y));
             if (_direction == Vector2.zero)
             {
                 newDirection *= -1;
             }
 
-            Debug.Log(newDirection * _inpuseMoveSpeed);
+            Debug.Log(newDirection);
 
 
 

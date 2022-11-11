@@ -14,7 +14,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] bool BossMonster = false;
     [SerializeField] bool _superArrmor = false;
     [SerializeField] float _stunTime = 0;
-    [SerializeField] float _DelayTime = 0;
+    [SerializeField] float _AttackDelayTime = 0;
 
     [Header("적이 기억한플레이어")]
     [SerializeField] PlayerStatues _playerStat = PlayerStatues.Idle;
@@ -45,14 +45,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void Update()
     {
-        _DelayTime -= Time.deltaTime;
+        _AttackDelayTime -= Time.deltaTime;
         _stunTime -= Time.deltaTime;
-
-        if(HP > MaxHP)
-        {
-            HP--;
-            Barrier++;
-        }
 
         if (HP <= 0)
         {
@@ -85,7 +79,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
 
         float Length = Mathf.Sqrt(Mathf.Pow(transform.position.x - Player.position.x, 2) + Mathf.Pow(transform.position.z - Player.position.z, 2));
-        if (_stunTime <= 0 && _DelayTime <= 0)
+        if (_stunTime <= 0 && _AttackDelayTime <= 0)
         {
             if (Length <= _detectionLength)
             {
@@ -103,6 +97,10 @@ public abstract class EnemyBase : MonoBehaviour
                 IdleEnemy();
                 _nav.ResetPath();
             }
+        }
+        else
+        {
+            Debug.Log($"{_stunTime}, {_AttackDelayTime}");
         }
 
     }
@@ -144,20 +142,11 @@ public abstract class EnemyBase : MonoBehaviour
             Vector3 force = (transform.position - Player.transform.position).normalized;
             int Grabing = Grab ? -1 : 1;
 
-            _rigid.AddForce(new Vector3(100, 100, 100), ForceMode.VelocityChange);//force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
+            _rigid.AddForce(force * 2, ForceMode.VelocityChange);//force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
 
         }
-        if(Barrier >= 0) // 0보다 크거나 같으니까 무조건 참
-        {
-            Barrier -= ATK;
-        }
 
-        if(Barrier < 0)
-        {
-            HP += Barrier;
-            Barrier = 0;
-        }
-
+        HP -= ATK;
     }
 
     public virtual void DamageEvent()

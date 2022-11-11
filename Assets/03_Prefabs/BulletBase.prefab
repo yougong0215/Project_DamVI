@@ -45,11 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7f098f9cf6d21478c0fb09f46ada94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 20
   stun: 0
   NuckBack: {x: 0, y: 3, z: 0}
   Grab: 0
   DelayTime: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 1073741824
 --- !u!136 &4927887938662984997
 CapsuleCollider:
   m_ObjectHideFlags: 0

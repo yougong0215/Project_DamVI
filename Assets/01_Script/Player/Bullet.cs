@@ -10,6 +10,8 @@ public class Bullet : PoolAble
     [SerializeField] bool Grab;
     [SerializeField] float DelayTime = 0;
 
+    int num = 0;
+
     Collider[] col;
     Vector3 dir;
     private void OnEnable()
@@ -22,7 +24,7 @@ public class Bullet : PoolAble
     private void Update()
     {
         transform.position += dir* 10 * Time.deltaTime;
-        Debug.Log(dir);
+        //Debug.Log(dir);
     }
     void OnDrawGizmos()
     {
@@ -32,19 +34,31 @@ public class Bullet : PoolAble
 
     private void OnTriggerEnter(Collider other)
     {
-            dir = Vector3.zero;
+        if (other.gameObject.layer == 30)
+        {
+            damage = 10;
+            col = Physics.OverlapBox(other.transform.position
+           , new Vector3(1.5f, 1.5f, 1.5f), Quaternion.identity, 1 << LayerMask.NameToLayer("Enemy")); ;
 
-            col = Physics.OverlapBox(new Vector3(GameManager.Instance.Player.position.x, GameManager.Instance.Player.position.y + 1f, GameManager.Instance.Player.position.z + 1f)
-           , new Vector3(1.5f, 1.5f, 1.5f), Quaternion.identity, 1 << (LayerMask.NameToLayer("InterectionObj"))); ;
+            transform.position = other.transform.position;
+            dir = Vector2.zero;
 
             for (int i = 0; i < col.Length; i++)
             {
+                Debug.Log(col[i].name);
                 if (col[i].GetComponent<EnemyBase>())
                 {
-                    col[i].GetComponent<EnemyBase>().DamagedForPlayer(damage, stun, NuckBack, Grab, DelayTime);
+                    col[i].GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
+                    num++;
                 }
             }
-        
+
+        }
     }
     
+    IEnumerator die()
+    {
+        yield return new WaitUntil(() => num+1 == col.Length);
+        PoolManager.Instance.Push(this);
+    }
 }
