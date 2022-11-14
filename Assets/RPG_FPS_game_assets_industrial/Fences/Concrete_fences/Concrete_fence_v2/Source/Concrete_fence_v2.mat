@@ -87,12 +87,12 @@ Material:
     - _OcclusionRemapEnd: 1
     - _OcclusionRemapStart: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 1
-    - _OutlineZOffset: 0.0001
+    - _OutlineWidth: 5
+    - _OutlineZOffset: 0
     - _OutlineZOffsetMaskRemapEnd: 1
     - _OutlineZOffsetMaskRemapStart: 0
     - _Parallax: 0.02
-    - _ReceiveShadowMappingAmount: 0.65
+    - _ReceiveShadowMappingAmount: 1
     - _ReceiveShadowMappingPosOffset: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

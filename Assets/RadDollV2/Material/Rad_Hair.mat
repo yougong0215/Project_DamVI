@@ -669,7 +669,7 @@ Material:
     - _OutlineStencilZFail: 0
     - _OutlineVectorScale: 1
     - _OutlineVertexR2Width: 0
-    - _OutlineWidth: 0.02
+    - _OutlineWidth: 1
     - _OutlineZClip: 1
     - _OutlineZOffset: 0.0001
     - _OutlineZOffsetMaskRemapEnd: 1
