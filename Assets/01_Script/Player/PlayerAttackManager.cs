@@ -16,7 +16,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
 
     [SerializeField] private int _playerAttackValue;
 
-    IEnumerator co;
+    Coroutine co = null;
 
 
 
@@ -53,7 +53,6 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
 
     void Start()
     {
-        co = clearStat();
         playerpri = PlayerPripoty.none;
         playerStat = PlayerStatues.Idle;
         _ani = Player.GetComponent<Animator>();
@@ -89,8 +88,9 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         if (Input.GetMouseButtonDown(0) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
         {
             _ani.SetInteger("Attack", 1);
-            StopCoroutine(co);
-            StartCoroutine(clearStat());
+            if(co !=null)
+                StopCoroutine(co);
+            co = StartCoroutine(clearStat());
         }
     }
 
