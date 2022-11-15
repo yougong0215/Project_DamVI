@@ -16,6 +16,8 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
 
     [SerializeField] private int _playerAttackValue;
 
+    IEnumerator co;
+
 
 
 
@@ -49,11 +51,9 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         }
     }
 
-
-    float Delay = 0;
-
     void Start()
     {
+        co = clearStat();
         playerpri = PlayerPripoty.none;
         playerStat = PlayerStatues.Idle;
         _ani = Player.GetComponent<Animator>();
@@ -62,10 +62,25 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     // Update is called once per frame
     void Update()
     {
-       
+        if(Input.GetMouseButton(1) == false)
+        {
+            Attack();
+        }
+        else
+        {
+            Aimaing();
+        }
+    }
 
-        //Debug.Log(PlayerP);
-        Attack();
+    void Aimaing()
+    {
+        if (Input.GetMouseButtonDown(0) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
+        {
+            _ani.SetInteger("Attack", 1);
+        }
+
+        SetStateAim();
+
     }
 
 
@@ -74,19 +89,15 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         if (Input.GetMouseButtonDown(0) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
         {
             _ani.SetInteger("Attack", 1);
-
+            StopCoroutine(co);
+            StartCoroutine(clearStat());
         }
-       // Debug.Log(Delay);
-        if (Delay >= 0.1f)
-        {
-            SetStateNone();
-        }
-        Delay += Time.deltaTime;
     }
 
-    public void SetDelayZero()
+    public void SetStateAim()
     {
-        Delay = 0;
+        playerpri = PlayerPripoty.aiming;
+        playerStat = PlayerStatues.bifurcationAttack1;
     }
 
     public void SetStateNone()
@@ -94,13 +105,11 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         playerpri = PlayerPripoty.none;
         playerStat = PlayerStatues.Idle;
     }
-    
-    public void AbleDamage(Vector3 size)
-    {
-        if (size == Vector3.zero)
-        {
-            size = new Vector3(1.5f, 1.5f, 1.5f);
-        }
 
+    IEnumerator clearStat()
+    {
+        yield return new WaitForSeconds(0.6f);
+            SetStateNone();
     }
+   
 }

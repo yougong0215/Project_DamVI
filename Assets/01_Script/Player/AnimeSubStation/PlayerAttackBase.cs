@@ -56,7 +56,7 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        Player.rotation = Player.GetComponent<PlayerMove>().GetCameraAngel();
         animator.SetInteger("Attack", 0);
 
         isstart = false;
@@ -83,7 +83,6 @@ public class PlayerAttackBase : StateMachineBehaviour
                 if (hit[i].gameObject.GetComponent<EnemyBase>())
                 {
                     hit[i].GetComponent<EnemyBase>().DamagedCool(1, stun, NuckBack, Grabing, Delay);
-                    PlayerAttackManager.Instance.SetDelayZero();
                     OnDamagedEnemyMelloAttack(animator, stateInfo, layerIndex, hit);
                 }
 
@@ -97,7 +96,6 @@ public class PlayerAttackBase : StateMachineBehaviour
             mono.StartCoroutine(OndamagedEnemyRangeAttack(animator, stateInfo, layerIndex, 0.1f));
         }
 
-        PlayerAttackManager.Instance.SetDelayZero();
         OnDamageEffectHold(animator, stateInfo, layerIndex);
     }
 

@@ -27,5 +27,16 @@ public class PlayerAttackTwo : PlayerAttackBase
     //
     //////////////////////////////////////////////////////////////////
 
+    public override void OnDamageEffectStart(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnDamageEffectStart(animator, stateInfo, layerIndex);
+        Player.GetComponent<Rigidbody>().velocity = Player.forward * -1 * 30;
+        Player.GetComponent<MonoBehaviour>().StartCoroutine(late());
+    }
 
+    public IEnumerator late()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
 }

@@ -54,7 +54,6 @@ public class PlayerMove : MonoBehaviour
         if (dir == Vector3.zero || _direction == Vector2.zero)
         {
             _ani.SetBool("Move", false);
-            _ani.SetBool("Run", false);
             return;
         }
 
@@ -67,7 +66,7 @@ public class PlayerMove : MonoBehaviour
 
         Debug.Log(_direction);
 
-        if(dir != Vector3.zero && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight)
+        if(dir != Vector3.zero && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight && _ani.GetInteger("Attack") != 1)
         {
             Move(_moveSpeed);
         }
@@ -103,8 +102,6 @@ public class PlayerMove : MonoBehaviour
         if (isDoged == false && Input.GetKeyDown(KeyCode.LeftShift) && _dogedCount > 0)
         {
 
-            _ani.SetBool("Move", false);
-            _ani.SetBool("Run", false);
             StartCoroutine(Doged());
             StartCoroutine(DogedTransler());
 
@@ -211,7 +208,6 @@ public class PlayerMove : MonoBehaviour
                 PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
             }
         }
-        PlayerAttackManager.Instance.SetDelayZero();
     }
 
     void NormalMove(float speed)
@@ -241,16 +237,28 @@ public class PlayerMove : MonoBehaviour
         return _direction;
     }
 
+    public Quaternion GetCameraAngel()
+    {
+        return Quaternion.Euler(Vector3.up * (cameraAngle + angle));
+    }
+
     private IEnumerator Doged()
     {
         isDoged = true;
         _dogedCount--;
+
         _ani.SetBool("Doged", true);
+
         yield return null;
-        _ani.SetBool("Doged", false);
+
         StopCoroutine(DogedCountUp());
+
         StartCoroutine(DogedCountUp());
-        yield return new WaitForSeconds(0.75f);
+
+        yield return new WaitForSeconds(0.85f);
+
+        _ani.SetBool("Doged", false);
+
         isDoged = false;
     }
 

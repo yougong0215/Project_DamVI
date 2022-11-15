@@ -9,6 +9,7 @@ public class Bullet : PoolAble
     [SerializeField] Vector3 NuckBack = Vector3.zero;
     [SerializeField] bool Grab;
     [SerializeField] float DelayTime = 0;
+    [SerializeField] float _speed = 50f;
 
     int num = 0;
 
@@ -16,6 +17,7 @@ public class Bullet : PoolAble
     Vector3 dir;
     private void OnEnable()
     {
+        GetComponent<TrailRenderer>().enabled = true;
         dir = GameManager.Instance.Player.localRotation * Vector3.forward;
         dir.y = 0;
         dir.Normalize();
@@ -23,7 +25,7 @@ public class Bullet : PoolAble
 
     private void Update()
     {
-        transform.position += dir* 10 * Time.deltaTime;
+        transform.position += dir* _speed * Time.deltaTime;
         //Debug.Log(dir);
     }
     void OnDrawGizmos()
@@ -52,12 +54,14 @@ public class Bullet : PoolAble
                     num++;
                 }
             }
+            StartCoroutine(die());
 
         }
     }
     
     IEnumerator die()
     {
+        GetComponent<TrailRenderer>().enabled = false;
         yield return new WaitUntil(() => num+1 == col.Length);
         PoolManager.Instance.Push(this);
     }
