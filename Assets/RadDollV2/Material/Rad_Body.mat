@@ -490,7 +490,7 @@ Material:
     - _ColorShift_Speed: 0
     - _Cull: 2
     - _CullMode: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DirectLightMultiplier: 1

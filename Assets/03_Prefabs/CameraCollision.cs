@@ -23,6 +23,7 @@ public class CameraCollision : MonoBehaviour
     [SerializeField] bool zxXxz = false;
     [SerializeField] bool zyYyz = false;
 
+    [SerializeField] LayerMask layer;
     bool _setPos = false;
 
     int L = 1, U = 1;
@@ -71,7 +72,7 @@ public class CameraCollision : MonoBehaviour
             _hitVec = _vcamFake.transform.position;
         }
 
-        if (Physics.Raycast(transform.position, (_vcamFake.transform.position - transform.position).normalized, out hit, CameraMaxDistance, 0))
+        if (Physics.Raycast(transform.position, (_vcamFake.transform.position - transform.position).normalized, out hit, CameraMaxDistance, layer))
         {
             _setPos = true;
             _vcam.transform.position = Vector3.Lerp(_vcamFake.transform.position, hit.point, Time.deltaTime * 500f);

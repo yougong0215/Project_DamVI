@@ -16,9 +16,6 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] float _stunTime = 0;
     [SerializeField] float _AttackDelayTime = 0;
 
-    [Header("적이 기억한플레이어")]
-    [SerializeField] PlayerStatues _playerStat = PlayerStatues.Idle;
-
     [Header("적 프러퍼티")]
     [SerializeField] NavMeshAgent _nav;
     [SerializeField] protected Rigidbody _rigid;
@@ -63,10 +60,6 @@ public abstract class EnemyBase : MonoBehaviour
 
 
 
-        if (PlayerAttackManager.Instance.playerpri == PlayerPripoty.Move || PlayerAttackManager.Instance.playerpri == PlayerPripoty.none)
-        {
-            _playerStat = PlayerStatues.Idle;
-        }
         EnemyDetectionLength();
     }
 
@@ -96,6 +89,7 @@ public abstract class EnemyBase : MonoBehaviour
             {
                 IdleEnemy();
                 _nav.ResetPath();
+                _nav.SetDestination(transform.position);
             }
         }
         else
@@ -132,8 +126,6 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual IEnumerator DamagedForPlayer(int ATK, float stuntime, Vector3 NuckBack, bool Grab, float DelayTIme)
     {
         yield return new WaitForSeconds(DelayTIme);
-        //_rigid.velocity = new Vector3(0, 0, 0);
-        _playerStat = PlayerAttackManager.Instance.playerStat;
 
         if (_superArrmor == false)
         {
@@ -147,7 +139,12 @@ public abstract class EnemyBase : MonoBehaviour
         }
 
         HP -= ATK;
+
+        yield return new WaitForSeconds(0.3f);
+        _rigid.velocity = Vector3.zero;
     }
+
+    
 
     public virtual void DamageEvent()
     {
