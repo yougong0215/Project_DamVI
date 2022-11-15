@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Bullet : PoolAble
 {
@@ -18,6 +19,7 @@ public class Bullet : PoolAble
     private void OnEnable()
     {
         GetComponent<TrailRenderer>().enabled = true;
+        GetComponentInChildren<VisualEffect>().enabled = false;
         dir = GameManager.Instance.Player.localRotation * Vector3.forward;
         dir.y = 0;
         dir.Normalize();
@@ -62,6 +64,8 @@ public class Bullet : PoolAble
     IEnumerator die()
     {
         GetComponent<TrailRenderer>().enabled = false;
+        GetComponentInChildren<VisualEffect>().enabled = true;
+        yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => num+1 == col.Length);
         PoolManager.Instance.Push(this);
     }
