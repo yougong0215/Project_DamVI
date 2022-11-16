@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    [Header("플레이어 스텟")]
+    [SerializeField] int HP = 30;
+    [SerializeField] float ATK = 1;
 
     [Header("가장 가까운 물체")]
     [SerializeField] BaseInteraction MatchingObject = null;
@@ -17,6 +20,16 @@ public class PlayerInteraction : MonoBehaviour
     {
         //hit[0].transform.position - transform.position < hit[i].transform.position - transform.position
         StartCoroutine(InteractionCheck());
+    }
+
+    public void Damaged(int dam)
+    {
+        HP -= dam;
+    }
+
+    public float CalcDamage()
+    {
+        return ATK;
     }
 
 

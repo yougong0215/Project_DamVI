@@ -74,7 +74,7 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        PlayerAttackManager.Instance.Corutines();
         if (state == AttackState.mello && isstart == false)
         {
             isstart = true;

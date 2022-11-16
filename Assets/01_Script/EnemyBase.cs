@@ -5,16 +5,16 @@ using UnityEngine.AI;
 public abstract class EnemyBase : MonoBehaviour
 {
     [Header("적 기본정보")]
-    [SerializeField] int MaxHP = 0;
-    [SerializeField] int HP = 0;
-    [SerializeField] int Barrier = 0;
-    [SerializeField] int ATK = 0;
-    [SerializeField] int _reviveCount = 0;
-    [SerializeField] int _detectionLength = 0;
-    [SerializeField] bool BossMonster = false;
-    [SerializeField] bool _superArrmor = false;
+    [SerializeField] protected int MaxHP = 0;
+    [SerializeField] protected int HP = 0;
+    [SerializeField] protected int Barrier = 0;
+    [SerializeField] protected int ATK = 0;
+    [SerializeField] protected int _reviveCount = 0;
+    [SerializeField] protected int _detectionLength = 0;
+    [SerializeField] protected bool BossMonster = false;
+    [SerializeField] protected bool _superArrmor = false;
     [SerializeField] float _stunTime = 0;
-    [SerializeField] float _AttackDelayTime = 0;
+    [SerializeField] protected float _AttackDelayTime = 0;
 
     [Header("적 프러퍼티")]
     [SerializeField] NavMeshAgent _nav;

@@ -88,10 +88,14 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         if (Input.GetMouseButtonDown(0) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
         {
             _ani.SetInteger("Attack", 1);
-            if(co !=null)
-                StopCoroutine(co);
-            co = StartCoroutine(clearStat());
         }
+    }
+
+    public void Corutines()
+    {
+        if (co != null)
+            StopCoroutine(co);
+        co = StartCoroutine(clearStat());
     }
 
     public void SetStateAim()
@@ -108,8 +112,8 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
 
     IEnumerator clearStat()
     {
-        yield return new WaitForSeconds(0.6f);
-            SetStateNone();
+        yield return null;
+        SetStateNone();
     }
    
 }
