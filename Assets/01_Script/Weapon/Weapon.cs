@@ -25,21 +25,20 @@ public class Weapon : MonoBehaviour
         {
             case WeaponType.Left:
                 L_muzzleEffect.Play();
-                Shoot(0);
+                Shoot(0, L_muzzleEffect.transform);
                 break;
             case WeaponType.Right:
                 R_muzzleEffect.Play();
-                Shoot(0);
+                Shoot(0, R_muzzleEffect.transform);
                 break;
         }
         
     }
 
-    void Shoot(int i)
+    void Shoot(int i, Transform _t)
     {
         PoolAble b = PoolManager.Instance.Pop(Type[i].gameObject.name);
-        b.transform.position = transform.position;
-        b.transform.position += new Vector3(0, 1, 0);
+        b.transform.position = _t.position;
     }
 
 

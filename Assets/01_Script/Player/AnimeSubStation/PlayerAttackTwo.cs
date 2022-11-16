@@ -33,6 +33,12 @@ public class PlayerAttackTwo : PlayerAttackBase
         Player.GetComponent<Rigidbody>().velocity = Player.forward * -1 * 30;
         Player.GetComponent<MonoBehaviour>().StartCoroutine(late());
     }
+    public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Player.GetComponent<Weapon>().fire(WeaponType.Right);
+    }
+
 
     public IEnumerator late()
     {
