@@ -18,6 +18,7 @@ public class Bullet : PoolAble
     Vector3 dir;
     private void OnEnable()
     {
+        num = 0;
         GetComponent<TrailRenderer>().enabled = true;
         GetComponentInChildren<VisualEffect>().enabled = false;
         dir = GameManager.Instance.Player.localRotation * Vector3.forward;
@@ -28,6 +29,7 @@ public class Bullet : PoolAble
     private void Update()
     {
         transform.position += dir* _speed * Time.deltaTime;
+        StartCoroutine(timeOut());
         //Debug.Log(dir);
     }
     void OnDrawGizmos()
@@ -56,17 +58,24 @@ public class Bullet : PoolAble
                     num++;
                 }
             }
+            
+
             StartCoroutine(die());
 
         }
+    }
+
+    IEnumerator timeOut()
+    {
+        yield return new WaitForSeconds(1);
+        PoolManager.Instance.Push(this);
     }
     
     IEnumerator die()
     {
         GetComponent<TrailRenderer>().enabled = false;
         GetComponentInChildren<VisualEffect>().enabled = true;
-        yield return new WaitForSeconds(1);
-        yield return new WaitUntil(() => num+1 == col.Length);
+        yield return new WaitUntil(() => num != 0);
         PoolManager.Instance.Push(this);
     }
 }
