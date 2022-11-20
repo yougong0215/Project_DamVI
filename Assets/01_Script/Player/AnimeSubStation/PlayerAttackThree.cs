@@ -27,6 +27,25 @@ public class PlayerAttackThree : PlayerAttackBase
     //
     //////////////////////////////////////////////////////////////////
 
+    public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Player.GetComponent<MonoBehaviour>().StartCoroutine(ShootCool(4));
+        
+    }
 
-   
+    IEnumerator ShootCool(int count)
+    {
+        LookEnemy();
+        Player.GetComponent<Rigidbody>().velocity = Player.forward * 1 * 5;
+        yield return new WaitForSeconds(0.20f);
+        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player.GetComponent<Weapon>().fire(WeaponType.Right);
+        if(count <= 0)
+        {
+            Player.GetComponent<MonoBehaviour>().StartCoroutine(ShootCool(count - 1));
+        }
+        
+    }
+
 }

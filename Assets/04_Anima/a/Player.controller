@@ -345,7 +345,7 @@ MonoBehaviour:
   Grabing: 0
   NuckBack: {x: 2, y: 3, z: 1}
   stun: 0.2
-  Delay: 0.2
+  Delay: 0.4
   state: 1
 --- !u!1102 &-706821964982755314
 AnimatorState:
@@ -723,7 +723,7 @@ MonoBehaviour:
   Grabing: 0
   NuckBack: {x: 2, y: 3, z: 1}
   stun: 0.2
-  Delay: 0.2
+  Delay: 0.1
   state: 1
 --- !u!1101 &3093431796242116396
 AnimatorStateTransition:

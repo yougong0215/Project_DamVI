@@ -87,6 +87,8 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     {
         if (Input.GetMouseButtonDown(0) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
         {
+
+
             _ani.SetInteger("Attack", 1);
         }
     }
@@ -112,7 +114,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
 
     IEnumerator clearStat()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.1f);
         SetStateNone();
     }
    

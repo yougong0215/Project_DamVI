@@ -40,6 +40,8 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     bool isstart = false;
 
+    private PlayerInteraction _inter = null;
+
     private Transform _player;
     public Transform Player
     {
@@ -56,14 +58,14 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Player.rotation = Player.GetComponent<PlayerMove>().GetCameraAngel();
+        _inter = Player.GetComponent<PlayerInteraction>();
         animator.SetInteger("Attack", 0);
 
         isstart = false;
         mono = Player.GetComponent<MonoBehaviour>();
 
 
-        Debug.Log(stateInfo);
+        //Debug.Log(stateInfo);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Fight;
         //SetSize();
         SetStateAttack();
@@ -93,7 +95,7 @@ public class PlayerAttackBase : StateMachineBehaviour
         if (state == AttackState.Range && isstart == false)
         {
             isstart = true;
-            mono.StartCoroutine(OndamagedEnemyRangeAttack(animator, stateInfo, layerIndex, 0.1f));
+            mono.StartCoroutine(OndamagedEnemyRangeAttack(animator, stateInfo, layerIndex, Delay));
         }
 
         OnDamageEffectHold(animator, stateInfo, layerIndex);
@@ -154,5 +156,21 @@ public class PlayerAttackBase : StateMachineBehaviour
     public virtual void OnDamageEffectEnd(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
+    }
+
+    protected void LookEnemy()
+    {
+        if (_inter.DistannsEnemy())
+        {
+            Vector3 enemy = (_inter.DistannsEnemy().position - Player.transform.position).normalized;
+            Debug.Log(enemy);
+            Player.rotation = Quaternion.LookRotation(enemy);
+            Player.localEulerAngles = new Vector3(0, Player.localEulerAngles.y, 0);
+            //Player.rotation = Quaternion.Euler(0, Player.localEulerAngles.y, 0);
+        }
+        else
+        {
+            Player.rotation = Player.GetComponent<PlayerMove>().GetCameraAngel();
+        }
     }
 }

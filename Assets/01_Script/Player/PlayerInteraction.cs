@@ -10,11 +10,13 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("가장 가까운 물체")]
     [SerializeField] BaseInteraction MatchingObject = null;
+    [SerializeField] EnemyBase EnemyMatchingObject = null;
 
 
     [Header("범위네 있는 물체")]
     [SerializeField] Collider[] hit;
     [SerializeField] List<float> _length = new List<float>();
+    [SerializeField] List<EnemyBase> _enemy = new List<EnemyBase>();
 
     private void OnEnable()
     {
@@ -31,14 +33,24 @@ public class PlayerInteraction : MonoBehaviour
     {
         return ATK;
     }
-
+    public Transform DistannsEnemy()
+    {
+        if(EnemyMatchingObject != null)
+        {
+            return EnemyMatchingObject.GetComponent<Transform>();
+        }
+        else
+        {
+            return null;
+        }
+    }
 
 
     IEnumerator InteractionCheck()
     {
         while(true)
         {
-            hit = Physics.OverlapBox(transform.position, new Vector3(4, 4, 4), Quaternion.identity, 1 << (LayerMask.NameToLayer("InterectionObj")));
+            hit = Physics.OverlapBox(transform.position, new Vector3(30, 30, 30), Quaternion.identity);
             MatchingObject = null;
             if (hit != null)
             {
@@ -63,12 +75,33 @@ public class PlayerInteraction : MonoBehaviour
                         hit[0] = hit[i];
                         hit[i] = tempcol;
                     }
-                    MatchingObject = hit[0].gameObject.GetComponent<BaseInteraction>();
+                    if (hit[0].GetComponent<BaseInteraction>())
+                    {
+                        MatchingObject = hit[0].gameObject.GetComponent<BaseInteraction>();
+                    }
                 }
             }
             yield return new WaitForSeconds(0.1f);
+            if(_length != null)
+            {
+                for (int i = 0; i < _length.Count; i++)
+                {
+                    if(hit[i].GetComponent<EnemyBase>())
+                    {
+                        EnemyMatchingObject = hit[i].GetComponent<EnemyBase>();
+                        break;
+                    }
+                    else
+                    {
+                        EnemyMatchingObject = null;
+                    }
+                }
+            }
+
             List<float> clear = new List<float>();
             _length = clear;
+
+            
         }
 
 

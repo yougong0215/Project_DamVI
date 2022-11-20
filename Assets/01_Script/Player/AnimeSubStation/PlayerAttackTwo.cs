@@ -36,7 +36,8 @@ public class PlayerAttackTwo : PlayerAttackBase
     public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
     {
         yield return new WaitForSeconds(delay);
-        Player.GetComponent<Weapon>().fire(WeaponType.Right);
+        LookEnemy();
+        Player.GetComponent<Weapon>().fire(WeaponType.Left);
     }
 
 

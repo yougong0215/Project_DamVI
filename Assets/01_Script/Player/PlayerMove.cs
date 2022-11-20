@@ -12,6 +12,8 @@ public class PlayerMove : MonoBehaviour
     float angle;
     float cameraAngle;
 
+    Coroutine co;
+
     int _dogedCount = 2;
 
     [Header("상태")]
@@ -64,7 +66,7 @@ public class PlayerMove : MonoBehaviour
         // 구르기 같은 순간 이동
 
 
-        Debug.Log(_direction);
+        //Debug.Log(_direction);
 
         if(dir != Vector3.zero && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight && _ani.GetInteger("Attack") != 1)
         {
@@ -117,7 +119,7 @@ public class PlayerMove : MonoBehaviour
                 newDirection *= -1;
             }
 
-            Debug.Log(newDirection);
+            //Debug.Log(newDirection);
 
 
 
@@ -251,9 +253,12 @@ public class PlayerMove : MonoBehaviour
 
         yield return null;
 
-        StopCoroutine(DogedCountUp());
+        if(co != null)
+        {
+            StopCoroutine(co);
+        }
 
-        StartCoroutine(DogedCountUp());
+        co = StartCoroutine(DogedCountUp());
 
         yield return new WaitForSeconds(0.85f);
 
@@ -276,7 +281,7 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator DogedTransler()
     {
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.doged;
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.5f);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
         _rigid.velocity = new Vector3(0, 0, 0);
     }
