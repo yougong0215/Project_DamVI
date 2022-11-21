@@ -30,7 +30,7 @@ public class PlayerAttackOne : PlayerAttackBase
     {
         yield return new WaitForSeconds(delay);
         LookEnemy();
-        Player.GetComponent<Weapon>().fire(WeaponType.Left);
+        Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.RedBullet);
     }
 
     public override void OnDamagedEnemyMelloAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider[] col)

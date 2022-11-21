@@ -2254,6 +2254,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8227009569765192209, guid: 3bb51874ed585fa47ab9e20952030819, type: 3}
+      propertyPath: _PoolList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8227009569765192209, guid: 3bb51874ed585fa47ab9e20952030819, type: 3}
+      propertyPath: _PoolList.Array.data[1]
+      value: 
+      objectReference: {fileID: 4927887938662984996, guid: 9bc2eb8e095ecb84db39e77907d3dfce, type: 3}
     - target: {fileID: 8227009569765192210, guid: 3bb51874ed585fa47ab9e20952030819, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -7955,6 +7963,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1971345623, guid: 57cf749234fa2dd4abf9517214f73d45, type: 3}
+      propertyPath: Type.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971345623, guid: 57cf749234fa2dd4abf9517214f73d45, type: 3}
+      propertyPath: Type.Array.data[1]
+      value: 
+      objectReference: {fileID: 4927887938662984996, guid: 9bc2eb8e095ecb84db39e77907d3dfce, type: 3}
     - target: {fileID: 81398964665377876, guid: 57cf749234fa2dd4abf9517214f73d45, type: 3}
       propertyPath: m_CastShadows
       value: 1

@@ -6,6 +6,13 @@ using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.VFX;
 
+
+public enum BulletType
+{
+    Bulletbase = 0,
+    RedBullet =1
+}
+
 public class Weapon : MonoBehaviour
 {
 
@@ -19,25 +26,25 @@ public class Weapon : MonoBehaviour
 
 
 
-    public void fire(WeaponType type)
+    public void fire(WeaponType type, BulletType bullet)
     {
         switch (type)
         {
             case WeaponType.Left:
                 L_muzzleEffect.Play();
-                Shoot(0, L_muzzleEffect.transform);
+                Shoot(0, L_muzzleEffect.transform, (int)bullet);
                 break;
             case WeaponType.Right:
                 R_muzzleEffect.Play();
-                Shoot(0, R_muzzleEffect.transform);
+                Shoot(0, R_muzzleEffect.transform, (int)bullet);
                 break;
         }
         
     }
 
-    void Shoot(int i, Transform _t)
+    void Shoot(int i, Transform _t, int bul)
     {
-        PoolAble b = PoolManager.Instance.Pop(Type[i].gameObject.name);
+        PoolAble b = PoolManager.Instance.Pop(Type[bul].gameObject.name);
         b.transform.position = _t.position;
     }
 

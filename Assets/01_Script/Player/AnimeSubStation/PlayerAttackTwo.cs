@@ -37,7 +37,7 @@ public class PlayerAttackTwo : PlayerAttackBase
     {
         yield return new WaitForSeconds(delay);
         LookEnemy();
-        Player.GetComponent<Weapon>().fire(WeaponType.Left);
+        Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.Bulletbase);
     }
 
 

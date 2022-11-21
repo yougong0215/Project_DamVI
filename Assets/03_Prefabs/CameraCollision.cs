@@ -28,10 +28,10 @@ public class CameraCollision : MonoBehaviour
 
     int L = 1, U = 1;
 
-
-
     RaycastHit hit;
     Vector3 _hitVec;
+
+    Vector3 _savePos;
 
 
     private Transform _player;
@@ -51,6 +51,10 @@ public class CameraCollision : MonoBehaviour
     private void LateUpdate()
     {
         CameraAltitude();
+        if (Input.GetKey(KeyCode.Space))
+        {
+            shake(0.1f, 0.3f, 0.3f);
+        }
     }
 
     void CameraAltitude()
@@ -75,17 +79,18 @@ public class CameraCollision : MonoBehaviour
         if (Physics.Raycast(transform.position, (_vcamFake.transform.position - transform.position).normalized, out hit, CameraMaxDistance, layer))
         {
             _setPos = true;
-            _vcam.transform.position = Vector3.Lerp(_vcamFake.transform.position, hit.point, Time.deltaTime * 500f);
+            _savePos = Vector3.Lerp(_vcamFake.transform.position, hit.point, Time.deltaTime * 500f);
             _hitVec = hit.point;
 
         }
         else
         {
-            _vcam.transform.position = Vector3.Lerp(_hitVec, _vcam.transform.position, Time.deltaTime * 1500f);
+            _savePos = Vector3.Lerp(_hitVec, _vcam.transform.position, Time.deltaTime * 1500f);
             //Debug.DrawRay(transform.position, MainCamera.transform.position, Color.red);        
         }
 
-        
+
+        _vcam.position = _savePos;
         transform.localEulerAngles = new Vector3(_originrayX, _originrayY, 0);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -99,6 +104,20 @@ public class CameraCollision : MonoBehaviour
     }
 
 
+    void shake(float shakeDuration, float shakeAmount, float decreaseFactor )
+    {
+        if (shakeDuration > 0)
+        {
+            _vcam.transform.localPosition = _savePos + Random.insideUnitSphere * shakeAmount;
+
+            shakeDuration -= Time.deltaTime * decreaseFactor;
+        }
+        else
+        {
+            shakeDuration = 0f;
+            _vcam.transform.localPosition = _savePos;
+        }
+    }
 
 }
 

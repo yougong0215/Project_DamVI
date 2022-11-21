@@ -27,11 +27,30 @@ public class PlayerAttackFour : PlayerAttackBase
     //
     //////////////////////////////////////////////////////////////////
 
-    public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex,  float delay)
+    public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
     {
         yield return new WaitForSeconds(delay);
+        Player.GetComponent<MonoBehaviour>().StartCoroutine(ShootCool(3, WeaponType.Left, BulletType.Bulletbase));
+        yield return new WaitForSeconds(0.3f);
+        Player.GetComponent<MonoBehaviour>().StartCoroutine(ShootCool(3, WeaponType.Right, BulletType.RedBullet));
+        yield return new WaitForSeconds(0.9f);
+        Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.RedBullet);
     }
 
+    IEnumerator ShootCool(int count, WeaponType wea, BulletType bul)
+    {
+        yield return new WaitForSeconds(0.05f);
+        Player.GetComponent<Rigidbody>().velocity = Player.forward * 1 * 2;
+        yield return new WaitForSeconds(0.05f);
+        LookEnemy();
+        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player.GetComponent<Weapon>().fire(wea, bul);
+        if (count > 0)
+        {
+            Player.GetComponent<MonoBehaviour>().StartCoroutine(ShootCool(count - 1, wea, bul));
+        }
+
+    }
     public override void OnDamagedEnemyMelloAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider[] col)
     {
 
@@ -44,10 +63,6 @@ public class PlayerAttackFour : PlayerAttackBase
 
     }
 
-    public override void OnDamageEffectHold(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.SetInteger("Attack", 0);
-    }
 
     public override void OnDamageEffectEnd(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

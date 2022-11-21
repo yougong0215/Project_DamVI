@@ -9,7 +9,9 @@ public class CameraCol : MonoBehaviour
     [SerializeField] float _originrayY;
     [SerializeField] float _sense = 1;
 
-
+    float shakeDuration = 0f;
+    float shakeAmount = 0.7f;
+    float decreaseFactor = 1.0f;
 
     private Transform _player;
     public Transform Player
