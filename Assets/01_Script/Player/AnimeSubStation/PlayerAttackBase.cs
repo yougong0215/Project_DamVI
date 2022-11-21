@@ -167,6 +167,7 @@ public class PlayerAttackBase : StateMachineBehaviour
             Player.rotation = Quaternion.LookRotation(enemy);
             Player.localEulerAngles = new Vector3(0, Player.localEulerAngles.y, 0);
             //Player.rotation = Quaternion.Euler(0, Player.localEulerAngles.y, 0);
+            Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.1f);
         }
         else
         {

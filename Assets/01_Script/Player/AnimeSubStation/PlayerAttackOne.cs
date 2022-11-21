@@ -28,9 +28,17 @@ public class PlayerAttackOne : PlayerAttackBase
 
     public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
     {
-        yield return new WaitForSeconds(delay);
         LookEnemy();
+        Player.GetComponent<Rigidbody>().velocity = Player.forward * 1 * 30;
+        yield return new WaitForSeconds(delay);
         Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.RedBullet);
+    }
+
+
+    public IEnumerator late()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
     public override void OnDamagedEnemyMelloAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider[] col)
@@ -41,7 +49,7 @@ public class PlayerAttackOne : PlayerAttackBase
     public override void OnDamageEffectStart(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //test code
-
+        Player.GetComponent<MonoBehaviour>().StartCoroutine(late());
     }
 
     public override void OnDamageEffectHold(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

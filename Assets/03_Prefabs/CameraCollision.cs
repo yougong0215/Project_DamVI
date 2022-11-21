@@ -31,8 +31,23 @@ public class CameraCollision : MonoBehaviour
     RaycastHit hit;
     Vector3 _hitVec;
 
-    Vector3 _savePos;
+    float shakeDuration = 0;
+    float shakeAmount = 0.05f;
+    float decreaseFactor = 1f;
 
+    /// <summary>
+    /// 카메라 쉐이킹
+    /// </summary>
+    /// <param name="a"></param> 지속시간
+    /// <param name="b"></param> 떨림도
+    /// <param name="c"></param> 지연 %
+    public void shaking(float a = 0, float b = 0.05f, float c = 1f)
+    {
+        shakeDuration = a;
+        shakeAmount = b;
+        decreaseFactor = c;
+
+    }
 
     private Transform _player;
     public Transform Player
@@ -50,10 +65,11 @@ public class CameraCollision : MonoBehaviour
 
     private void LateUpdate()
     {
+
         CameraAltitude();
-        if (Input.GetKey(KeyCode.Space))
+        if(shakeDuration > 0)
         {
-            shake(0.1f, 0.3f, 0.3f);
+            shake();
         }
     }
 
@@ -79,18 +95,17 @@ public class CameraCollision : MonoBehaviour
         if (Physics.Raycast(transform.position, (_vcamFake.transform.position - transform.position).normalized, out hit, CameraMaxDistance, layer))
         {
             _setPos = true;
-            _savePos = Vector3.Lerp(_vcamFake.transform.position, hit.point, Time.deltaTime * 500f);
-            _hitVec = hit.point;
+            _hitVec = hit.point;//Vector3.Lerp(_vcamFake.transform.position, hit.point, Time.deltaTime * 1500f);
 
         }
-        else
+        else if (Vector3.Distance(transform.position, _vcam.transform.position) > Vector3.Distance(transform.position, _vcamFake.transform.position))
         {
-            _savePos = Vector3.Lerp(_hitVec, _vcam.transform.position, Time.deltaTime * 1500f);
-            //Debug.DrawRay(transform.position, MainCamera.transform.position, Color.red);        
+            _setPos = false;
+            _hitVec = _vcamFake.transform.position;
         }
 
+        _vcam.transform.position = _hitVec;
 
-        _vcam.position = _savePos;
         transform.localEulerAngles = new Vector3(_originrayX, _originrayY, 0);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -104,18 +119,18 @@ public class CameraCollision : MonoBehaviour
     }
 
 
-    void shake(float shakeDuration, float shakeAmount, float decreaseFactor )
+    void shake()
     {
         if (shakeDuration > 0)
         {
-            _vcam.transform.localPosition = _savePos + Random.insideUnitSphere * shakeAmount;
+            _vcam.transform.position = _hitVec + Random.insideUnitSphere * shakeAmount;
 
             shakeDuration -= Time.deltaTime * decreaseFactor;
         }
         else
         {
             shakeDuration = 0f;
-            _vcam.transform.localPosition = _savePos;
+            _vcam.transform.position = _hitVec;
         }
     }
 
