@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: CMPlayerCam
-    m_To: ArrowView
+    m_To: ZoomCamLeft
     m_Blend:
       m_Style: 0
       m_Time: 0.001
@@ -24,10 +24,10 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: ArrowView
+  - m_From: ZoomCamLeft
     m_To: CMPlayerCam
     m_Blend:
-      m_Style: 1
+      m_Style: 0
       m_Time: 0.1
       m_CustomCurve:
         serializedVersion: 2

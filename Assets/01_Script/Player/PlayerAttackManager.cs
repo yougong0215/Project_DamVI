@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerAttackManager : Singleton<PlayerAttackManager>
 {
@@ -14,6 +15,10 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     [Header("ภ๛ต้")]
     [SerializeField] Collider[] hit;
 
+
+
+
+    [SerializeField] private bool _normalAttack = false;
     [SerializeField] private int _playerAttackValue;
 
     Coroutine co = null;
@@ -65,9 +70,13 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         {
             Attack();
         }
-        else
+        else if (_normalAttack == false && Input.GetMouseButton(1))
         {
             Aimaing();
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            SetStateNone();
         }
     }
 
@@ -87,8 +96,6 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     {
         if (Input.GetMouseButtonDown(0) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
         {
-
-
             _ani.SetInteger("Attack", 1);
         }
     }
@@ -104,18 +111,23 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     {
         playerpri = PlayerPripoty.aiming;
         playerStat = PlayerStatues.bifurcationAttack1;
+        Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 11;
     }
 
     public void SetStateNone()
     {
         playerpri = PlayerPripoty.none;
         playerStat = PlayerStatues.Idle;
+        Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 9;
     }
 
     IEnumerator clearStat()
     {
+        Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 9;
+        _normalAttack = true;
         yield return new WaitForSeconds(0.1f);
         SetStateNone();
+        _normalAttack = false;
     }
    
 }

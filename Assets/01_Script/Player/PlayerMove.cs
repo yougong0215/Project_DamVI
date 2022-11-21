@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
+    #region 변수들
     float h, v;
     Vector3 dir;
     Vector3 dirs;
@@ -21,13 +21,14 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] bool isRun = false;
 
     [Header("카메라 혹은 락걸때")]
-    [SerializeField] Transform LookObject;
-    [SerializeField] Transform ArrowLook;
+    [SerializeField] public Transform LookObject;
+    [SerializeField] public Transform ArrowLook;
     [SerializeField] Transform _front;
     Vector2 _direction;
 
     [Header("이동 값")]
     [SerializeField] float _moveSpeed = 5f;
+    [SerializeField] float _sense = 10f;
 
     [Header("강력한 값")]
     [SerializeField] float _inpuseMoveSpeed = 5;
@@ -35,7 +36,8 @@ public class PlayerMove : MonoBehaviour
     [Header("기타 상태 확인용 컴포넌트")]
     [SerializeField] Animator _ani;
     [SerializeField] Rigidbody _rigid;
-    float _sense = 0.5f;
+    #endregion
+
 
     private void OnEnable()
     {
@@ -53,6 +55,13 @@ public class PlayerMove : MonoBehaviour
 
         DogedUse();
         // 입력 X
+
+
+        if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming && ArrowLook != null)
+        {
+            ZoomMove();
+            return;
+        }
         if (dir == Vector3.zero || _direction == Vector2.zero)
         {
             _ani.SetBool("Move", false);
@@ -68,17 +77,14 @@ public class PlayerMove : MonoBehaviour
 
         //Debug.Log(_direction);
 
-        if(dir != Vector3.zero && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight && _ani.GetInteger("Attack") != 1)
+        if(dir != Vector3.zero && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight 
+            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming && _ani.GetInteger("Attack") != 1)
         {
             Move(_moveSpeed);
         }
 
 
         // 만약에 활을 쓴다면.. ( 근데 총 때문에 다시 쓸지도 )
-        if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming && ArrowLook != null)
-        {
-            ZoomMove();
-        }
     }
 
     /// <summary>
@@ -101,7 +107,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void DogedUse()
     {
-        if (isDoged == false && Input.GetKeyDown(KeyCode.LeftShift) && _dogedCount > 0)
+        if (isDoged == false && Input.GetKeyDown(KeyCode.LeftShift) && _dogedCount > 0 && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight)
         {
 
             StartCoroutine(Doged());
@@ -139,8 +145,8 @@ public class PlayerMove : MonoBehaviour
         ArrowLook.localEulerAngles = new Vector3(_originrayX, 0, 0);
 
 
-        _originrayY += Input.GetAxis("Mouse X") * _sense;
-        _originrayX += Input.GetAxisRaw("Mouse Y") * _sense;
+        _originrayY += Input.GetAxisRaw("Mouse X") * _sense / 5;
+        _originrayX -= Input.GetAxisRaw("Mouse Y") * _sense / 20;
 
         _originrayX = Mathf.Clamp(_originrayX, -10, 10);
 
