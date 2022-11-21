@@ -8,6 +8,8 @@ public class CameraCollision : MonoBehaviour
     [Header("진짜 카메라와 위치용 가짜 카메라 셋팅")]
     [SerializeField] Transform _vcam;
     [SerializeField] Transform _vcamFake;
+    [SerializeField] Transform _aiming;
+    [SerializeField] Transform _aimingFake;
 
     [Header("카메라 정보")]
     [SerializeField] float _originrayX;
@@ -30,6 +32,7 @@ public class CameraCollision : MonoBehaviour
 
     RaycastHit hit;
     Vector3 _hitVec;
+    Vector3 OriginAimingpos;
 
     float shakeDuration = 0;
     float shakeAmount = 0.05f;
@@ -67,10 +70,7 @@ public class CameraCollision : MonoBehaviour
     {
 
         CameraAltitude();
-        if(shakeDuration > 0)
-        {
-            shake();
-        }
+        shake();
     }
 
     void CameraAltitude()
@@ -81,6 +81,7 @@ public class CameraCollision : MonoBehaviour
 
         // 원래 있어야 할 위치로 이동하는 캠
         _hitVec = _vcamFake.transform.position;
+        _aiming.transform.position = _aimingFake.transform.position;
 
         // 카메라 반전
         L = zxXxz ? -1 : 1;
@@ -124,13 +125,8 @@ public class CameraCollision : MonoBehaviour
         if (shakeDuration > 0)
         {
             _vcam.transform.position = _hitVec + Random.insideUnitSphere * shakeAmount;
-
+            _aiming.transform.position = _aiming.transform.position + Random.insideUnitSphere * shakeAmount;
             shakeDuration -= Time.deltaTime * decreaseFactor;
-        }
-        else
-        {
-            shakeDuration = 0f;
-            _vcam.transform.position = _hitVec;
         }
     }
 
