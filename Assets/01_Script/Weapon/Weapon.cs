@@ -16,15 +16,21 @@ public enum BulletType
 public class Weapon : MonoBehaviour
 {
 
+    [SerializeField] List<AudioClip> Clip = new List<AudioClip>();
     [SerializeField] List<Bullet> Type = new List<Bullet>();
 
+
+    [SerializeField] AudioSource Source;
 
     [SerializeField]
     private VisualEffect L_muzzleEffect;
     [SerializeField][Tooltip("Default")]
     private VisualEffect R_muzzleEffect;
 
-
+    private void Awake()
+    {
+        Source = GetComponent<AudioSource>();
+    }
 
     public void fire(WeaponType type, BulletType bullet)
     {
@@ -46,6 +52,8 @@ public class Weapon : MonoBehaviour
     {
         PoolAble b = PoolManager.Instance.Pop(Type[bul].gameObject.name);
         b.transform.position = _t.position;
+        Source.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        Source.PlayOneShot(Clip[1]);
     }
 
 

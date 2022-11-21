@@ -36,6 +36,7 @@ public class PlayerAttackFour : PlayerAttackBase
         yield return new WaitForSeconds(0.9f);
         Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.RedBullet);
         Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.1f, 0.2f);
+        animator.SetInteger("Attack", 0);
     }
 
     IEnumerator ShootCool(int count, WeaponType wea, BulletType bul)

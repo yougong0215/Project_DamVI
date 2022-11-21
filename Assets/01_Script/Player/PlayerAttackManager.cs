@@ -125,7 +125,9 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     {
         Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 9;
         _normalAttack = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
+        _ani.SetInteger("Attack", 0);
+        yield return new WaitForSeconds(0.05f);
         SetStateNone();
         _normalAttack = false;
     }

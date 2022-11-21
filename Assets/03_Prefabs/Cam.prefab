@@ -79,6 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vcam: {fileID: 2196048594574135334}
   _vcamFake: {fileID: 52411474}
+  _aiming: {fileID: 0}
+  _aimingFake: {fileID: 0}
   _originrayX: 0
   _originrayY: 0
   _sense: 3
@@ -87,6 +89,9 @@ MonoBehaviour:
   CameraMaxDistance: 5
   zxXxz: 0
   zyYyz: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &2196048594574135336
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,8 +116,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2196048594574135336}
-  m_LocalRotation: {x: 0.3781054, y: 0.00000004039981, z: -0.000000055720772, w: 0.92576265}
-  m_LocalPosition: {x: 0, y: 2.9999986, z: -3.0600004}
+  m_LocalRotation: {x: 0.3781054, y: 0.000000040399808, z: -0.00000005572077, w: 0.9257626}
+  m_LocalPosition: {x: 0, y: 2.999999, z: -3.0599995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

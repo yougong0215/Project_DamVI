@@ -18,6 +18,9 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] List<float> _length = new List<float>();
     [SerializeField] List<EnemyBase> _enemy = new List<EnemyBase>();
 
+    [Header("¸ô?·ç")]
+    [SerializeField] LayerMask layer;
+
     private void OnEnable()
     {
         //hit[0].transform.position - transform.position < hit[i].transform.position - transform.position
@@ -50,7 +53,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         while(true)
         {
-            hit = Physics.OverlapBox(transform.position, new Vector3(30, 30, 30), Quaternion.identity);
+            hit = Physics.OverlapBox(transform.position, new Vector3(30, 30, 30), Quaternion.identity, layer);
             MatchingObject = null;
             if (hit != null)
             {
