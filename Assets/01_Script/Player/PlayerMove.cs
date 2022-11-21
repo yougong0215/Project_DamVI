@@ -285,4 +285,9 @@ public class PlayerMove : MonoBehaviour
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
         _rigid.velocity = new Vector3(0, 0, 0);
     }
+
+    public CameraCollision CameraReturn()
+    {
+        return LookObject.GetComponent<CameraCollision>();
+    }
 }

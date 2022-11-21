@@ -35,6 +35,7 @@ public class PlayerAttackFour : PlayerAttackBase
         Player.GetComponent<MonoBehaviour>().StartCoroutine(ShootCool(3, WeaponType.Right, BulletType.RedBullet));
         yield return new WaitForSeconds(0.9f);
         Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.RedBullet);
+        Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.1f, 0.2f);
     }
 
     IEnumerator ShootCool(int count, WeaponType wea, BulletType bul)
@@ -49,23 +50,6 @@ public class PlayerAttackFour : PlayerAttackBase
         {
             Player.GetComponent<MonoBehaviour>().StartCoroutine(ShootCool(count - 1, wea, bul));
         }
-
-    }
-    public override void OnDamagedEnemyMelloAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, Collider[] col)
-    {
-
-    }
-
-
-
-    public override void OnDamageEffectStart(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-    }
-
-
-    public override void OnDamageEffectEnd(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
 
     }
 }

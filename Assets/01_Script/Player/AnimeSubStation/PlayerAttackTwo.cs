@@ -30,14 +30,15 @@ public class PlayerAttackTwo : PlayerAttackBase
     public override void OnDamageEffectStart(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnDamageEffectStart(animator, stateInfo, layerIndex);
-        Player.GetComponent<Rigidbody>().velocity = Player.forward * -1 * 30;
         Player.GetComponent<MonoBehaviour>().StartCoroutine(late());
     }
     public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
     {
+        Player.GetComponent<Rigidbody>().velocity = Player.forward * -1 * 30;
         yield return new WaitForSeconds(delay);
         LookEnemy();
         Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.Bulletbase);
+        Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.1f, 0.1f);
     }
 
 
