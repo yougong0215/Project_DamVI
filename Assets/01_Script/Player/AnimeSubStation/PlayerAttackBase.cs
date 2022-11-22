@@ -76,7 +76,8 @@ public class PlayerAttackBase : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerAttackManager.Instance.Corutines();
+        if(animator.GetBool("Aiming") == false)
+             PlayerAttackManager.Instance.Corutines();
         if (state == AttackState.mello && isstart == false)
         {
             isstart = true;

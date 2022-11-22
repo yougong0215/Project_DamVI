@@ -29,9 +29,9 @@ public class PlayerAttackFive : PlayerAttackBase
 
     public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return null;
         Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.RedBullet);
-        Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.1f, 0.2f);
+        Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.05f, 0.05f);
     }
 
 

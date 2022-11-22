@@ -15,7 +15,8 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     [Header("ภ๛ต้")]
     [SerializeField] Collider[] hit;
 
-
+    [Header("UI")]
+    [SerializeField] GameObject _aimDraw;
 
 
     [SerializeField] private bool _normalAttack = false;
@@ -81,13 +82,14 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     }
 
     void Aimaing()
-    {
-        if (Input.GetMouseButtonDown(0) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
+    {   
+        SetStateAim();
+        if (Input.GetMouseButtonDown(0))
         {
-            _ani.SetInteger("Attack", 1);
+            _ani.SetTrigger("AimShoot");
         }
 
-        SetStateAim();
+
 
     }
 
@@ -112,6 +114,8 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         playerpri = PlayerPripoty.aiming;
         playerStat = PlayerStatues.bifurcationAttack1;
         Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 11;
+        _ani.SetBool("Aiming", true);
+        _aimDraw.SetActive(true);
     }
 
     public void SetStateNone()
@@ -119,15 +123,20 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         playerpri = PlayerPripoty.none;
         playerStat = PlayerStatues.Idle;
         Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 9;
+
+        _ani.SetBool("Aiming", false);
+        _ani.SetInteger("Attack", 0);
+        _aimDraw.SetActive(false);
     }
 
     IEnumerator clearStat()
     {
-        Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 9;
+        if(_ani.GetBool("Aiming")== false)
+            Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 9;
+
         _normalAttack = true;
-        yield return new WaitForSeconds(0.05f);
-        _ani.SetInteger("Attack", 0);
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f);
+
         SetStateNone();
         _normalAttack = false;
     }
