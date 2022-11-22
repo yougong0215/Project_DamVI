@@ -72,14 +72,14 @@ public abstract class EnemyBase : MonoBehaviour
     {
 
         float Length = Mathf.Sqrt(Mathf.Pow(transform.position.x - Player.position.x, 2) + Mathf.Pow(transform.position.z - Player.position.z, 2));
-        if (_stunTime <= 0 && _AttackDelayTime <= 0)
+        if (_stunTime <= 0)
         {
             if (Length <= _detectionLength)
             {
-                _nav.SetDestination(Player.position);
-                _nav.stoppingDistance = 2;
 
-                if(Length <= 3)
+                MoveEnemy();
+
+                if(Length <= 4)
                 {
                     EnemyDetection();
                 }
@@ -99,6 +99,12 @@ public abstract class EnemyBase : MonoBehaviour
 
     }
 
+
+    protected virtual void MoveEnemy()
+    {
+        _nav.SetDestination(Player.position);
+        _nav.stoppingDistance = 2;
+    }
     protected virtual void IdleEnemy()
     {
 
@@ -109,7 +115,17 @@ public abstract class EnemyBase : MonoBehaviour
     /// </summary>
     protected virtual void EnemyDetection()
     {
+        
+    }
 
+    protected virtual void AttackBase()
+    {
+
+    }
+
+    protected virtual void AttackCoolBase()
+    {
+        
     }
 
     public virtual void DamagedCool(int ATK, float stuntime, Vector3 NuckBack, bool Grab, float DelayTime)
