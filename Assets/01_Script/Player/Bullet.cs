@@ -73,33 +73,12 @@ public class Bullet : PoolAble
 
     private void OnTriggerEnter(Collider other)
     {
+        num = 0;
         if (other.gameObject.layer == 30)
         {
             if (_aimshoot == false)
             {
-                //col = Physics.OverlapBox(other.transform.position
-                //, new Vector3(1f, 1f, 1f), Quaternion.identity, 1 << LayerMask.NameToLayer("Enemy")); ;
-
-                //transform.position = other.transform.position;
-                //dir = Vector2.zero;
-
-                //for (int i = 0; i < col.Length; i++)
-                //{
-                //    Debug.Log(col[i].name);
-                //    if (col[i].GetComponent<EnemyBase>())
-                //    {
-                //        col[i].GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
-                //        num++;
-                //    }
-                //}
-                if (other.GetComponent<EnemyBase>())
-                {
-                    other.GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
-                    GetComponent<TrailRenderer>().enabled = false;
-                    GetComponentInChildren<VisualEffect>().Play();
-                    PoolManager.Instance.Push(this);
-                }
-                //StartCoroutine(die());
+                StartCoroutine(Attack(other));
             }
             else
             {
@@ -115,6 +94,33 @@ public class Bullet : PoolAble
           
 
         }
+    }
+    IEnumerator Attack(Collider other)
+    {
+        col = Physics.OverlapBox(other.transform.position
+        , new Vector3(1.5f, 1.5f, 1.5f), Quaternion.identity, 1 << LayerMask.NameToLayer("Enemy")); ;
+
+        transform.position = other.transform.position;
+        dir = Vector2.zero;
+
+        for (int i = 0; i < col.Length; i++)
+        {
+            yield return null;
+            Debug.Log(col[i].name);
+            if (col[i].GetComponent<EnemyBase>())
+            {
+                col[i].GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
+                num++;
+            }
+        }
+        //if (other.GetComponent<EnemyBase>())
+        //{
+        //    other.GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
+        //    GetComponent<TrailRenderer>().enabled = false;
+        //    GetComponentInChildren<VisualEffect>().Play();
+        //    PoolManager.Instance.Push(this);
+        //}
+        StartCoroutine(die());
     }
 
     IEnumerator timeOut()

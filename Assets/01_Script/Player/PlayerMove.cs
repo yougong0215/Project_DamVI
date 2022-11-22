@@ -107,7 +107,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void DogedUse()
     {
-        if (isDoged == false && Input.GetKeyDown(KeyCode.LeftShift) && _dogedCount > 0 && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight)
+        if (isDoged == false && Input.GetKeyDown(KeyCode.LeftShift) && _dogedCount > 0 && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming)
         {
 
             StartCoroutine(Doged());
@@ -223,7 +223,7 @@ public class PlayerMove : MonoBehaviour
     void NormalMove(float speed)
     {
 
-        transform.rotation = Quaternion.Euler(Vector3.up * (cameraAngle + angle));
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * (cameraAngle + angle)), Time.deltaTime * 7);
 
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(a * Vector3.forward), Time.deltaTime * 3);
         transform.Translate(Vector3.forward * Time.deltaTime * _moveSpeed * speed);
@@ -267,10 +267,9 @@ public class PlayerMove : MonoBehaviour
         }
 
         co = StartCoroutine(DogedCountUp());
-
-        yield return new WaitForSeconds(0.85f);
-
+        yield return new WaitForSeconds(0.55f);
         _ani.SetBool("Doged", false);
+        yield return new WaitForSeconds(0.3f);
 
         isDoged = false;
     }

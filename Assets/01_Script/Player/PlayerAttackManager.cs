@@ -10,7 +10,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     [SerializeField] public PlayerPripoty playerpri;
 
     [Header("에니메이션")]
-    [SerializeField] Animator _ani;
+    [SerializeField] public Animator _ani;
 
     [Header("적들")]
     [SerializeField] Collider[] hit;
@@ -23,7 +23,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     [SerializeField] private int _playerAttackValue;
 
     Coroutine co = null;
-
+    PlayerInteraction _inter;
 
 
 
@@ -62,12 +62,18 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         playerpri = PlayerPripoty.none;
         playerStat = PlayerStatues.Idle;
         _ani = Player.GetComponent<Animator>();
+        _inter = GetComponent<PlayerInteraction>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(1) == false)
+        if (Input.GetMouseButtonDown(1))
+        {
+            //LookEnemy();
+        }
+
+        if (Input.GetMouseButton(1) == false)
         {
             Attack();
         }
@@ -140,5 +146,19 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         SetStateNone();
         _normalAttack = false;
     }
-   
+    //protected void LookEnemy()
+    //{
+    //    if (_inter.DistannsEnemy())
+    //    {
+    //        Vector3 enemy = (_inter.DistannsEnemy().position - Player.transform.position).normalized;
+    //        Debug.Log(enemy);
+    //        Player.rotation = Quaternion.LookRotation(enemy);
+    //        Player.localEulerAngles = new Vector3(0, Player.localEulerAngles.y, 0);
+    //        //Player.rotation = Quaternion.Euler(0, Player.localEulerAngles.y, 0);
+    //    }
+    //    else
+    //    {
+    //        Player.rotation = Player.GetComponent<PlayerMove>().GetCameraAngel();
+    //    }
+    //}
 }

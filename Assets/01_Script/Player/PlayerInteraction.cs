@@ -30,6 +30,7 @@ public class PlayerInteraction : MonoBehaviour
     public void Damaged(int dam)
     {
         HP -= dam;
+        PlayerAttackManager.Instance._ani.SetTrigger("Block");
     }
 
     public float CalcDamage()

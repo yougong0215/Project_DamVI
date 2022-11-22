@@ -94,8 +94,15 @@ public abstract class EnemyBase : MonoBehaviour
             {
                 _ani.SetBool("Detection", false);
                 IdleEnemy();
-                _nav.ResetPath();
-                _nav.SetDestination(transform.position);
+                try
+                {
+                    _nav.ResetPath();
+                    _nav.SetDestination(transform.position);
+                }
+                catch
+                {
+
+                }
             }
         }
         else
@@ -181,6 +188,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void DieEvent()
     {
         //gameObject.SetActive(false);
+        
         Destroy(this.gameObject);
     }
 
