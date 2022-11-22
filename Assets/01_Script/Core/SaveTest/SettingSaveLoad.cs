@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering.Universal;
 
 public class SettingSaveLoad : Singleton<SettingSaveLoad>
 {
+    private MotionBlurSettingUI motionBlurSettingUI;
     private AudioMixer _audioMixer;
+    private void Awake()
+    {
+        motionBlurSettingUI = FindObjectOfType<MotionBlurSettingUI>();
+    }
     private void Start()
     {
         DontDestroyOnLoad(this);
     }
 
-    public void SaveSetting(AudioMixer audioMixer)
+    public void SaveAudioSetting(AudioMixer audioMixer)
     {
         _audioMixer = audioMixer;
         AudioState audioState = new AudioState();
@@ -31,7 +37,7 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
 
         File.WriteAllText(path, audioJson);
     }
-    public void LoadSetting(AudioMixer audioMixer)
+    public void LoadAudioSetting(AudioMixer audioMixer)
     {
         _audioMixer = audioMixer;
         string fileName = "Audio";
@@ -44,4 +50,32 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
         _audioMixer.SetFloat("SFX", audioState.sfx);
         _audioMixer.SetFloat("BGM", audioState.bgm);
     }
+
+    public void SaveGraphicSetting()
+    {
+        GraphicState graphicState = new GraphicState();
+        graphicState.graphic = (Graphic)QualitySettings.GetQualityLevel();
+        graphicState.motionBlurValue = motionBlurSettingUI.value;
+        string graphicJson = JsonUtility.ToJson(graphicState);
+
+        string fileName = "Graphic";
+        string path = Application.dataPath + "/" + fileName + ".json";
+
+        File.WriteAllText(path, graphicJson);
+    }
+
+    public void LoadGraphicSetting()
+    {
+        string fileName = "Graphic";
+        string path = Application.dataPath + "/" + fileName + ".json";
+        string json = File.ReadAllText(path);
+
+        GraphicState graphicState = JsonUtility.FromJson<GraphicState>(json);
+
+        QualitySettings.SetQualityLevel((int)graphicState.graphic);
+        motionBlurSettingUI._slider.value = graphicState.motionBlurValue;
+        motionBlurSettingUI._text.text = graphicState.motionBlurValue.ToString();
+    }
+
+
 }

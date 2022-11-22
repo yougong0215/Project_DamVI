@@ -20,22 +20,24 @@ public class AudioState
     public float master;
 }
 
-public class AudioSettingUI : MonoBehaviour
+public class AudioSettingUI : SliderUIBase
 {
-    [SerializeField]
     private TextMeshProUGUI _text;
+    
 
     public AudioMixer _audioMixer;
 
     private Slider _slider;
+    
 
     [SerializeField]
     private Audio audioEnum;
 
+
     private void Start()
     {
         _slider = GetComponentInChildren<Slider>();
-
+        _text = GetComponentInChildren<TextMeshProUGUI>();
         _slider.minValue = -40;
         _slider.maxValue = 0;
         Load();
@@ -43,14 +45,14 @@ public class AudioSettingUI : MonoBehaviour
 
     private void Load()
     {
-        SettingSaveLoad.Instance.LoadSetting(_audioMixer);
+        SettingSaveLoad.Instance.LoadAudioSetting(_audioMixer);
 
         _audioMixer.GetFloat(audioEnum.ToString(), out float f);
         _slider.value = f;
         _text.text = ((int)(((f - -40) / _slider.minValue) * -100)).ToString();
     }
 
-    public void ChangeValue(float f)
+    public new void ChangeValue(float f)
     {
         if(audioEnum == Audio.none)
         {
@@ -61,7 +63,7 @@ public class AudioSettingUI : MonoBehaviour
 
         _text.text = ((int)(((f - -40) / _slider.minValue) * -100)).ToString();
 
-        SettingSaveLoad.Instance.SaveSetting(_audioMixer);
+        SettingSaveLoad.Instance.SaveAudioSetting(_audioMixer);
     }
 
    
