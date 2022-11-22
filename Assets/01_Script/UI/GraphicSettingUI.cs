@@ -14,11 +14,18 @@ public enum Graphic
     좋음,
     존나좋군
 }
+public class GraphicState
+{
+    public Graphic graphic;
+    public float motionBlurValue;
+}
 
-public class GraphicSettingUI : MonoBehaviour
+public class GraphicSettingUI : SliderUIBase
 {
     private TextMeshProUGUI _text;
+
     private Slider _slider;
+
     [SerializeField]
     private Graphic _graphic;
 
@@ -35,22 +42,21 @@ public class GraphicSettingUI : MonoBehaviour
         _slider.maxValue = 5;
         _slider.minValue = 0;
 
+        SettingSaveLoad.Instance.LoadGraphicSetting();
 
         _slider.value = QualitySettings.GetQualityLevel();
         _graphic = (Graphic)QualitySettings.GetQualityLevel();
         _text.text = _graphic.ToString();
     }
 
-    void Load()
+    public new void ChangeValue(float f)
     {
-    }
-
-    public void ChangeValue(float n)
-    {
-        int i = (int)n;
+        int i = (int)f;
         _graphic = (Graphic)i;
         _text.text = _graphic.ToString();
 
         QualitySettings.SetQualityLevel(i);
+
+        SettingSaveLoad.Instance.SaveGraphicSetting();
     }
 }
