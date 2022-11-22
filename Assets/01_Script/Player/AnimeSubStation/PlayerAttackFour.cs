@@ -35,6 +35,7 @@ public class PlayerAttackFour : PlayerAttackBase
         Player.GetComponent<MonoBehaviour>().StartCoroutine(ShootCool(3, WeaponType.Right, BulletType.RedBullet));
         yield return new WaitForSeconds(0.9f);
         Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.RedBullet);
+        LookEnemy();
         Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.1f, 0.2f);
         animator.SetInteger("Attack", 0);
     }

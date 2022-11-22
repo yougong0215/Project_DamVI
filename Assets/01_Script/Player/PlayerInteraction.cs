@@ -53,51 +53,67 @@ public class PlayerInteraction : MonoBehaviour
     {
         while(true)
         {
+
             hit = Physics.OverlapBox(transform.position, new Vector3(30, 30, 30), Quaternion.identity, layer);
             MatchingObject = null;
             if (hit != null)
             {
-                //Debug.Log(hit.Length);
-                for (int i = 0; i < hit.Length; i++)
+                try
                 {
-                    _length.Add(
-                          Mathf.Sqrt(
-                          Mathf.Pow(hit[i].transform.position.x - transform.position.x, 2)
-                        + Mathf.Pow(hit[i].transform.position.y - transform.position.y, 2)
-                        + Mathf.Pow(hit[i].transform.position.z - transform.position.z, 2)));
-                }
-                for (int i = 0; i < hit.Length; i++)
-                {
-                    if(_length[0] < _length[i])
+                    //Debug.Log(hit.Length);
+                    for (int i = 0; i < hit.Length; i++)
                     {
-                        float temp = _length[0];
-                        _length[0] = _length[i];
-                        _length[i] = temp;
+                        _length.Add(
+                              Mathf.Sqrt(
+                              Mathf.Pow(hit[i].transform.position.x - transform.position.x, 2)
+                            + Mathf.Pow(hit[i].transform.position.y - transform.position.y, 2)
+                            + Mathf.Pow(hit[i].transform.position.z - transform.position.z, 2)));
+                    }
+                    for (int i = 0; i < hit.Length; i++)
+                    {
+                        if (_length[0] < _length[i])
+                        {
+                            float temp = _length[0];
+                            _length[0] = _length[i];
+                            _length[i] = temp;
 
-                        Collider tempcol = hit[0];
-                        hit[0] = hit[i];
-                        hit[i] = tempcol;
-                    }
-                    if (hit[0].GetComponent<BaseInteraction>())
-                    {
-                        MatchingObject = hit[0].gameObject.GetComponent<BaseInteraction>();
+                            Collider tempcol = hit[0];
+                            hit[0] = hit[i];
+                            hit[i] = tempcol;
+                        }
+                        if (hit[0].GetComponent<BaseInteraction>())
+                        {
+                            MatchingObject = hit[0].gameObject.GetComponent<BaseInteraction>();
+                        }
                     }
                 }
+                catch
+                {
+                    _length = null;
+                }
+               
             }
             yield return new WaitForSeconds(0.1f);
             if(_length != null)
             {
-                for (int i = 0; i < _length.Count; i++)
+                try
                 {
-                    if(hit[i].GetComponent<EnemyBase>())
+                    for (int i = 0; i < _length.Count; i++)
                     {
-                        EnemyMatchingObject = hit[i].GetComponent<EnemyBase>();
-                        break;
+                        if (hit[i].GetComponent<EnemyBase>())
+                        {
+                            EnemyMatchingObject = hit[i].GetComponent<EnemyBase>();
+                            break;
+                        }
+                        else
+                        {
+                            EnemyMatchingObject = null;
+                        }
                     }
-                    else
-                    {
-                        EnemyMatchingObject = null;
-                    }
+                }
+                catch
+                {
+                    EnemyMatchingObject = null;
                 }
             }
 

@@ -13,6 +13,9 @@ public class Bullet : PoolAble
     [SerializeField] float DelayTime = 0;
     [SerializeField] float _speed = 50f;
 
+
+    bool _aimshoot = false;
+
     int num = 0;
 
     private Transform _player;
@@ -32,6 +35,9 @@ public class Bullet : PoolAble
     Vector3 dir;
     private void OnEnable()
     {
+
+        _aimshoot = false;
+
         num = 0;
         transform.position -= new Vector3(0, 2f, 0);
         GetComponent<TrailRenderer>().enabled = false;
@@ -46,6 +52,7 @@ public class Bullet : PoolAble
         }
         else
         {
+            _aimshoot = true;
             dir = Player.GetComponent<PlayerMove>().ArrowLook.transform.forward;
             dir.Normalize();
         }
@@ -68,25 +75,44 @@ public class Bullet : PoolAble
     {
         if (other.gameObject.layer == 30)
         {
-            damage = 10;
-            col = Physics.OverlapBox(other.transform.position
-           , new Vector3(1.5f, 1.5f, 1.5f), Quaternion.identity, 1 << LayerMask.NameToLayer("Enemy")); ;
-
-            transform.position = other.transform.position;
-            dir = Vector2.zero;
-
-            for (int i = 0; i < col.Length; i++)
+            if (_aimshoot == false)
             {
-                Debug.Log(col[i].name);
-                if (col[i].GetComponent<EnemyBase>())
+                //col = Physics.OverlapBox(other.transform.position
+                //, new Vector3(1f, 1f, 1f), Quaternion.identity, 1 << LayerMask.NameToLayer("Enemy")); ;
+
+                //transform.position = other.transform.position;
+                //dir = Vector2.zero;
+
+                //for (int i = 0; i < col.Length; i++)
+                //{
+                //    Debug.Log(col[i].name);
+                //    if (col[i].GetComponent<EnemyBase>())
+                //    {
+                //        col[i].GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
+                //        num++;
+                //    }
+                //}
+                if (other.GetComponent<EnemyBase>())
                 {
-                    col[i].GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
-                    num++;
+                    other.GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
+                    GetComponent<TrailRenderer>().enabled = false;
+                    GetComponentInChildren<VisualEffect>().Play();
+                    PoolManager.Instance.Push(this);
+                }
+                //StartCoroutine(die());
+            }
+            else
+            {
+                if (other.GetComponent<EnemyBase>())
+                {
+                    other.GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
+                    GetComponent<TrailRenderer>().enabled = false;
+                    GetComponentInChildren<VisualEffect>().Play();
+                    PoolManager.Instance.Push(this);
                 }
             }
-            
 
-            StartCoroutine(die());
+          
 
         }
     }

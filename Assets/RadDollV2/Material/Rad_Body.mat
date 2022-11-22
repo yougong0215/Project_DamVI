@@ -313,7 +313,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RimColorTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 58f19eb52bb951987eabad7d4754d5d0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_1a1c7c7c8291cc8b862b9c37e54d7945_Texture_1:
@@ -498,7 +498,7 @@ Material:
     - _ColorShift_Speed: 0
     - _Cull: 2
     - _CullMode: 2
-    - _Cutoff: 0
+    - _Cutoff: 0.001
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DirectLightMultiplier: 1
@@ -698,7 +698,7 @@ Material:
     - _OutlineVectorScale: 1
     - _OutlineVectorUVMode: 0
     - _OutlineVertexR2Width: 0
-    - _OutlineWidth: 0.089
+    - _OutlineWidth: 0.1
     - _OutlineZBias: 0
     - _OutlineZClip: 1
     - _OutlineZOffset: 0
@@ -725,7 +725,7 @@ Material:
     - _RimBlur: 0.41
     - _RimBorder: 0.717
     - _RimDirRange: 0
-    - _RimDirStrength: 0
+    - _RimDirStrength: 0.643
     - _RimEnableLighting: 1
     - _RimFresnelPower: 8.5
     - _RimIndirBlur: 0.1
@@ -935,7 +935,7 @@ Material:
     - _MatCapBlendUV1: {r: 0, g: 0, b: 0, a: 0}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OcclusionMapChannelMask: {r: 1, g: 0, b: 0, a: 0}
-    - _OutlineColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineLitColor: {r: 1, g: 0.2, b: 0, a: 0}
     - _OutlineTexHSVG: {r: 0, g: 1, b: 1, a: 1}
     - _OutlineTex_ScrollRotate: {r: 0, g: 0, b: 0, a: 0}

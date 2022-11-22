@@ -119,11 +119,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: e84c943909304dec2dec9186e40c5fb4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 58f19eb52bb951987eabad7d4754d5d0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: e84c943909304dec2dec9186e40c5fb4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 58f19eb52bb951987eabad7d4754d5d0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Bump2ndMap:
@@ -517,7 +517,7 @@ Material:
     - _ColorShift_Speed: 0
     - _Cull: 2
     - _CullMode: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0.001
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DirectLightMultiplier: 1
@@ -719,7 +719,7 @@ Material:
     - _OutlineVectorScale: 1
     - _OutlineVectorUVMode: 0
     - _OutlineVertexR2Width: 0
-    - _OutlineWidth: 0.5
+    - _OutlineWidth: 0.1
     - _OutlineZBias: 0
     - _OutlineZClip: 1
     - _OutlineZOffset: 0.0001

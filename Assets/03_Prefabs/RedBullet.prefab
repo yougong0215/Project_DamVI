@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7f098f9cf6d21478c0fb09f46ada94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 10
   stun: 0
   NuckBack: {x: 0, y: 3, z: 0}
   Grab: 0
