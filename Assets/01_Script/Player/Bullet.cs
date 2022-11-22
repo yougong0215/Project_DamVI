@@ -34,9 +34,11 @@ public class Bullet : PoolAble
     {
         num = 0;
         transform.position -= new Vector3(0, 2f, 0);
+        GetComponent<TrailRenderer>().enabled = false;
         GetComponent<TrailRenderer>().enabled = true;
-        GetComponentInChildren<VisualEffect>().enabled = false;
-        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming)
+        GetComponentInChildren<VisualEffect>().enabled = true;
+        GetComponentInChildren<VisualEffect>().Stop();
+        if (PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming)
         {
             dir = GameManager.Instance.Player.localRotation * Vector3.forward;
             dir.y = 0;
@@ -98,7 +100,7 @@ public class Bullet : PoolAble
     IEnumerator die()
     {
         GetComponent<TrailRenderer>().enabled = false;
-        GetComponentInChildren<VisualEffect>().enabled = true;
+        GetComponentInChildren<VisualEffect>().Play();
         yield return new WaitUntil(() => num != 0);
         PoolManager.Instance.Push(this);
     }
