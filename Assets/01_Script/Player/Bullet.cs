@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using Cinemachine;
 
 public class Bullet : PoolAble
 {
@@ -14,16 +15,39 @@ public class Bullet : PoolAble
 
     int num = 0;
 
+    private Transform _player;
+    public Transform Player
+    {
+        get
+        {
+            if (_player == null)
+            {
+                _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            }
+            return _player;
+        }
+    }
+
     Collider[] col;
     Vector3 dir;
     private void OnEnable()
     {
         num = 0;
+        transform.position -= new Vector3(0, 2f, 0);
         GetComponent<TrailRenderer>().enabled = true;
         GetComponentInChildren<VisualEffect>().enabled = false;
-        dir = GameManager.Instance.Player.localRotation * Vector3.forward;
-        dir.y = 0;
-        dir.Normalize();
+        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming)
+        {
+            dir = GameManager.Instance.Player.localRotation * Vector3.forward;
+            dir.y = 0;
+            dir.Normalize();
+        }
+        else
+        {
+            dir = Player.GetComponent<PlayerMove>().ArrowLook.transform.forward;
+            dir.Normalize();
+        }
+        GetComponent<TrailRenderer>().enabled = true;
     }
 
     private void Update()

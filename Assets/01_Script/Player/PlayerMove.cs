@@ -151,6 +151,8 @@ public class PlayerMove : MonoBehaviour
         _originrayX = Mathf.Clamp(_originrayX, -10, 10);
 
 
+        _ani.SetBool("Move", false);
+
         if (dir == Vector3.zero)
         {
             //_ani.SetBool("Walk", false);
