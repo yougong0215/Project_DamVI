@@ -4,13 +4,15 @@ using TMPro;
 
 public abstract class SliderUIBase : MonoBehaviour
 {
-    private TextMeshProUGUI _text;
+    public TextMeshProUGUI _text;
 
-    private Slider _slider;
+    public Slider _slider;
     
 
     public void ChangeValue(float f)
     {
         
     }
+
+    
 }

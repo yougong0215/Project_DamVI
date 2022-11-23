@@ -74,7 +74,8 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
 
         QualitySettings.SetQualityLevel((int)graphicState.graphic);
         motionBlurSettingUI._slider.value = graphicState.motionBlurValue;
-        motionBlurSettingUI._text.text = graphicState.motionBlurValue.ToString();
+        motionBlurSettingUI._text.text = string.Format("{0:0.#}", graphicState.motionBlurValue);
+
     }
 
 

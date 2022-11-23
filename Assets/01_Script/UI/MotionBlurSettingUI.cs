@@ -14,9 +14,7 @@ public class MotionBlurSettingUI :  SliderUIBase
 
     public float maxValue;
 
-    public TextMeshProUGUI _text;
 
-    public Slider _slider;
    
     [HideInInspector]
     public float value;
@@ -27,14 +25,8 @@ public class MotionBlurSettingUI :  SliderUIBase
         _slider = GetComponentInChildren<Slider>();
         _slider.minValue = 0;
         _slider.maxValue = 1;
-    }
-    void Start()
-    {
-        volume = GameObject.FindObjectOfType<Volume>();
-        if(volume.profile.TryGet<MotionBlur>(out MotionBlur tmp))
-        {
-            _motionBlur = tmp;
-        }
+        volume.profile.TryGet<MotionBlur>(out _motionBlur);
+        
         SettingSaveLoad.Instance.LoadGraphicSetting();
         _motionBlur.intensity.value = Mathf.Lerp(0, maxValue, value);
     }
@@ -43,7 +35,8 @@ public class MotionBlurSettingUI :  SliderUIBase
     {
         value = f;
         _motionBlur.intensity.value = Mathf.Lerp(0, maxValue, value);
-        _text.text = value.ToString();
+        //_text.text = value.ToString();
+        _text.text = string.Format("{0:0.#}", value);
         
         SettingSaveLoad.Instance.SaveGraphicSetting();
     }

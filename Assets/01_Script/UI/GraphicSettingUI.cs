@@ -22,9 +22,7 @@ public class GraphicState
 
 public class GraphicSettingUI : SliderUIBase
 {
-    private TextMeshProUGUI _text;
 
-    private Slider _slider;
 
     [SerializeField]
     private Graphic _graphic;

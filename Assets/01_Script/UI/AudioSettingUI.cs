@@ -22,12 +22,10 @@ public class AudioState
 
 public class AudioSettingUI : SliderUIBase
 {
-    private TextMeshProUGUI _text;
     
 
     public AudioMixer _audioMixer;
 
-    private Slider _slider;
     
 
     [SerializeField]
