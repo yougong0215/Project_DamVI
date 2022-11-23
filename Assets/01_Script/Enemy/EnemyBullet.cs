@@ -17,7 +17,7 @@ public class EnemyBullet : PoolAble
             return _player;
         }
     }
-    Vector3 dir = Vector3.zero;
+    Quaternion dir = Quaternion.identity;
     float speed = 0.3f;
     int damage = 0;
 
@@ -33,13 +33,13 @@ public class EnemyBullet : PoolAble
     {
         damage = val;
         enemy = e;
+       // dir = d;
     }
 
     protected virtual IEnumerator Shoot()
     {
         yield return null;
         speed = 0.3f;
-        dir = (Player.position + new Vector3(0,1.4f,0) - transform.position).normalized;
         yield return new WaitForSeconds(0.2f);
         //dir = (Player.position - transform.position).normalized;
         speed = 30f;
@@ -48,7 +48,7 @@ public class EnemyBullet : PoolAble
 
     private void Update()
     {     
-        transform.position += dir * speed * Time.deltaTime;
+        transform.position += transform.forward * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
