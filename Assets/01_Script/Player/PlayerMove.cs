@@ -49,38 +49,42 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(_dogedCount);
-        PrimaryCamSet();
-        MoveDir();
-
-        DogedUse();
-        // 입력 X
-
-
-        if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming && ArrowLook != null)
+        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.hit)
         {
-            ZoomMove();
-            return;
-        }
-        if (dir == Vector3.zero || _direction == Vector2.zero)
-        {
-            _ani.SetBool("Move", false);
-            return;
-        }
+            //Debug.Log(_dogedCount);
+            PrimaryCamSet();
+            MoveDir();
+
+            DogedUse();
+            // 입력 X
 
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-            isRun = isRun ? false : true;
+            if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming && ArrowLook != null)
+            {
+                ZoomMove();
+                return;
+            }
+            if (dir == Vector3.zero || _direction == Vector2.zero)
+            {
+                _ani.SetBool("Move", false);
+                return;
+            }
 
-        // 구르기 같은 순간 이동
+
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+                isRun = isRun ? false : true;
+
+            // 구르기 같은 순간 이동
 
 
-        //Debug.Log(_direction);
+            //Debug.Log(_direction);
 
-        if(dir != Vector3.zero && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight 
-            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming && _ani.GetInteger("Attack") != 1)
-        {
-            Move(_moveSpeed);
+            if (dir != Vector3.zero && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight
+                && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming && _ani.GetInteger("Attack") != 1)
+            {
+                Move(_moveSpeed);
+            }
+
         }
 
 

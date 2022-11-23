@@ -72,6 +72,6 @@ public class GunMinater : EnemyBase
     {
         PoolAble a = PoolManager.Instance.Pop(Bullet.name);
         a.transform.position = _pos.position;
-        a.GetComponent<EnemyBullet>().SetDamage(ATK);
+        a.GetComponent<EnemyBullet>().SetDamage(ATK, transform);
     }
 }
