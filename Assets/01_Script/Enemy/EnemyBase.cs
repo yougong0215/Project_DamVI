@@ -132,6 +132,15 @@ public abstract class EnemyBase : MonoBehaviour
         
     }
 
+    protected virtual void AttackBase()
+    {
+
+    }
+
+    protected virtual void AttackCoolBase()
+    {
+        
+    }
 
     public virtual void DamagedCool(int ATK, float stuntime, Vector3 NuckBack, bool Grab, float DelayTime)
     {

@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("플레이어 스텟")]
     [SerializeField] int HP = 30;
     [SerializeField] float ATK = 1;
-    [SerializeField] int arrmor = 30;
-    [SerializeField] bool _superArrmor = false;
 
     [Header("가장 가까운 물체")]
     [SerializeField] BaseInteraction MatchingObject = null;
@@ -24,74 +21,16 @@ public class PlayerInteraction : MonoBehaviour
     [Header("몰?루")]
     [SerializeField] LayerMask layer;
 
-    Coroutine hiting;
-    bool _nuckback = false;
-    Coroutine nuck;
-
     private void OnEnable()
     {
         //hit[0].transform.position - transform.position < hit[i].transform.position - transform.position
-        arrmor = 30;
         StartCoroutine(InteractionCheck());
-    }
-
-    public void PlusArrmor(int value)
-    {
-        arrmor += value;
-    }
-    public void arrmorBlack(int value, Transform enemy)
-    {
-        if(_nuckback == false)
-        {
-            arrmor -= value;
-
-            if (nuck != null)
-            {
-                StopCoroutine(nuck);
-            }
-            nuck = StartCoroutine(Nakback(enemy));
-            arrmor = HP;
-        }
-        
-
     }
 
     public void Damaged(int dam)
     {
         HP -= dam;
-        if(_superArrmor == false)
-        {
-            arrmor -= dam * Random.Range(1, 11);
-        }
-    }
-
-    IEnumerator Nakback(Transform Enemy)
-    {
-        _nuckback = true;
-        if (hiting != null)
-        {
-            StopCoroutine(hiting);
-        }
-        
-
-        PlayerAttackManager.Instance._ani.SetTrigger("Hit");
-        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.hit;
-        transform.rotation = Quaternion.LookRotation(Enemy.position);
-
-        GetComponent<Rigidbody>().AddForce((transform.position - Enemy.position).normalized * 5, ForceMode.VelocityChange);
-
-        yield return new WaitForSeconds(0.7f);
-        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
-        _nuckback = false;
-    }
-
-    IEnumerator hitStat()
-    {
         PlayerAttackManager.Instance._ani.SetTrigger("Block");
-        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.hit;
-        yield return new WaitForSeconds(0.7f);
-        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
-
     }
 
     public float CalcDamage()
@@ -100,7 +39,7 @@ public class PlayerInteraction : MonoBehaviour
     }
     public Transform DistannsEnemy()
     {
-        if (EnemyMatchingObject != null)
+        if(EnemyMatchingObject != null)
         {
             return EnemyMatchingObject.GetComponent<Transform>();
         }
@@ -113,7 +52,7 @@ public class PlayerInteraction : MonoBehaviour
 
     IEnumerator InteractionCheck()
     {
-        while (true)
+        while(true)
         {
 
             hit = Physics.OverlapBox(transform.position, new Vector3(30, 30, 30), Quaternion.identity, layer);
@@ -153,10 +92,10 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     _length = null;
                 }
-
+               
             }
             yield return new WaitForSeconds(0.1f);
-            if (_length != null)
+            if(_length != null)
             {
                 try
                 {
@@ -182,7 +121,7 @@ public class PlayerInteraction : MonoBehaviour
             List<float> clear = new List<float>();
             _length = clear;
 
-
+            
         }
 
 
@@ -195,26 +134,10 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (MatchingObject != null && Input.GetKeyDown(KeyCode.F))
+        if (MatchingObject !=null && Input.GetKeyDown(KeyCode.F))
         {
-            MatchingObject.Interaction();
+           MatchingObject.Interaction();
         }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            SceneManager.LoadScene(1);
-        }
-
-        if (arrmor < 0)
-        {
-            if (hiting != null)
-            {
-                StopCoroutine(hiting);
-            }
-            hiting = StartCoroutine(hitStat());
-            arrmor = HP;
-        }
-
     }
 
-}
+}   

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyBullet : PoolAble
 {
 
+
     private Transform _player;
     public Transform Player
     {
@@ -17,11 +18,9 @@ public class EnemyBullet : PoolAble
             return _player;
         }
     }
-    Quaternion dir = Quaternion.identity;
+    Vector3 dir = Vector3.zero;
     float speed = 0.3f;
     int damage = 0;
-
-    Transform enemy;
 
     protected void OnEnable()
     {
@@ -29,17 +28,16 @@ public class EnemyBullet : PoolAble
         StartCoroutine(Shoot());
     }
 
-    public void SetDamage(int val, Transform e)
+    public void SetDamage(int val)
     {
         damage = val;
-        enemy = e;
-       // dir = d;
     }
 
     protected virtual IEnumerator Shoot()
     {
         yield return null;
         speed = 0.3f;
+        dir = (Player.position - transform.position).normalized;
         yield return new WaitForSeconds(0.2f);
         //dir = (Player.position - transform.position).normalized;
         speed = 30f;
@@ -48,7 +46,7 @@ public class EnemyBullet : PoolAble
 
     private void Update()
     {     
-        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position += dir * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,7 +54,6 @@ public class EnemyBullet : PoolAble
         if(other.gameObject.name == "Player")
         {
             Player.GetComponent<PlayerInteraction>().Damaged(damage);
-            Player.GetComponent<PlayerInteraction>().arrmorBlack(100000, enemy);
             PoolManager.Instance.Push(this);
         }
     }

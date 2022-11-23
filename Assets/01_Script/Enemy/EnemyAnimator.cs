@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyAnimator : StateMachineBehaviour
 {
-    GunMinater _g;
-
     private Transform _player;
     public Transform Player
     {
@@ -22,7 +20,6 @@ public class EnemyAnimator : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _g = animator.GetComponent<GunMinater>();
         shot = false;
     }
 
@@ -34,31 +31,12 @@ public class EnemyAnimator : StateMachineBehaviour
 
     IEnumerator Shoot(Animator animator)
     {
-
-        //dir = (Player.position + new Vector3(0, 1.4f, 0) - transform.position).normalized;
-        
         shot = true;
         yield return new  WaitForSeconds(0.05f);
-        _g.Att(15);
-        yield return null;
-        _g.Att(12);
-        yield return null;
-        _g.Att(9);
-        yield return null;
-        _g.Att(6);
-        yield return null;
-        _g.Att(3);
-        yield return new WaitForSeconds(0.1f);
-        _g.Att();
-        yield return new WaitForSeconds(0.1f);
-        _g.Att(-3);
-        yield return null;
-        _g.Att(-6);
-        yield return null;
-        _g.Att(-9);
-        yield return null;
-        _g.Att(-12);
-        yield return null;
-        _g.Att(-15);
+        animator.GetComponent<GunMinater>().Att();
+        yield return new WaitForSeconds(0.05f);
+        animator.GetComponent<GunMinater>().Att();
+        yield return new WaitForSeconds(0.05f);
+        animator.GetComponent<GunMinater>().Att();
     }
 }
