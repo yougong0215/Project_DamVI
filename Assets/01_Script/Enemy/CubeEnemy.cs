@@ -19,7 +19,7 @@ public class CubeEnemy : EnemyBase
     
     }
 
-    protected override void AttackBase()
+    protected void AttackBase()
     {
         Collider[] col = Physics.OverlapBox(transform.position + (transform.position - Player.position).normalized
         , new Vector3(1 * _attackLength, 1, 1), transform.rotation
@@ -36,7 +36,7 @@ public class CubeEnemy : EnemyBase
 
     }
 
-    protected override void AttackCoolBase()
+    protected void AttackCoolBase()
     {
         MoveEnemy();
     }
