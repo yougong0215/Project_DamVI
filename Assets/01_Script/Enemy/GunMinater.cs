@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunMinater : EnemyBase
+public class GunMinater : EnemyBase, IEnemyDetection
 {
     [SerializeField] public GameObject Bullet = null;
     [SerializeField] public Transform _pos;
@@ -10,11 +10,7 @@ public class GunMinater : EnemyBase
     {
         if(Vector3.Distance(Player.position, transform.position) >= _attackLength)
         {
-<<<<<<< Updated upstream
-            transform.rotation = Quaternion.LookRotation(( Player.position - transform.position).normalized);
-=======
             transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
->>>>>>> Stashed changes
             try
             {
                 _nav.SetDestination(Player.position);
@@ -53,7 +49,7 @@ public class GunMinater : EnemyBase
 
     }
 
-    protected override void AttackBase()
+    public void AttackBase()
     {
         transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
         _ani.SetBool("Attack", true);
@@ -65,7 +61,7 @@ public class GunMinater : EnemyBase
         _rigid.velocity = Vector3.zero;
     }
 
-    protected override void AttackCoolBase()
+    public void AttackCoolBase()
     {
         transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
         MoveEnemy();
@@ -73,10 +69,12 @@ public class GunMinater : EnemyBase
     }
 
 
-    public void Att()
+    public void Att(float angle = 0)
     {
         PoolAble a = PoolManager.Instance.Pop(Bullet.name);
         a.transform.position = _pos.position;
-        a.GetComponent<EnemyBullet>().SetDamage(ATK);
+        a.transform.rotation = Quaternion.LookRotation(Player.position);
+        a.transform.rotation = Quaternion.Euler(transform.localEulerAngles + new Vector3(0, angle, 0));
+        a.GetComponent<EnemyBullet>().SetDamage(ATK, transform);
     }
 }
