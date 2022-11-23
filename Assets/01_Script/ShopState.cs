@@ -69,7 +69,7 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
     {
         get
         {
-            S_attack = Mathf.Clamp(S_attack, 10, 100);
+            S_Shield = Mathf.Clamp(S_Shield, 10, 100);
             return S_attack;
         }
         set => S_Shield += value;
