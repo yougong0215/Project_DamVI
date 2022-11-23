@@ -10,7 +10,11 @@ public class GunMinater : EnemyBase
     {
         if(Vector3.Distance(Player.position, transform.position) >= _attackLength)
         {
+<<<<<<< Updated upstream
+            transform.rotation = Quaternion.LookRotation(( Player.position - transform.position).normalized);
+=======
             transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
+>>>>>>> Stashed changes
             try
             {
                 _nav.SetDestination(Player.position);
