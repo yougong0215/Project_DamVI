@@ -121,7 +121,7 @@ public abstract class EnemyBase : MonoBehaviour
     }
     protected virtual void IdleEnemy()
     {
-
+        _ani.SetBool("Move", false);
     }
 
     /// <summary>
@@ -164,15 +164,18 @@ public abstract class EnemyBase : MonoBehaviour
             int Grabing = Grab ? -1 : 1;
 
             _rigid.AddForce(force * 2 * _fiber, ForceMode.VelocityChange);//force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
+            
+            
             if(_stunTime > 0)
             {
-                _ani.SetTrigger("hit");
+                _ani.SetBool("hit", true);
             }
         }
 
         HP -= ATK;
         yield return new WaitForSeconds(0.3f);
         _rigid.velocity = Vector3.zero;
+        _ani.SetBool("hit", false);
     }
 
     

@@ -10,7 +10,8 @@ using UnityEngine.VFX;
 public enum BulletType
 {
     Bulletbase = 0,
-    RedBullet =1
+    RedBullet =1,
+    ActivityBullet = 2
 }
 
 public class Weapon : MonoBehaviour

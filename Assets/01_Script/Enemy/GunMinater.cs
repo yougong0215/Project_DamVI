@@ -10,7 +10,11 @@ public class GunMinater : EnemyBase
     {
         if(Vector3.Distance(Player.position, transform.position) >= _attackLength)
         {
+<<<<<<< Updated upstream
             transform.rotation = Quaternion.LookRotation(( Player.position - transform.position).normalized);
+=======
+            transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
+>>>>>>> Stashed changes
             try
             {
                 _nav.SetDestination(Player.position);
@@ -51,7 +55,7 @@ public class GunMinater : EnemyBase
 
     protected override void AttackBase()
     {
-        transform.rotation = Quaternion.LookRotation((Player.position - transform.position).normalized);
+        transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
         _ani.SetBool("Attack", true);
 
         _nav.stoppingDistance = 100;
@@ -63,6 +67,7 @@ public class GunMinater : EnemyBase
 
     protected override void AttackCoolBase()
     {
+        transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
         MoveEnemy();
         _ani.SetBool("Attack", false);
     }
