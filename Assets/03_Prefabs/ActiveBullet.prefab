@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4927887938662984997}
   - component: {fileID: 6715606586013258691}
   m_Layer: 0
-  m_Name: RedBullet
+  m_Name: ActiveBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7f098f9cf6d21478c0fb09f46ada94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  stun: 0
+  damage: 50
+  stun: 0.2
   NuckBack: {x: 0, y: 3, z: 0}
   Grab: 0
   DelayTime: 0
@@ -88,7 +88,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be930103637f2134881a854080575374, type: 2}
+  - {fileID: 2100000, guid: 185ee02d98a3ab147ade589e5f66d019, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
