@@ -40,12 +40,12 @@ public class Bullet : PoolAble
 
         num = 0;
         transform.position -= new Vector3(0, 2f, 0);
-        GetComponent<TrailRenderer>().enabled = false;
-        GetComponent<TrailRenderer>().enabled = true;
-        GetComponentInChildren<VisualEffect>().enabled = true;
+
+
         GetComponentInChildren<VisualEffect>().Stop();
         if (PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming)
         {
+            transform.forward = Player.forward;
             transform.rotation = Player.GetComponent<Weapon>().Dir(transform.localEulerAngles);
             dir.Normalize();
         }
@@ -55,9 +55,25 @@ public class Bullet : PoolAble
             dir = Player.GetComponent<PlayerMove>().ArrowLook.transform.forward;
             dir.Normalize();
         }
-        GetComponent<TrailRenderer>().enabled = true;
+        if (Player.GetComponent<Weapon>().Shoot() == false)
+        {
+            StartCoroutine(timeOut(0.3f));
+        }
+        else
+        {
+            StartCoroutine(timeOut(1));
+        }
+        StartCoroutine(ROtateing());
     }
 
+
+    private IEnumerator ROtateing()
+    {
+        GetComponent<TrailRenderer>().enabled = true;
+        GetComponentInChildren<VisualEffect>().enabled = true;
+        yield return null;
+
+    }
     private void Update()
     {
         if(_aimshoot == true)
@@ -68,7 +84,7 @@ public class Bullet : PoolAble
         {
             transform.position += transform.forward * _speed * Time.deltaTime;
         }
-        StartCoroutine(timeOut());
+        
         //Debug.Log(dir);
     }
     void OnDrawGizmos()
@@ -112,7 +128,6 @@ public class Bullet : PoolAble
         for (int i = 0; i < col.Length; i++)
         {
             yield return null;
-            Debug.Log(col[i].name);
             if (col[i].GetComponent<EnemyBase>())
             {
                 col[i].GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
@@ -129,9 +144,13 @@ public class Bullet : PoolAble
         StartCoroutine(die());
     }
 
-    IEnumerator timeOut()
+
+
+    IEnumerator timeOut(float time)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(time);
+        GetComponent<TrailRenderer>().enabled = false;
+        yield return new WaitForSeconds(0.1f);
         PoolManager.Instance.Push(this);
     }
     

@@ -11,12 +11,12 @@ public class PlayerShootGun : PlayerAttackBase
     public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
     {
         yield return new WaitForSeconds(0.1f);
-        for (int i = -60; i <= 60; i += 20)
+        for (int i = -6; i <= 6; i += (int)Random.Range(1f,4f))
         {
-            for(int j = -60; j <=60; j+= 20)
+            for(int j = -6; j <= 6; j += (int)Random.Range(1f, 4f))
             {
-               
-                Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.RedBullet, i, j);
+                Player.GetComponent<PlayerMove>().LookObject.GetComponent<CameraCollision>().shaking(0.1f, 0.5f, 1);
+                Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.ActivityBullet, i, j, true);
             }
         }
     }
