@@ -9,10 +9,6 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
 {
     private MotionBlurSettingUI motionBlurSettingUI;
     private AudioMixer _audioMixer;
-    private void Awake()
-    {
-        motionBlurSettingUI = FindObjectOfType<MotionBlurSettingUI>();
-    }
     private void Start()
     {
         DontDestroyOnLoad(this);
@@ -53,6 +49,7 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
 
     public void SaveGraphicSetting()
     {
+        motionBlurSettingUI = FindObjectOfType<MotionBlurSettingUI>();
         GraphicState graphicState = new GraphicState();
         graphicState.graphic = (Graphic)QualitySettings.GetQualityLevel();
         graphicState.motionBlurValue = motionBlurSettingUI.value;
@@ -66,6 +63,7 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
 
     public void LoadGraphicSetting()
     {
+        motionBlurSettingUI = FindObjectOfType<MotionBlurSettingUI>();
         string fileName = "Graphic";
         string path = Application.dataPath + "/" + fileName + ".json";
         string json = File.ReadAllText(path);

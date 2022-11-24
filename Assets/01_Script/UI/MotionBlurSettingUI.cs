@@ -16,15 +16,15 @@ public class MotionBlurSettingUI :  SliderUIBase
 
 
    
-    [HideInInspector]
     public float value;
 
     private void Awake()
     {
         _text = GetComponentInChildren<TextMeshProUGUI>();
         _slider = GetComponentInChildren<Slider>();
+        volume = GameObject.FindObjectOfType<Volume>();
         _slider.minValue = 0;
-        _slider.maxValue = 1;
+         _slider.maxValue = 1;
         volume.profile.TryGet<MotionBlur>(out _motionBlur);
         
         SettingSaveLoad.Instance.LoadGraphicSetting();
