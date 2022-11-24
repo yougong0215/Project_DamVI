@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] float ATK = 1;
     [SerializeField] int arrmor = 30;
     [SerializeField] bool _superArrmor = false;
+    [SerializeField] float MP = 0;
 
     [Header("가장 가까운 물체")]
     [SerializeField] BaseInteraction MatchingObject = null;
@@ -24,6 +25,8 @@ public class PlayerInteraction : MonoBehaviour
     [Header("몰?루")]
     [SerializeField] LayerMask layer;
 
+    
+
     Coroutine hiting;
     bool _nuckback = false;
     Coroutine nuck;
@@ -31,7 +34,12 @@ public class PlayerInteraction : MonoBehaviour
     private void OnEnable()
     {
         //hit[0].transform.position - transform.position < hit[i].transform.position - transform.position
-        arrmor = 30;
+
+        HP = ShopState.Instance.HPAdd;
+        ATK = ShopState.Instance.AttackAdd;
+        arrmor = ShopState.Instance.ShiedlAdd;
+        MP = ShopState.Instance.MPAdd;
+
         StartCoroutine(InteractionCheck());
     }
 
@@ -50,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
                 StopCoroutine(nuck);
             }
             nuck = StartCoroutine(Nakback(enemy));
-            arrmor = HP;
+            arrmor = ShopState.Instance.ShiedlAdd/10;
         }
         
 
@@ -59,6 +67,7 @@ public class PlayerInteraction : MonoBehaviour
     public void Damaged(int dam)
     {
         HP -= dam;
+        GetComponent<PlayerMove>().LookObject.GetComponent<CameraCollision>().shaking(0.1f, 0.2f, 1);
         if(_superArrmor == false)
         {
             arrmor -= dam * Random.Range(1, 11);
@@ -193,6 +202,17 @@ public class PlayerInteraction : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector3(3, 3, 3));
     }
 
+    IEnumerator Arrmor()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            
+                        arrmor+=5;
+        
+        }
+    }
+
     private void Update()
     {
         if (MatchingObject != null && Input.GetKeyDown(KeyCode.F))
@@ -205,6 +225,12 @@ public class PlayerInteraction : MonoBehaviour
             SceneManager.LoadScene(1);
         }
 
+        if(arrmor >= ShopState.Instance.ShiedlAdd)
+        {
+            arrmor = ShopState.Instance.ShiedlAdd;
+        }
+
+
         if (arrmor < 0)
         {
             if (hiting != null)
@@ -212,7 +238,7 @@ public class PlayerInteraction : MonoBehaviour
                 StopCoroutine(hiting);
             }
             hiting = StartCoroutine(hitStat());
-            arrmor = HP;
+            arrmor = ShopState.Instance.ShiedlAdd / 4;
         }
 
     }

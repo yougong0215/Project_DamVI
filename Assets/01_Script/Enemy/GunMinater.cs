@@ -6,19 +6,18 @@ public class GunMinater : EnemyBase, IEnemyDetection
 {
     [SerializeField] public GameObject Bullet = null;
     [SerializeField] public Transform _pos;
+
+    public bool _rotate = false;
+
     protected override void MoveEnemy()
     {
         if(Vector3.Distance(Player.position, transform.position) >= _attackLength)
         {
-            transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
-            try
+
+            if (_ani.GetBool("Die") == false)
             {
                 _nav.SetDestination(Player.position);
                 _nav.stoppingDistance = _attackLength - Random.Range(0.0f, 5.0f);
-            }
-            catch
-            {
-                Debug.Log($"{gameObject.name}오브잭트 사라짐");
             }
             _ani.SetBool("Move", true);
         }
@@ -29,11 +28,25 @@ public class GunMinater : EnemyBase, IEnemyDetection
         
     }
 
+    void rot()
+    {
+        transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+    }
+
+
+
     /// <summary>
     /// 여기서 적이 행동하는거 쓰면될듯
     /// </summary>
     protected override void EnemyDetection()
     {
+
+        if(_rotate == true)
+        {
+            rot();
+        }
+
         if (_AttackDelayTime <= 0 && Vector3.Distance(Player.position, transform.position) - 5 < _attackLength)
         {
             AttackBase();
@@ -51,21 +64,20 @@ public class GunMinater : EnemyBase, IEnemyDetection
 
     public void AttackBase()
     {
-        transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
+        //transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
         _ani.SetBool("Attack", true);
+        if (_ani.GetBool("Die") == false)
+        {
+            _nav.stoppingDistance = 100;
 
-        _nav.stoppingDistance = 100;
-
-        transform.rotation = Quaternion.LookRotation((Player.position + new Vector3(0,1f,0) - transform.position).normalized);
+        }
+        
         _AttackDelayTime = 5f;
-        _rigid.velocity = Vector3.zero;
     }
 
     public void AttackCoolBase()
     {
-        transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
         MoveEnemy();
-        _ani.SetBool("Attack", false);
     }
 
 

@@ -5,26 +5,26 @@ using UnityEngine.AI;
 public abstract class EnemyBase : MonoBehaviour
 {
     [Header("적 기본정보")]
-    [SerializeField] protected int MaxHP = 0;
-    [SerializeField] protected int HP = 0;
-    [SerializeField] protected int Barrier = 0;
-    [SerializeField] protected int ATK = 0;
-    [SerializeField] protected int _reviveCount = 0;
+    [SerializeField] public int MaxHP = 0;
+    [SerializeField] public int HP = 0;
+    [SerializeField] public int Barrier = 0;
+    [SerializeField] public int ATK = 0;
+    [SerializeField] public int _reviveCount = 0;
 
-    [SerializeField] protected bool BossMonster = false;
-    [SerializeField] protected bool _superArrmor = false;
+    [SerializeField] public bool BossMonster = false;
+    [SerializeField] public bool _superArrmor = false;
     [SerializeField] float _stunTime = 0;
-    [SerializeField] protected float _AttackDelayTime = 0;
+    [SerializeField] public float _AttackDelayTime = 0;
 
-    [SerializeField] protected int _detectionLength = 0;
-    [SerializeField] protected float _attackLength = 0;
+    [SerializeField] public int _detectionLength = 0;
+    [SerializeField] public float _attackLength = 0;
 
-    [SerializeField] protected float _fiber = 1;
+    [SerializeField] public float _fiber = 1;
 
     [Header("적 프러퍼티")]
-    [SerializeField] protected NavMeshAgent _nav;
-    [SerializeField] protected Rigidbody _rigid;
-    [SerializeField] protected Animator _ani;
+    [SerializeField] public NavMeshAgent _nav;
+    [SerializeField] public Rigidbody _rigid;
+    [SerializeField] public Animator _ani;
 
     private void OnEnable()
     {
@@ -80,28 +80,24 @@ public abstract class EnemyBase : MonoBehaviour
     {
 
         float Length = Mathf.Sqrt(Mathf.Pow(transform.position.x - Player.position.x, 2) + Mathf.Pow(transform.position.z - Player.position.z, 2));
-        if (_stunTime <= 0 )
+        if (_stunTime <= 0)
         {
             if (Length <= _detectionLength) // 탐지 거리
             {
 
                 _ani.SetBool("Detection", true);
                 EnemyDetection();
-                
+
 
             }
             else
             {
                 _ani.SetBool("Detection", false);
                 IdleEnemy();
-                try
+                if (_ani.GetBool("Die") == false)
                 {
                     _nav.ResetPath();
                     _nav.SetDestination(transform.position);
-                }
-                catch
-                {
-
                 }
             }
         }
@@ -116,8 +112,11 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void MoveEnemy()
     {
-        _nav.SetDestination(Player.position);
-        _nav.stoppingDistance = _attackLength - 0.5f;
+        if (_ani.GetBool("Die") == false)
+        {
+            _nav.SetDestination(Player.position);
+            _nav.stoppingDistance = _attackLength - 0.5f;
+        }
     }
     protected virtual void IdleEnemy()
     {
@@ -129,7 +128,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// </summary>
     protected virtual void EnemyDetection()
     {
-        
+
     }
 
 
@@ -155,9 +154,9 @@ public abstract class EnemyBase : MonoBehaviour
             int Grabing = Grab ? -1 : 1;
 
             _rigid.AddForce(force * 2 * _fiber, ForceMode.VelocityChange);//force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
-            
-            
-            if(_stunTime > 0)
+
+
+            if (_stunTime > 0)
             {
                 _ani.SetBool("hit", true);
             }
@@ -169,7 +168,7 @@ public abstract class EnemyBase : MonoBehaviour
         _ani.SetBool("hit", false);
     }
 
-    
+
 
     public virtual void DamageEvent()
     {
@@ -182,8 +181,9 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void DieEvent()
     {
         //gameObject.SetActive(false);
-        
-        Destroy(this.gameObject);
+        _ani.SetBool("Die", true);
+        _nav.enabled = false;
+        Destroy(this.gameObject, 0.5f);
     }
 
     /// <summary>
@@ -197,5 +197,13 @@ public abstract class EnemyBase : MonoBehaviour
 
 
         return ReviveHP;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            _rigid.velocity = new Vector3(0, 0, 0);
+        }
     }
 }

@@ -29,12 +29,13 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
 
     private float S_attack = 0;
     private float S_critical = 0;
-    private float S_hp = 0;
-    private float S_Shield = 0;
+    private int S_hp = 0;
+    private int S_Shield = 0;
     private float S_Mp = 0;
+    private int S_Bullet = 0;
 
     private int whill = 0;
-    private bool alter = false;
+    private bool shoot = false;
     private bool quick = false;
     private bool speacial = false;
 
@@ -56,7 +57,7 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
         }
         set => S_critical += value;
     }
-    public float HPAdd
+    public int HPAdd
     {
         get
         {
@@ -65,12 +66,12 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
         }
         set => S_hp += value;
     }
-    public float ShiedlAdd
+    public int ShiedlAdd
     {
         get
         {
             S_Shield = Mathf.Clamp(S_Shield, 10, 100);
-            return S_attack;
+            return S_Shield;
         }
         set => S_Shield += value;
     }
@@ -83,19 +84,30 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
         }
         set => S_Mp += value;
     }
+
+    public int BulletAdd
+    {
+        get
+        {
+            S_Bullet = Mathf.Clamp(S_Bullet, 6, 12);
+            return S_Bullet;
+        }
+        set => S_Bullet += value;
+    }
+
     public int Willadd
     {
         get
         {
-            whill = Mathf.Clamp(whill, 0, 2);
+            whill = Mathf.Clamp(whill, 2, 3);
             return whill;
         }
         set => whill = value;
     }
-    public bool Alter_EgoBool
+    public bool ShooGun
     {
-        get => alter;
-        set => alter = value;
+        get => shoot;
+        set => shoot = value;
     }
     public bool QuickDrowBool
     {

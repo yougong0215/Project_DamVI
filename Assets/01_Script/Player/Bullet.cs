@@ -46,8 +46,7 @@ public class Bullet : PoolAble
         GetComponentInChildren<VisualEffect>().Stop();
         if (PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming)
         {
-            dir = GameManager.Instance.Player.localRotation * Vector3.forward;
-            dir.y = 0;
+            transform.rotation = Player.GetComponent<Weapon>().Dir(transform.localEulerAngles);
             dir.Normalize();
         }
         else
@@ -61,7 +60,14 @@ public class Bullet : PoolAble
 
     private void Update()
     {
-        transform.position += dir* _speed * Time.deltaTime;
+        if(_aimshoot == true)
+        {
+            transform.position += dir * _speed * Time.deltaTime;
+        }
+        else
+        {
+            transform.position += transform.forward * _speed * Time.deltaTime;
+        }
         StartCoroutine(timeOut());
         //Debug.Log(dir);
     }
@@ -84,7 +90,7 @@ public class Bullet : PoolAble
             {
                 if (other.GetComponent<EnemyBase>())
                 {
-                    other.GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
+                    other.GetComponent<EnemyBase>().DamagedCool((int)(damage * PlayerAttackManager.Instance._inter.CalcDamage()), stun, NuckBack, Grab, DelayTime); ;
                     GetComponent<TrailRenderer>().enabled = false;
                     GetComponentInChildren<VisualEffect>().Play();
                     PoolManager.Instance.Push(this);

@@ -7,20 +7,14 @@ public class AIDogNight : EnemyBase, IEnemyDetection
     [SerializeField] Collider[] col;
     [SerializeField]
     LayerMask layer;
-
+    public bool _rotate = false;
     protected override void MoveEnemy()
     {
         if (Vector3.Distance(Player.position, transform.position) >= _attackLength)
         {
-            transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
-            try
-            {
+            if (_ani.GetBool("Die") == false) {
                 _nav.SetDestination(Player.position);
                 _nav.stoppingDistance = _attackLength;
-            }
-            catch
-            {
-                Debug.Log($"{gameObject.name}ø¿∫Í¿Ë∆Æ ªÁ∂Û¡¸");
             }
             _ani.SetBool("Move", true);
         }
@@ -38,6 +32,12 @@ public class AIDogNight : EnemyBase, IEnemyDetection
     }
     protected override void EnemyDetection()
     {
+        if(_rotate == true)
+        {
+            rot();
+        }
+
+
         if (_AttackDelayTime <= 0 && Vector3.Distance(Player.position, transform.position) < _attackLength)
         {
             AttackBase();
@@ -51,28 +51,29 @@ public class AIDogNight : EnemyBase, IEnemyDetection
 
     public void AttackBase()
     {
-        transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
-        col = Physics.OverlapBox(transform.position + (Player.position - transform.position).normalized
-        , (Player.position - transform.position).normalized + new Vector3(1.2f,1.2f,1.2f), transform.rotation
-        , layer);
         _ani.SetBool("Attack", true);
-
-
-        for (int i = 0; i < col.Length; i++)
-        {
-            if (col[i].GetComponent<PlayerInteraction>())
-            {
-                col[i].GetComponent<PlayerInteraction>().Damaged(ATK);
-                _AttackDelayTime = 3;
-            }
-        }
+        StartCoroutine(FalseAttack());
     }
+
+
+
+    void rot()
+    {
+        transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+    }
+
+    IEnumerator FalseAttack()
+    {
+        yield return new WaitForSeconds(0.1f);
+        _ani.SetBool("Attack", false);
+    }
+
 
     public void AttackCoolBase()
     {
         transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
         MoveEnemy();
-        _ani.SetBool("Attack", false);
     }
 
 }   

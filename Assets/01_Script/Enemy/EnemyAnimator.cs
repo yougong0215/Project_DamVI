@@ -22,7 +22,10 @@ public class EnemyAnimator : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
         _g = animator.GetComponent<GunMinater>();
+        animator.SetBool("Attack", false);
+        _g._rotate = true;
         shot = false;
     }
 
@@ -60,5 +63,6 @@ public class EnemyAnimator : StateMachineBehaviour
         _g.Att(-12);
         yield return null;
         _g.Att(-15);
+        _g._rotate = false;
     }
 }

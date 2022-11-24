@@ -23,7 +23,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     [SerializeField] private int _playerAttackValue;
 
     Coroutine co = null;
-    PlayerInteraction _inter;
+    public PlayerInteraction _inter;
 
 
 
@@ -81,7 +81,13 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         {
             Aimaing();
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetKeyDown(KeyCode.Q) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
+        {
+            playerpri = PlayerPripoty.weaponAttack;
+            _ani.SetBool("Weapon", true);
+        }
+
+        if (Input.GetMouseButtonUp(1) && playerpri == PlayerPripoty.aiming)
         {
             SetStateNone();
         }
@@ -106,6 +112,9 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         {
             _ani.SetInteger("Attack", 1);
         }
+
+
+
     }
 
     public void Corutines()
@@ -132,6 +141,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
 
         _ani.SetBool("Aiming", false);
         _ani.SetInteger("Attack", 0);
+        _ani.SetBool("Weapon", false);
         _aimDraw.SetActive(false);
     }
 

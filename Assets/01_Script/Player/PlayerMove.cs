@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
 
     Coroutine co;
 
-    int _dogedCount = 2;
+    int _dogedCount = 0;
 
     [Header("상태")]
     [SerializeField] bool isDoged = false;
@@ -44,6 +44,8 @@ public class PlayerMove : MonoBehaviour
         isDoged = false;
        _rigid = GetComponent<Rigidbody>();
        _ani = GetComponent<Animator>();
+
+        _dogedCount = ShopState.Instance.Willadd;
     }
 
 
@@ -59,7 +61,8 @@ public class PlayerMove : MonoBehaviour
             // 입력 X
 
 
-            if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming && ArrowLook != null)
+            if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming && ArrowLook != null
+                && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.weaponAttack)
             {
                 ZoomMove();
                 return;
@@ -80,7 +83,8 @@ public class PlayerMove : MonoBehaviour
             //Debug.Log(_direction);
 
             if (dir != Vector3.zero && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight
-                && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming && _ani.GetInteger("Attack") != 1)
+                && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming && _ani.GetInteger("Attack") != 1
+                && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.weaponAttack)
             {
                 Move(_moveSpeed);
             }
@@ -111,7 +115,10 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void DogedUse()
     {
-        if (isDoged == false && Input.GetKeyDown(KeyCode.LeftShift) && _dogedCount > 0 && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming)
+        if (isDoged == false && Input.GetKeyDown(KeyCode.LeftShift) && _dogedCount > 0 
+            && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight 
+            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming
+            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.weaponAttack)
         {
 
             StartCoroutine(Doged());
@@ -210,7 +217,7 @@ public class PlayerMove : MonoBehaviour
 
             if (isRun == true)
             {
-                NormalMove(0.5f);
+                NormalMove(0.3f);
 
                 _ani.SetBool("Run", false);
                 PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Move;
@@ -282,7 +289,7 @@ public class PlayerMove : MonoBehaviour
     IEnumerator DogedCountUp()
     {
         yield return new WaitForSeconds(2);
-        _dogedCount = 2;
+        _dogedCount = ShopState.Instance.Willadd;
     }
     
     public Vector3 ShootDir(Vector3 vec)

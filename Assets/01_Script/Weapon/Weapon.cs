@@ -23,6 +23,9 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] AudioSource Source;
 
+
+    float x = 0, y = 0;
+
     [SerializeField]
     private VisualEffect L_muzzleEffect;
     [SerializeField][Tooltip("Default")]
@@ -33,8 +36,11 @@ public class Weapon : MonoBehaviour
         Source = GetComponent<AudioSource>();
     }
 
-    public void fire(WeaponType type, BulletType bullet)
+    public void fire(WeaponType type, BulletType bullet, float angleX = 0, float angleY = 0)
     {
+        x = angleX;
+        y = angleY;
+
         switch (type)
         {
             case WeaponType.Left:
@@ -48,12 +54,18 @@ public class Weapon : MonoBehaviour
         }
         
     }
+    public Quaternion Dir(Vector3 Euler)
+    {
+        return Quaternion.Euler(Euler + new Vector3(x, y, 0));
+    }
 
     void Shoot(int i, Transform _t, int bul)
     {
         
         PoolAble b = PoolManager.Instance.Pop(Type[bul].gameObject.name);
         b.transform.position = _t.position - new Vector3(0,0.15f,0);
+
+
         Source.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
         Source.PlayOneShot(Clip[1]);
     }
