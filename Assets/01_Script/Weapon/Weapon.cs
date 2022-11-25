@@ -42,6 +42,10 @@ public class Weapon : MonoBehaviour
         y = angleY;
         shoot = f;
 
+            //L_muzzleEffect.transform.localScale = new Vector3(1, 1, 1);
+            //R_muzzleEffect.transform.localScale = new Vector3(1, 1, 1);
+        
+
         switch (type)
         {
             case WeaponType.Left:

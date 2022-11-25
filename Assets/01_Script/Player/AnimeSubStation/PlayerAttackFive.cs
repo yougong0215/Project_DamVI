@@ -30,7 +30,22 @@ public class PlayerAttackFive : PlayerAttackBase
     public override IEnumerator OndamagedEnemyRangeAttack(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, float delay)
     {
         yield return null;
-        Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.ActivityBullet);
+        if (PlayerAttackManager.Instance.Bullet.CanUse() == 1)
+        {
+            Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.ActivityBullet);
+            PlayerAttackManager.Instance.Bullet.UseingShoot();
+        }
+        else if(PlayerAttackManager.Instance.Bullet.CanUse() == 0)
+        {
+            PlayerAttackManager.Instance.Bullet.UseingShoot();
+            Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.Bulletbase);
+        }
+        else
+        {
+            Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.Bulletbase);
+        }
+        PlayerAttackManager.Instance.Rectmove();
+
         Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.05f, 0.05f);
     }
 
