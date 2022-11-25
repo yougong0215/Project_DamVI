@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class StatMP : ShopUpgrade
 {
-    public override void UpgradeStat()
+    public override void Upgrade()
     {
-        base.UpgradeStat();
+        base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.MPAdd = shopOption.upValue;
         UpdateText();

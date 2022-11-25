@@ -22,17 +22,15 @@ public abstract class ShopUpgrade : MonoBehaviour
 
     [SerializeField]
     protected ShopOption shopOption;
-    public virtual void UpgradeStat()
+    public virtual void Upgrade()
     {
-        if (shopOption.count <
-            
-            
-            shopOption.maxCount)
+        if (shopOption.count < shopOption.maxCount)
         {
-            if (ShopState.Instance.Gold - (shopOption.upCoast * (shopOption.count - 1)) >= 0)
+            if (ShopState.Instance.Gold - (shopOption.coast + (shopOption.upCoast * (shopOption.count - 1 < 0 ? 0 : shopOption.count - 1))) >= 0)
             {
-                ShopState.Instance.Gold = -(shopOption.coast+(shopOption.upCoast * (shopOption.count - 1)));
+                ShopState.Instance.Gold = -(shopOption.coast+(shopOption.upCoast * (shopOption.count - 1 < 0 ? 0 : shopOption.count - 1)));
                 shopOption.count++;
+                goldText.UpdateText();
                 isPossible = true;
             }
             else

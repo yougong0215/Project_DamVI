@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class StatBullet : ShopUpgrade
 {
-    public override void UpgradeStat()
+    public override void Upgrade()
     {
-        base.UpgradeStat();
+        base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.BulletAdd = (int)shopOption.upValue;
         UpdateText();

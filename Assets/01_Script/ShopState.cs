@@ -49,9 +49,9 @@ public class ShopState : Singleton<ShopState>
     private int S_Bullet = 0;
 
     private int whill = 0;
-    private bool shoot = false;
-    private bool quick = false;
-    private bool speacial = false;
+    private int shoot = 0;
+    private int quick = 0;
+    private int special = 0;
 
     private int S_gold = 1000000;
 
@@ -121,25 +121,37 @@ public class ShopState : Singleton<ShopState>
     {
         get
         {
-            whill = Mathf.Clamp(whill, 2, 3);
+            whill = Mathf.Clamp(whill, 0, 3);
             return whill;
         }
         set => whill = value;
     }
-    public bool ShooGun
+    public int ShooGun
     {
-        get => shoot;
+        get
+        {
+            shoot = Mathf.Clamp(shoot, 0, 2);
+            return shoot;
+        }
         set => shoot = value;
     }
-    public bool QuickDrowBool
+    public int QuickDrowBool
     {
-        get => quick;
+        get
+        {
+            quick = Mathf.Clamp(quick, 0, 2);
+            return quick;
+        }
         set => quick = value;
     }
-    public bool UltBool
+    public int UltBool
     {
-        get => speacial;
-        set => speacial = value;
+        get
+        {
+            special = Mathf.Clamp(special, 0, 2);
+            return special;
+        }
+        set => special = value;
     }
 
     
