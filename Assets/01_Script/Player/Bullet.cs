@@ -35,17 +35,17 @@ public class Bullet : PoolAble
     Vector3 dir;
     private void OnEnable()
     {
-
+        GetComponent<TrailRenderer>().Clear();
         _aimshoot = false;
 
         num = 0;
         transform.position -= new Vector3(0, 2f, 0);
-        GetComponent<TrailRenderer>().enabled = false;
-        GetComponent<TrailRenderer>().enabled = true;
-        GetComponentInChildren<VisualEffect>().enabled = true;
+        GetComponent<CapsuleCollider>().enabled = true;
+
         GetComponentInChildren<VisualEffect>().Stop();
         if (PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming)
         {
+            transform.forward = Player.forward;
             transform.rotation = Player.GetComponent<Weapon>().Dir(transform.localEulerAngles);
             dir.Normalize();
         }
@@ -55,9 +55,35 @@ public class Bullet : PoolAble
             dir = Player.GetComponent<PlayerMove>().ArrowLook.transform.forward;
             dir.Normalize();
         }
-        GetComponent<TrailRenderer>().enabled = true;
+        if (Player.GetComponent<Weapon>().Shoot() == false)
+        {
+            StartCoroutine(timeOut(0.3f));
+        }
+        else
+        {
+            StartCoroutine(timeOut(1));
+        }
+        StartCoroutine(ROtateing());
     }
 
+
+    private IEnumerator ROtateing()
+    {
+        GetComponent<TrailRenderer>().Clear();
+        yield return null;
+        GetComponent<TrailRenderer>().time = -100;
+        if (gameObject.name != "ActiveBullet")
+        {
+            GetComponentInChildren<VisualEffect>().enabled = true;
+        }
+        else
+        {
+            GetComponentInChildren<VisualEffect>().enabled = true;
+            //GetComponentInChildren<VisualEffect>().transform.localScale = new Vector3(1000, 1000, 1000);
+        }
+        GetComponent<TrailRenderer>().time = 1.5f;
+
+    }
     private void Update()
     {
         if(_aimshoot == true)
@@ -68,7 +94,7 @@ public class Bullet : PoolAble
         {
             transform.position += transform.forward * _speed * Time.deltaTime;
         }
-        StartCoroutine(timeOut());
+        
         //Debug.Log(dir);
     }
     void OnDrawGizmos()
@@ -91,7 +117,8 @@ public class Bullet : PoolAble
                 if (other.GetComponent<EnemyBase>())
                 {
                     other.GetComponent<EnemyBase>().DamagedCool((int)(damage * PlayerAttackManager.Instance._inter.CalcDamage()), stun, NuckBack, Grab, DelayTime); ;
-                    GetComponent<TrailRenderer>().enabled = false;
+                   // GetComponent<TrailRenderer>().enabled = false;
+                   // GetComponent<TrailRenderer>().
                     GetComponentInChildren<VisualEffect>().Play();
                     PoolManager.Instance.Push(this);
                 }
@@ -112,10 +139,19 @@ public class Bullet : PoolAble
         for (int i = 0; i < col.Length; i++)
         {
             yield return null;
-            Debug.Log(col[i].name);
-            if (col[i].GetComponent<EnemyBase>())
+            try
             {
-                col[i].GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
+                if (col[i].GetComponent<EnemyBase>())
+                {
+
+                    col[i].GetComponent<EnemyBase>().DamagedCool(damage, stun, NuckBack, Grab, DelayTime);
+
+
+                    num++;
+                }
+            }
+            catch
+            {
                 num++;
             }
         }
@@ -126,19 +162,32 @@ public class Bullet : PoolAble
         //    GetComponentInChildren<VisualEffect>().Play();
         //    PoolManager.Instance.Push(this);
         //}
+
+        GetComponent<TrailRenderer>().time = -100;
         StartCoroutine(die());
     }
 
-    IEnumerator timeOut()
+
+
+    IEnumerator timeOut(float time)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(time);
+        GetComponent<TrailRenderer>().time = -100;
+        //GetComponent<TrailRenderer>().enabled = false;
+        yield return new WaitForSeconds(0.1f);
         PoolManager.Instance.Push(this);
     }
     
     IEnumerator die()
     {
-        GetComponent<TrailRenderer>().enabled = false;
+        GetComponent<TrailRenderer>().time = -100;
+        //GetComponent<TrailRenderer>().enabled = false;
+        yield return null;
+        GetComponent<TrailRenderer>().time = -100;
         GetComponentInChildren<VisualEffect>().Play();
+        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<TrailRenderer>().Clear();
+        //yield return new WaitForSeconds(0.3f);
         yield return new WaitUntil(() => num != 0);
         PoolManager.Instance.Push(this);
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 
 public class PlayerAttackManager : Singleton<PlayerAttackManager>
 {
@@ -17,6 +18,8 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
 
     [Header("UI")]
     [SerializeField] GameObject _aimDraw;
+
+    [SerializeField] public BulletReload Bullet;
 
 
     [SerializeField] private bool _normalAttack = false;
@@ -57,12 +60,15 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         }
     }
 
+    Vector3 OriginZoomUivec;
     void Start()
     {
         playerpri = PlayerPripoty.none;
         playerStat = PlayerStatues.Idle;
         _ani = Player.GetComponent<Animator>();
         _inter = GetComponent<PlayerInteraction>();
+        OriginZoomUivec = _aimDraw.transform.position;
+        _aimDraw.GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 10000);
     }
 
     // Update is called once per frame
@@ -100,6 +106,11 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         {
             _ani.SetTrigger("AimShoot");
         }
+        if (Input.GetKeyDown(KeyCode.R) && _inter.I_MP >= 10)
+        {
+            _inter.UseMp(10);
+            Bullet._bulletcount = ShopState.Instance.BulletAdd;
+        }
 
 
 
@@ -130,7 +141,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         playerStat = PlayerStatues.bifurcationAttack1;
         Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 11;
         _ani.SetBool("Aiming", true);
-        _aimDraw.SetActive(true);
+        _aimDraw.GetComponent<RectTransform>().position = OriginZoomUivec;
     }
 
     public void SetStateNone()
@@ -142,7 +153,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         _ani.SetBool("Aiming", false);
         _ani.SetInteger("Attack", 0);
         _ani.SetBool("Weapon", false);
-        _aimDraw.SetActive(false);
+        _aimDraw.GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 10000);
     }
 
     IEnumerator clearStat()
@@ -156,6 +167,14 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         SetStateNone();
         _normalAttack = false;
     }
+
+    public void Rectmove(float f = 0.9f)
+    {
+        _aimDraw.GetComponent<RectTransform>().DOScale(1.05f, 0.05f).SetEase(Ease.InQuint).OnComplete(
+            ()=> _aimDraw.GetComponent<RectTransform>().DOScale(1, 0.05f).SetEase(Ease.InQuint)
+        );
+    }
+
     //protected void LookEnemy()
     //{
     //    if (_inter.DistannsEnemy())

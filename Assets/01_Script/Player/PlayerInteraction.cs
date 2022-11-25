@@ -10,7 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] float ATK = 1;
     [SerializeField] int arrmor = 30;
     [SerializeField] bool _superArrmor = false;
-    [SerializeField] float MP = 0;
+    [SerializeField] float MP = 100;
 
     [Header("가장 가까운 물체")]
     [SerializeField] BaseInteraction MatchingObject = null;
@@ -25,6 +25,19 @@ public class PlayerInteraction : MonoBehaviour
     [Header("몰?루")]
     [SerializeField] LayerMask layer;
 
+    public int I_HP
+    {
+        get => HP;
+    }
+    public float I_MP
+    {
+        get => MP;
+    }
+
+    public void UseMp(float mp)
+    {
+        MP -= mp;
+    }
     
 
     Coroutine hiting;
@@ -39,7 +52,7 @@ public class PlayerInteraction : MonoBehaviour
         ATK = ShopState.Instance.AttackAdd;
         arrmor = ShopState.Instance.ShieldAdd;
         MP = ShopState.Instance.MPAdd;
-
+        StartCoroutine(Cool());
         StartCoroutine(InteractionCheck());
     }
 
@@ -134,15 +147,11 @@ public class PlayerInteraction : MonoBehaviour
                     //Debug.Log(hit.Length);
                     for (int i = 0; i < hit.Length; i++)
                     {
-                        _length.Add(
-                              Mathf.Sqrt(
-                              Mathf.Pow(hit[i].transform.position.x - transform.position.x, 2)
-                            + Mathf.Pow(hit[i].transform.position.y - transform.position.y, 2)
-                            + Mathf.Pow(hit[i].transform.position.z - transform.position.z, 2)));
+                        _length.Add(Vector3.Distance(hit[i].transform.position, transform.position));
                     }
                     for (int i = 0; i < hit.Length; i++)
                     {
-                        if (_length[0] < _length[i])
+                        if (_length[0] > _length[i])
                         {
                             float temp = _length[0];
                             _length[0] = _length[i];
@@ -179,6 +188,7 @@ public class PlayerInteraction : MonoBehaviour
                         else
                         {
                             EnemyMatchingObject = null;
+                            break;
                         }
                     }
                 }
@@ -202,13 +212,14 @@ public class PlayerInteraction : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector3(3, 3, 3));
     }
 
-    IEnumerator Arrmor()
+    IEnumerator Cool()
     {
         while (true)
         {
             yield return new WaitForSeconds(1);
-            
-                        arrmor+=5;
+
+            MP += 5;//ShopState.Instance.MPAdd;
+            arrmor+=5;
         
         }
     }
@@ -228,6 +239,11 @@ public class PlayerInteraction : MonoBehaviour
         if(arrmor >= ShopState.Instance.ShieldAdd)
         {
             arrmor = ShopState.Instance.ShieldAdd;
+        }
+
+        if(MP >= 100)
+        {
+            MP = 100;
         }
 
 
