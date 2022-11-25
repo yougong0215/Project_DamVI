@@ -87,8 +87,10 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         {
             Aimaing();
         }
-        if (Input.GetKeyDown(KeyCode.Q) && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
+
+        if (Input.GetKeyDown(KeyCode.Q) && _inter.I_MP >= 20 && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
         {
+            _inter.UseMp(20);
             playerpri = PlayerPripoty.weaponAttack;
             _ani.SetBool("Weapon", true);
         }
