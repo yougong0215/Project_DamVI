@@ -49,7 +49,7 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
     private bool quick = false;
     private bool speacial = false;
 
-    private int S_gold;
+    private int S_gold = 1000000;
 
     public int Gold
     {
@@ -97,7 +97,7 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
     {
         get
         {
-            S_attack = Mathf.Clamp(S_Mp, 0, 5);
+            S_attack = Mathf.Clamp(S_Mp, 1, 6);
             return S_attack;
         }
         set => S_Mp += value;

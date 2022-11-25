@@ -5,10 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class ShopOption
 {
+    
     public Stats stats;
     public int coast;
     public int upCoast;
     public int count;
+    public int maxCount;
     public float upValue;
     
 }

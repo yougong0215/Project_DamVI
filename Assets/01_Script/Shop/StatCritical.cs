@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatAttack : ShopUpgrade
+public class StatCritical : ShopUpgrade
 {
     public override void Upgrade()
     {
         base.Upgrade();
         if (!isPossible) return;
-        ShopState.Instance.AttackAdd = shopOption.upValue;
+        ShopState.Instance.CriticalAdd = shopOption.upValue;
         UpdateText();
     }
 
     public override void UpdateText()
     {
-        if (shopOption.count == shopOption.maxCount)
+        if(shopOption.count == shopOption.maxCount)
         {
-            ValueText.text = $"+{Mathf.Round((ShopState.Instance.AttackAdd - 1f) * 10) * 0.1f}";
+            ValueText.text = $"+{ShopState.Instance.CriticalAdd * 100}%";
             CoastText.text = "MAX";
             return;
         }
-        ValueText.text = $"+{Mathf.Round((ShopState.Instance.AttackAdd -1f) * 10)*0.1f} -> +{Mathf.Round((ShopState.Instance.AttackAdd + shopOption.upValue - 1)*10)*0.1f}";
+        ValueText.text = $"+{Mathf.Round(ShopState.Instance.CriticalAdd*100)}% ->\n+{Mathf.Round((ShopState.Instance.CriticalAdd+shopOption.upValue)*100)}%";
         CoastText.text = $"{shopOption.coast + (shopOption.upCoast * (shopOption.count - 1))}";
         goldText.UpdateText();
     }
