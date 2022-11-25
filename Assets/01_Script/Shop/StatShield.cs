@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class StatShield : ShopUpgrade
 {
-    public override void UpgradeStat()
+    public override void Upgrade()
     {
-        base.UpgradeStat();
+        base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.ShieldAdd = (int)shopOption.upValue;
         UpdateText();
