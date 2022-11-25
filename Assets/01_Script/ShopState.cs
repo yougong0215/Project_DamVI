@@ -2,6 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum ShopEnum
+{
+    attack,
+    critical,
+    hp,
+    shield,
+    mp,
+    bullet,
+    whill,
+    shoot,
+    quick,
+    special
+}
 public class ShopState : Singleton<ShopState>
 {
     /*
@@ -12,7 +26,7 @@ public class ShopState : Singleton<ShopState>
 체력 :  100 ~ 500 까지 강화 가능 총 10회 강화 가능             -> int 프러퍼티
 
 추가 실드양 ( 피격 방어 ) - 0 ~ 100 까지 총 10회 가능             -> int 프러퍼티
-
+    33
 MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
 
     특수 능력
@@ -39,11 +53,19 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
     private bool quick = false;
     private bool speacial = false;
 
+    private int S_gold = 1000000;
+
+    public int Gold
+    {
+        get => S_gold;
+        set => S_gold += value;
+    }
+
     public float AttackAdd
     {
         get
         {
-            S_attack = Mathf.Clamp(S_attack, 0, 10);
+            S_attack = Mathf.Clamp(S_attack, 1, 10f);
             return S_attack;
         } 
         set => S_attack += value;
@@ -52,7 +74,7 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
     {
         get
         {
-            S_critical = Mathf.Clamp(S_critical, 0, 1);
+            S_critical = Mathf.Clamp(S_critical, 0.0f, 1.0f);
             return S_critical;
         }
         set => S_critical += value;
@@ -66,7 +88,7 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
         }
         set => S_hp += value;
     }
-    public int ShiedlAdd
+    public int ShieldAdd
     {
         get
         {
@@ -79,8 +101,8 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
     {
         get
         {
-            S_attack = Mathf.Clamp(S_Mp, 0, 5);
-            return S_attack;
+            S_Mp = Mathf.Clamp(S_Mp, 1, 5);
+            return S_Mp;
         }
         set => S_Mp += value;
     }
@@ -89,7 +111,7 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
     {
         get
         {
-            S_Bullet = Mathf.Clamp(S_Bullet, 6, 12);
+            S_Bullet = Mathf.Clamp(S_Bullet, 4, 12);
             return S_Bullet;
         }
         set => S_Bullet += value;
@@ -120,5 +142,5 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
         set => speacial = value;
     }
 
-
+    
 }
