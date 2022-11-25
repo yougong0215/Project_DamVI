@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum Stats
+public enum ShopEnum
 {
     attack,
     critical,
     hp,
     shield,
     mp,
-    bullet
+    bullet,
+    whill,
+    shoot,
+    quick,
+    special
 }
 public class ShopState : Singleton<ShopState>
 {
@@ -84,7 +88,7 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
         }
         set => S_hp += value;
     }
-    public int ShiedlAdd
+    public int ShieldAdd
     {
         get
         {
@@ -97,8 +101,8 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
     {
         get
         {
-            S_attack = Mathf.Clamp(S_Mp, 1, 6);
-            return S_attack;
+            S_Mp = Mathf.Clamp(S_Mp, 1, 5);
+            return S_Mp;
         }
         set => S_Mp += value;
     }
@@ -107,7 +111,7 @@ MP? SP 초당 추가 회복량 - 0 ~ 5 까지 총 10회 가능             -> float 프러퍼티
     {
         get
         {
-            S_Bullet = Mathf.Clamp(S_Bullet, 4, 13);
+            S_Bullet = Mathf.Clamp(S_Bullet, 4, 12);
             return S_Bullet;
         }
         set => S_Bullet += value;

@@ -11,7 +11,7 @@ public abstract class ShopUpgrade : MonoBehaviour
     [SerializeField]
     protected GoldText goldText;
     [SerializeField]
-    protected Stats stats;
+    protected ShopEnum stats;
     [SerializeField]
     protected TextMeshProUGUI CountText;
     [SerializeField]
@@ -22,7 +22,7 @@ public abstract class ShopUpgrade : MonoBehaviour
 
     [SerializeField]
     protected ShopOption shopOption;
-    public virtual void Upgrade()
+    public virtual void UpgradeStat()
     {
         if (shopOption.count <
             
@@ -31,7 +31,7 @@ public abstract class ShopUpgrade : MonoBehaviour
         {
             if (ShopState.Instance.Gold - (shopOption.upCoast * (shopOption.count - 1)) >= 0)
             {
-                ShopState.Instance.Gold -= (shopOption.upCoast * (shopOption.count - 1));
+                ShopState.Instance.Gold = -(shopOption.coast+(shopOption.upCoast * (shopOption.count - 1)));
                 shopOption.count++;
                 isPossible = true;
             }
@@ -52,6 +52,11 @@ public abstract class ShopUpgrade : MonoBehaviour
 
     private void OnEnable()
     {
+        if(shop == null)
+        {
+            Debug.LogError("shop 프로퍼티 없음");
+            return;
+        }
         for (int i = 0; i < shop.options.Count; i++)
         {
             if (stats == shop.options[i].stats)

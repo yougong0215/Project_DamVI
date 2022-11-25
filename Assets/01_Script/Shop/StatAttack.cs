@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class StatAttack : ShopUpgrade
 {
-    public override void Upgrade()
+    public override void UpgradeStat()
     {
-        base.Upgrade();
+        base.UpgradeStat();
         if (!isPossible) return;
         ShopState.Instance.AttackAdd = shopOption.upValue;
         UpdateText();

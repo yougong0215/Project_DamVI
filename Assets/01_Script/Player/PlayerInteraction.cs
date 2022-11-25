@@ -37,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
 
         HP = ShopState.Instance.HPAdd;
         ATK = ShopState.Instance.AttackAdd;
-        arrmor = ShopState.Instance.ShiedlAdd;
+        arrmor = ShopState.Instance.ShieldAdd;
         MP = ShopState.Instance.MPAdd;
 
         StartCoroutine(InteractionCheck());
@@ -58,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
                 StopCoroutine(nuck);
             }
             nuck = StartCoroutine(Nakback(enemy));
-            arrmor = ShopState.Instance.ShiedlAdd/10;
+            arrmor = ShopState.Instance.ShieldAdd/10;
         }
         
 
@@ -225,9 +225,9 @@ public class PlayerInteraction : MonoBehaviour
             SceneManager.LoadScene(1);
         }
 
-        if(arrmor >= ShopState.Instance.ShiedlAdd)
+        if(arrmor >= ShopState.Instance.ShieldAdd)
         {
-            arrmor = ShopState.Instance.ShiedlAdd;
+            arrmor = ShopState.Instance.ShieldAdd;
         }
 
 
@@ -238,7 +238,7 @@ public class PlayerInteraction : MonoBehaviour
                 StopCoroutine(hiting);
             }
             hiting = StartCoroutine(hitStat());
-            arrmor = ShopState.Instance.ShiedlAdd / 4;
+            arrmor = ShopState.Instance.ShieldAdd / 4;
         }
 
     }

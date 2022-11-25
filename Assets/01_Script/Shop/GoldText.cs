@@ -6,12 +6,11 @@ using TMPro;
 
 public class GoldText : MonoBehaviour
 {
+    [SerializeField]
     private TextMeshProUGUI text;
-    private ShopState shopState;
     private void Awake()
     {
         text = GetComponent<TextMeshProUGUI>();
-        shopState = ShopState.Instance;
     }
     private void OnEnable()
     {
@@ -19,16 +18,12 @@ public class GoldText : MonoBehaviour
         {
             text = GetComponent<TextMeshProUGUI>();
         }
-        if(shopState == null)
-        {
-            shopState = ShopState.Instance;
-        }
 
         UpdateText();
     }
 
     public void UpdateText()
     {
-        text.text = $"Gold : {shopState.Gold}";
+        text.text = $"Gold : {ShopState.Instance.Gold}";
     }
 }
