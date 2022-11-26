@@ -19,13 +19,24 @@ public class PlayerDeath : StateMachineBehaviour
     }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Player.GetComponent<MonoBehaviour>().StartCoroutine(Die(animator));
+        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.die;
+    }
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.die;
     }
 
-
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerAttackManager.Instance.Scene();
+        PlayerAttackManager.Instance.PlayerP = PlayerPripoty.die;
+        
+    }
+    IEnumerator Die(Animator animator)
+    {
+        yield return new WaitForSeconds(1);
+        animator.speed = 0;
+        
     }
 
 }

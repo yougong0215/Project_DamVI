@@ -44,4 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e711913ef14e344a166c3a0d487263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI: {fileID: 0}
+  UI: {fileID: 75328222023867876, guid: 36fb537c9f88c6b45a2d4e078485ecc5, type: 3}
+  Times: {fileID: 0}
+  Scores: {fileID: 0}
+  Gold: {fileID: 0}
+  MaxGold: 0
+  MinGold: 0

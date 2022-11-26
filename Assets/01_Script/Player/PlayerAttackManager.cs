@@ -52,6 +52,7 @@ public class PlayerAttackManager :  MonoBehaviour
     Coroutine co = null;
     public PlayerInteraction _inter;
 
+    [SerializeField] StageClear _stage;
     
 
 
@@ -104,38 +105,49 @@ public class PlayerAttackManager :  MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CurrentClearTime += Time.deltaTime;
-
-        if (Input.GetMouseButtonDown(1))
+        if (PlayerP != PlayerPripoty.Clear && PlayerP != PlayerPripoty.die)
         {
-            //LookEnemy();
+            CurrentClearTime += Time.deltaTime;
+
+            Debug.Log(CurrentScore);
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                //LookEnemy();
+            }
+
+            if (Input.GetMouseButton(1) == false)
+            {
+                Attack();
+            }
+            else if (_normalAttack == false && Input.GetMouseButton(1))
+            {
+                Aimaing();
+            }
+
+
+            if (_inter.I_HP <= 0)
+            {
+                _ani.SetBool("Die", true);
+                PlayerAttackManager.Instance.PlayerP = PlayerPripoty.die;
+                _stage.OnDied();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q) && _inter.I_MP >= 20 && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
+            {
+                _inter.UseMp(20);
+                playerpri = PlayerPripoty.weaponAttack;
+                _ani.SetBool("Weapon", true);
+            }
+
+            if (Input.GetMouseButtonUp(1) && playerpri == PlayerPripoty.aiming)
+            {
+                SetStateNone();
+            }
         }
-
-        if (Input.GetMouseButton(1) == false)
+        else
         {
-            Attack();
-        }
-        else if (_normalAttack == false && Input.GetMouseButton(1))
-        {
-            Aimaing();
-        }
-
-
-        if (_inter.I_HP<=0)
-        {
-            _ani.SetBool("Die", true);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q) && _inter.I_MP >= 20 && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
-        {
-            _inter.UseMp(20);
-            playerpri = PlayerPripoty.weaponAttack;
-            _ani.SetBool("Weapon", true);
-        }
-
-        if (Input.GetMouseButtonUp(1) && playerpri == PlayerPripoty.aiming)
-        {
-            SetStateNone();
+            _stage.OnDied();
         }
     }
 

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class SummonObj : MonoBehaviour
 {
     [Header("클리어")]
-    [SerializeField] UnityEvent Clear = null;
+    [SerializeField] StageClear Clear = null;
 
     [Header("위치")]
     [SerializeField] List<std> enemy = new List<std>();
@@ -19,7 +19,7 @@ public class SummonObj : MonoBehaviour
 
 
     public int Pase = 0;
-    public int ClearPase = 3;
+    public int ClearPase = 1;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,8 +31,6 @@ public class SummonObj : MonoBehaviour
         
     }
 
-
-    int enemycount = 0;
     IEnumerator Som() 
     {
 
@@ -41,19 +39,18 @@ public class SummonObj : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             for (int i = 0; i < obj.Count; i++)
             {
-                enemycount = 0;
                 if (obj[i] == null)
                 {
                     obj.Remove(obj[i]);
                 }
-                else
-                {
-                    enemycount++;
-                }
             }
-            if(obj.Count == 0 && Pase != ClearPase)
+            if(obj.Count == 0)
             {
                 StartCoroutine(Sommon());
+                if (Pase == ClearPase)
+                {
+                    break;
+                }
             }
 
         }
@@ -63,23 +60,27 @@ public class SummonObj : MonoBehaviour
     {
         if(Pase == ClearPase)
         {
-            if(Clear != null)
-            {
-                Clear?.Invoke();
-            }
+            Clear.OnClear();
+           
 
             Destroy(this);
         }
-
-        for(int i =0; i < enemy[Pase].enemy.Count; i++)
+        else
         {
-            yield return null;
-            EnemyBase ene = Instantiate(enemy[Pase].enemy[i].GameObject);
-            obj.Add(ene);
-            obj[i].transform.position = enemy[Pase].enemy[i].SummonPos.position;
-            ene.ATK = enemy[Pase].enemy[i].ATK;
-            ene.MaxHP = enemy[Pase].enemy[i].HP;
+            for (int i = 0; i < enemy[Pase].enemy.Count; i++)
+            {
+                yield return null;
+                EnemyBase ene = Instantiate(enemy[Pase].enemy[i].GameObject);
+                obj.Add(ene);
+                obj[i].transform.position = enemy[Pase].enemy[i].SummonPos.position;
+                ene.ATK = enemy[Pase].enemy[i].ATK;
+                ene.MaxHP = enemy[Pase].enemy[i].HP;
+                ene.HP = enemy[Pase].enemy[i].HP;
+                ene.Score = enemy[Pase].enemy[i].Score;
+                ene.MinScore = enemy[Pase].enemy[i].MinScore;
+            }
         }
+      
 
         Pase++;
     }
@@ -100,5 +101,6 @@ public class Enemys
     public int ATK;
     public int HP;
     public int Score;
+    public int MinScore;
 
 }
