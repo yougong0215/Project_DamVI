@@ -4,6 +4,9 @@ using UnityEngine;
 using Cinemachine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
+using UnityEngine.Playables;
+using System.Linq;
 
 public class PlayerAttackManager :  MonoBehaviour
 {
@@ -35,6 +38,8 @@ public class PlayerAttackManager :  MonoBehaviour
 
     [Header("에니메이션")]
     [SerializeField] public Animator _ani;
+    [SerializeField] public PlayableDirector _timeLine;
+    [SerializeField] public AnimationPlayableAsset ppi;
 
     [Header("적들")]
     [SerializeField] Collider[] hit;
@@ -111,6 +116,18 @@ public class PlayerAttackManager :  MonoBehaviour
 
             Debug.Log(CurrentScore);
 
+            if (PlayerP != PlayerPripoty.Fight && PlayerP != PlayerPripoty.Move 
+                && PlayerP != PlayerPripoty.doged && PlayerP != PlayerPripoty.aiming
+                && PlayerP != PlayerPripoty.hit && PlayerP != PlayerPripoty.weaponAttack
+                && ShopState.Instance.UltBool == 0 && Input.GetKeyDown(KeyCode.R)
+                && _inter.I_MP >= 10)
+            {
+                StartCoroutine(Animi());
+                
+
+            }
+
+            //_timeLine.time += (double)Time.unscaledTime;
             if (Input.GetMouseButtonDown(1))
             {
                 //LookEnemy();
@@ -151,7 +168,38 @@ public class PlayerAttackManager :  MonoBehaviour
             StopAllCoroutines();
         }
     }
+    IEnumerator Animi()
+    {
+        Vector3 save = transform.position;
+        _timeLine.gameObject.SetActive(true);
+        _inter.UseMp(10);
+        _timeLine.Play();
+        _timeLine.timeUpdateMode = DirectorUpdateMode.UnscaledGameTime;
 
+        PlayableAsset playableAsset = _timeLine.playableAsset;
+        var outputs = playableAsset.outputs.ToList();
+
+        // Although I know that it is always not going to be the first track but here for simplicity we use the first track
+        //AnimationPlayableAsset animationPlayableAsset = outputs[5].sourceObject as AnimationPlayableAsset;
+        //animationPlayableAsset.position = save;
+
+        //ab.outputTargetType.GetType();
+        //Debug.Log(ls.Count);
+
+        //ppi.position = save;
+
+        // Although I know that it is always not going to be the first track but here for simplicity we use the first track
+        //Vector3 iDontWantTheTrackOffset = save;
+
+        // var clips = animationTrack.GetClips().ToArray();
+
+        Time.timeScale = 0f;
+
+        
+        yield return new WaitForSecondsRealtime(6.3f);
+        Time.timeScale = 1;
+        _timeLine.gameObject.SetActive(false);
+    }
     void Aimaing()
     {   
         SetStateAim();
