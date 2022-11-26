@@ -68,10 +68,13 @@ public class CameraCollision : MonoBehaviour
 
     private void LateUpdate()
     {
-
-        CameraAltitude();
-        shake();
-        Aiming();
+        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear
+            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die)
+        {
+            CameraAltitude();
+            shake();
+            Aiming();
+        }
     }
 
     void Aiming()

@@ -51,7 +51,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.hit && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die)
+        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.hit 
+            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die
+            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear)
         {
             //Debug.Log(_dogedCount);
             PrimaryCamSet();

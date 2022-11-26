@@ -1,15 +1,20 @@
+using Cinemachine;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public abstract class EnemyBase : MonoBehaviour
 {
+    [SerializeField] string nameing;
     [Header("적 기본정보")]
-    [SerializeField] public int MaxHP = 0;
-    [SerializeField] public int HP = 0;
+    [SerializeField] public float MaxHP = 0;
+    [SerializeField] public float HP = 0;
     [SerializeField] public int Barrier = 0;
     [SerializeField] public int ATK = 0;
     [SerializeField] public int _reviveCount = 0;
+    
     
 
     [SerializeField] public bool BossMonster = false;
@@ -19,25 +24,33 @@ public abstract class EnemyBase : MonoBehaviour
 
     [SerializeField] public int _detectionLength = 0;
     [SerializeField] public float _attackLength = 0;
+    [SerializeField] public bool _die =false;
 
     [SerializeField] public float _fiber = 1;
     [SerializeField] public float Score = 0;
     [SerializeField] public int MinScore = 0;
+    
 
     [Header("적 프러퍼티")]
     [SerializeField] public NavMeshAgent _nav;
     [SerializeField] public Rigidbody _rigid;
     [SerializeField] public Animator _ani;
+    [SerializeField] public GameObject UI;
+    [SerializeField] public Image HPUI;
+    [SerializeField] public TextMeshProUGUI Name;
+    GameObject cam;
 
     private void OnEnable()
     {
         _nav = GetComponent<NavMeshAgent>();
         _rigid = gameObject.GetComponent<Rigidbody>();
-        HP = MaxHP;
+        cam = GameObject.Find("Cam");
+
 
         if (GetComponent<Animator>())
         {
             _ani = GetComponent<Animator>();
+            
         }
     }
 
@@ -56,9 +69,12 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void Update()
     {
+        Name.text = nameing;
+        UI.transform.localEulerAngles = cam.transform.localEulerAngles;
         _AttackDelayTime -= Time.deltaTime;
         _stunTime -= Time.deltaTime;
-
+        Debug.Log((HP) / (MaxHP));
+        HPUI.fillAmount = (HP) / (MaxHP);
         Score -= Time.deltaTime;
 
         if(Score < MinScore)
@@ -73,8 +89,9 @@ public abstract class EnemyBase : MonoBehaviour
                 HP = ReviveEvent();
                 Debug.Log("응애");
             }
-            else
+            else if(_die == false)
             {
+                _die = true;
                 DieEvent();
             }
         }
@@ -130,6 +147,8 @@ public abstract class EnemyBase : MonoBehaviour
     }
     protected virtual void IdleEnemy()
     {
+        _rigid.velocity = new Vector2(0, 0);
+        //_nav.SetDestination(transform.position);
         _ani.SetBool("Move", false);
     }
 
@@ -191,8 +210,10 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void DieEvent()
     {
         //gameObject.SetActive(false);
+        
         _ani.SetBool("Die", true);
         _nav.enabled = false;
+        PlayerAttackManager.Instance.CurrentScore += (int)Score;
         Destroy(this.gameObject, 0.5f);
     }
 

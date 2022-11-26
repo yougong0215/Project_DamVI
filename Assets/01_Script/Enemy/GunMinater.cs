@@ -57,10 +57,6 @@ public class GunMinater : EnemyBase, IEnemyDetection
         }
     }
 
-    protected override void IdleEnemy()
-    {
-
-    }
 
     public void AttackBase()
     {
