@@ -52,6 +52,7 @@ public class PlayerAttackManager :  MonoBehaviour
     Coroutine co = null;
     public PlayerInteraction _inter;
 
+    
 
 
     private Transform _player;
@@ -66,6 +67,9 @@ public class PlayerAttackManager :  MonoBehaviour
             return _player;
         }
     }
+
+    public float CurrentClearTime = 0;
+    public int CurrentScore = 0;
 
     public PlayerStatues PlayerS
     {
@@ -100,6 +104,8 @@ public class PlayerAttackManager :  MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CurrentClearTime += Time.deltaTime;
+
         if (Input.GetMouseButtonDown(1))
         {
             //LookEnemy();
