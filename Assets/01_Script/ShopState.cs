@@ -154,5 +154,8 @@ public class ShopState : Singleton<ShopState>
         set => special = value;
     }
 
-    
+    private void Update()
+    {
+        Debug.Log(BulletAdd);
+    }
 }

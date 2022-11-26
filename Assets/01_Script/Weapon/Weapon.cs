@@ -74,7 +74,7 @@ public class Weapon : MonoBehaviour
         
         PoolAble b = PoolManager.Instance.Pop(Type[bul].gameObject.name);
         b.transform.position = _t.position - new Vector3(0,0.15f,0);
-        
+        PlayerAttackManager.Instance.Rectmove();
         Source.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
         Source.PlayOneShot(Clip[1]);
     }

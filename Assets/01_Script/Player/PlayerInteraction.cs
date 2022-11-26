@@ -245,6 +245,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             MP = 100;
         }
+        
 
 
         if (arrmor < 0)

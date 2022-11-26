@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class OptionButton : MonoBehaviour
+public class StartScene : MonoBehaviour
 {
     GameObject _obj = null;
     private void OnEnable()
     {
-        SceneManager.LoadScene("Option", LoadSceneMode.Additive);
+        SceneManager.LoadScene("StageSelect", LoadSceneMode.Additive);
 
         StartCoroutine(StartOff());
     }
@@ -16,13 +16,13 @@ public class OptionButton : MonoBehaviour
     IEnumerator StartOff()
     {
         yield return null;
-        _obj = GameObject.Find("OptionCanvas").transform.GetChild(0).gameObject;
+        _obj = GameObject.Find("StageCanvas");
         _obj.SetActive(false);
     }
 
     public void Click()
     {
-        if (GameObject.Find("OptionCanvas"))
+        if (_obj)
         {
             _obj.SetActive(_obj.activeInHierarchy ? false : true);
         }
