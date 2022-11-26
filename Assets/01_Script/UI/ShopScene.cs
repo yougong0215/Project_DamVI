@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class OptionButton : MonoBehaviour
+public class ShopScene : MonoBehaviour
 {
     GameObject _obj = null;
     private void OnEnable()
     {
-        SceneManager.LoadScene("Option", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Store", LoadSceneMode.Additive);
 
         StartCoroutine(StartOff());
     }
@@ -16,13 +16,13 @@ public class OptionButton : MonoBehaviour
     IEnumerator StartOff()
     {
         yield return null;
-        _obj = GameObject.Find("OptionCanvas").transform.GetChild(0).gameObject;
+        _obj = GameObject.Find("ShopCanvas").transform.GetChild(0).gameObject;
         _obj.SetActive(false);
     }
 
     public void Click()
     {
-        if (GameObject.Find("OptionCanvas"))
+        if (GameObject.Find("ShopCanvas"))
         {
             _obj.SetActive(_obj.activeInHierarchy ? false : true);
         }

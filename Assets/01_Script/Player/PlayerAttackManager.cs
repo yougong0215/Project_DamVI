@@ -3,9 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
-public class PlayerAttackManager : Singleton<PlayerAttackManager>
+public class PlayerAttackManager :  MonoBehaviour
 {
+    private static PlayerAttackManager m_Instance;
+    public static PlayerAttackManager Instance
+    {
+        get
+        {
+
+            if (m_Instance == null)
+            {
+                m_Instance = (PlayerAttackManager)FindObjectOfType(typeof(PlayerAttackManager));
+                if (m_Instance == null)
+                {
+                    var singletonObject = new GameObject();
+                    m_Instance = singletonObject.AddComponent<PlayerAttackManager>();
+                    singletonObject.name = typeof(PlayerAttackManager).ToString() + " (Singleton)";
+                }
+            }
+
+            return m_Instance;
+        }
+    }
+
+
     [Header("Enum ต้")]
     [SerializeField] public PlayerStatues playerStat;
     [SerializeField] public PlayerPripoty playerpri;
@@ -18,6 +41,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
 
     [Header("UI")]
     [SerializeField] GameObject _aimDraw;
+    [SerializeField] GameObject _draw;
 
     [SerializeField] public BulletReload Bullet;
 
@@ -28,6 +52,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     Coroutine co = null;
     public PlayerInteraction _inter;
 
+    
 
 
     private Transform _player;
@@ -42,6 +67,9 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
             return _player;
         }
     }
+
+    public float CurrentClearTime = 0;
+    public int CurrentScore = 0;
 
     public PlayerStatues PlayerS
     {
@@ -60,20 +88,24 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         }
     }
 
-    Vector3 OriginZoomUivec;
+    Vector3 OriginZoomUIvec;
+    Vector3 OriginUIvec;
     void Start()
     {
         playerpri = PlayerPripoty.none;
         playerStat = PlayerStatues.Idle;
         _ani = Player.GetComponent<Animator>();
         _inter = GetComponent<PlayerInteraction>();
-        OriginZoomUivec = _aimDraw.transform.position;
+        OriginZoomUIvec = _aimDraw.transform.position;
+        OriginUIvec = _draw.transform.position;
         _aimDraw.GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 10000);
     }
 
     // Update is called once per frame
     void Update()
     {
+        CurrentClearTime += Time.deltaTime;
+
         if (Input.GetMouseButtonDown(1))
         {
             //LookEnemy();
@@ -86,6 +118,12 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         else if (_normalAttack == false && Input.GetMouseButton(1))
         {
             Aimaing();
+        }
+
+
+        if (_inter.I_HP<=0)
+        {
+            _ani.SetBool("Die", true);
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && _inter.I_MP >= 20 && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
@@ -137,13 +175,18 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         co = StartCoroutine(clearStat());
     }
 
+    public void Scene()
+    {
+        SceneManager.LoadScene(1);
+    }
     public void SetStateAim()
     {
         playerpri = PlayerPripoty.aiming;
         playerStat = PlayerStatues.bifurcationAttack1;
         Player.GetComponent<PlayerMove>().ArrowLook.GetComponent<CinemachineVirtualCamera>().Priority = 11;
         _ani.SetBool("Aiming", true);
-        _aimDraw.GetComponent<RectTransform>().position = OriginZoomUivec;
+        _aimDraw.GetComponent<RectTransform>().position = OriginZoomUIvec;
+        _draw.GetComponent<RectTransform>().position = new Vector3(10000, 10000, 10000);
     }
 
     public void SetStateNone()
@@ -155,6 +198,7 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
         _ani.SetBool("Aiming", false);
         _ani.SetInteger("Attack", 0);
         _ani.SetBool("Weapon", false);
+        _draw.GetComponent<RectTransform>().position = OriginUIvec;
         _aimDraw.GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 10000);
     }
 
@@ -174,6 +218,9 @@ public class PlayerAttackManager : Singleton<PlayerAttackManager>
     {
         _aimDraw.GetComponent<RectTransform>().DOScale(1.05f, 0.05f).SetEase(Ease.InQuint).OnComplete(
             ()=> _aimDraw.GetComponent<RectTransform>().DOScale(1, 0.05f).SetEase(Ease.InQuint)
+        );
+        _draw.GetComponent<RectTransform>().DOScale(1.05f, 0.05f).SetEase(Ease.InQuint).OnComplete(
+            () => _draw.GetComponent<RectTransform>().DOScale(1, 0.05f).SetEase(Ease.InQuint)
         );
     }
 

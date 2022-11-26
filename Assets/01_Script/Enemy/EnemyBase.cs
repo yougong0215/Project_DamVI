@@ -10,6 +10,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] public int Barrier = 0;
     [SerializeField] public int ATK = 0;
     [SerializeField] public int _reviveCount = 0;
+    
 
     [SerializeField] public bool BossMonster = false;
     [SerializeField] public bool _superArrmor = false;
@@ -20,6 +21,8 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] public float _attackLength = 0;
 
     [SerializeField] public float _fiber = 1;
+    [SerializeField] public float Score = 0;
+    [SerializeField] public int MinScore = 0;
 
     [Header("적 프러퍼티")]
     [SerializeField] public NavMeshAgent _nav;
@@ -55,6 +58,13 @@ public abstract class EnemyBase : MonoBehaviour
     {
         _AttackDelayTime -= Time.deltaTime;
         _stunTime -= Time.deltaTime;
+
+        Score -= Time.deltaTime;
+
+        if(Score < MinScore)
+        {
+            Score = MinScore;
+        }
 
         if (HP <= 0)
         {
