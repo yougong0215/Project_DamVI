@@ -4,7 +4,7 @@
 // This is a combined mouse look and camera move script.
 // The cam move script is by: Francis R. Griffiths-Keam
 
-public class MouseLook : MonoBehaviour
+public class MouseLooks : MonoBehaviour
 {
 	Vector2 _mouseAbsolute;
 	Vector2 _smoothMouse;
