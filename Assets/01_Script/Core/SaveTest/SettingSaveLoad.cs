@@ -5,10 +5,14 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering.Universal;
 
+
 public class SettingSaveLoad : Singleton<SettingSaveLoad>
 {
     private MotionBlurSettingUI motionBlurSettingUI;
     private AudioMixer _audioMixer;
+
+    [SerializeField]
+    private List<string> fileNames;
     private void Start()
     {
         DontDestroyOnLoad(this);
@@ -76,5 +80,18 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
 
     }
 
+    public void Reset()
+    {
+        List<string> paths = new List<string>();
+        paths.Add(Application.dataPath + "/Graphic.json");
+        paths.Add(Application.dataPath + "/Audio.json");
 
+        for(int i = 0; i < paths.Count; i++)
+        {
+            File.Delete(paths[i]);
+        }
+
+
+
+    }
 }

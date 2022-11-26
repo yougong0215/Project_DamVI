@@ -29,27 +29,33 @@ node21 [shape="box" color="lightgray" style="filled" label="VFXExpressionCombine
 node22 [shape="box" color="lightslategray" style="filled" label="VFXValue`1 Float (-1.701412E+38)"]
 node23 [shape="box" color="lightgray" style="filled" label="VFXExpressionCombine Float3"]
 node24 [shape="box" color="lightslategray" style="filled" label="VFXValue`1 Float (1.701412E+38)"]
-node25 [shape="box" color="cyan" style="filled" label="VFXValue`1 Float (0.1)
+node25 [shape="box" color="cyan" style="filled" label="VFXMeshValue Mesh (1230)
+mesh"]
+node26 [shape="box" color="cyan" style="filled" label="VFXValue`1 Uint32 (4294967295)
+subMeshMask"]
+node27 [shape="box" color="cyan" style="filled" label="VFXExpressionCombine Float3
 A_a"]
-node26 [shape="box" color="cyan" style="filled" label="VFXValue`1 Float (0.2)
-B_a"]
-node27 [shape="box" color="cyan" style="filled" label="VFXBuiltInExpression Float (DeltaTime)
-deltaTime_a"]
-node28 [shape="box" color="cyan" style="filled" label="VFXValue`1 Float (4)
-Size_b"]
-node29 [shape="box" color="cyan" style="filled" label="VFXExpressionBakeCurve Float4
-Size_c"]
-node30 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Curve (UnityEngine.AnimationCurve)"]
+node28 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (-0.333)"]
+node29 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0.2)"]
+node30 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (-0.333)"]
 node31 [shape="box" color="cyan" style="filled" label="VFXExpressionCombine Float3
-Color_d"]
-node32 [shape="box" label="VFXExpressionExtractComponent Float"]
-node33 [shape="box" label="VFXValue`1 Float4 ((4.00, 2.62, 0.00, 0.00))"]
-node34 [shape="box" label="VFXExpressionExtractComponent Float"]
-node35 [shape="box" label="VFXExpressionExtractComponent Float"]
-node36 [shape="box" color="cyan" style="filled" label="VFXExpressionBakeGradient Float2
-Color_e"]
-node37 [shape="box" color="lightgray" style="filled" label="VFXValue`1 ColorGradient (UnityEngine.Gradient)"]
-node38 [shape="box" color="cyan" style="filled" label="VFXTexture2DValue Texture2D (1126)
+B_a"]
+node32 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0.333)"]
+node33 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (1)"]
+node34 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0.333)"]
+node35 [shape="box" color="cyan" style="filled" label="VFXValue`1 Float (3)
+Lifetime_b"]
+node36 [shape="box" color="cyan" style="filled" label="VFXExpressionCombine Float3
+Angle_c"]
+node37 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0)"]
+node38 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0)"]
+node39 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0)"]
+node40 [shape="box" color="cyan" style="filled" label="VFXBuiltInExpression Float (DeltaTime)
+deltaTime_a
+deltaTime_b"]
+node41 [shape="box" color="cyan" style="filled" label="VFXValue`1 Float (3)
+Size_a"]
+node42 [shape="box" color="cyan" style="filled" label="VFXTexture2DValue Texture2D (53172)
 mainTexture"]
 node1 -> node0 [headlabel="0"]
 node1 -> node0 [headlabel="1"]
@@ -78,12 +84,13 @@ node22 -> node21 [headlabel="2"]
 node24 -> node23 [headlabel="0"]
 node24 -> node23 [headlabel="1"]
 node24 -> node23 [headlabel="2"]
-node30 -> node29 
+node28 -> node27 [headlabel="0"]
+node29 -> node27 [headlabel="1"]
+node30 -> node27 [headlabel="2"]
 node32 -> node31 [headlabel="0"]
-node34 -> node31 [headlabel="1"]
-node35 -> node31 [headlabel="2"]
-node33 -> node32 
-node33 -> node34 
-node33 -> node35 
-node37 -> node36 
+node33 -> node31 [headlabel="1"]
+node34 -> node31 [headlabel="2"]
+node37 -> node36 [headlabel="0"]
+node38 -> node36 [headlabel="1"]
+node39 -> node36 [headlabel="2"]
 }
