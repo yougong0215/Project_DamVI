@@ -409,7 +409,6 @@ GameObject:
   - component: {fileID: 7761365999731870707}
   - component: {fileID: 1748156720043185884}
   - component: {fileID: 7761365999731870709}
-  - component: {fileID: 7927228711800632658}
   m_Layer: 30
   m_Name: Doggi
   m_TagString: Untagged
@@ -480,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3077e0e2e275324aa6ea34489e863e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameing: "\uC2DC\uBC14\uB098\uC774\uCE20"
+  nameing: "\uC2DC\uBC14\uB098\uACAC"
   MaxHP: 100
   HP: 100
   Barrier: 0
@@ -558,45 +557,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7927228711800632658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8582451385721237006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3077e0e2e275324aa6ea34489e863e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameing: 
-  MaxHP: 100
-  HP: 100
-  Barrier: 0
-  ATK: 30
-  _reviveCount: 0
-  BossMonster: 0
-  _superArrmor: 0
-  _stunTime: 0
-  _AttackDelayTime: 0
-  _detectionLength: 10
-  _attackLength: 2
-  _die: 0
-  _fiber: 1
-  Score: 0
-  MinScore: 0
-  _nav: {fileID: 0}
-  _rigid: {fileID: 0}
-  _ani: {fileID: 0}
-  UI: {fileID: 0}
-  HPUI: {fileID: 0}
-  Name: {fileID: 0}
-  col: []
-  layer:
-    serializedVersion: 2
-    m_Bits: 2147483648
-  _rotate: 0
 --- !u!1 &8582451385721237008
 GameObject:
   m_ObjectHideFlags: 0

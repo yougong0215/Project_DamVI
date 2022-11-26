@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-public class Stage
+public class Stageed
 {
     public float time = 99;
     public int min = 99;
@@ -32,7 +32,19 @@ public class StageClear : MonoBehaviour
     int hour = 0;
     int Score = 0;
 
-    Stage _stage;
+    private Transform _player;
+    public Transform Player
+    {
+        get
+        {
+            if (_player == null)
+            {
+                _player = GameObject.Find("Player").GetComponent<Transform>();
+            }
+            return _player;
+        }
+    }
+    Stageed _stage;
 
     string sceneName;
 
@@ -61,7 +73,8 @@ public class StageClear : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-
+        PlayerAttackManager.Instance._ani.enabled = false;
+        PlayerAttackManager.Instance.StopAllCoroutines();
         sceneName = SceneManager.GetActiveScene().name;
 
         obj = Instantiate(UI);
@@ -74,7 +87,7 @@ public class StageClear : MonoBehaviour
 
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Clear;
 
-        Gold.text = $"È¹µæ °ñµå : {(int)Score/time}";
+        Gold.text = $"È¹µæ °ñµå : {(int)(Score/time)}";
 
         ShopState.Instance.Gold = (int)(Score / time);
 
@@ -93,14 +106,15 @@ public class StageClear : MonoBehaviour
     {
         string path = Application.dataPath + "/" + sceneName + ".json";
         string json;
+        Debug.Log(Application.dataPath + "/" + sceneName + ".json");
         try
         {
             json = File.ReadAllText(path);
-            _stage = JsonUtility.FromJson<Stage>(json);
+            _stage = JsonUtility.FromJson<Stageed>(json);
         }
         catch
         {
-            _stage = new Stage();
+            _stage = new Stageed();
         }
 
         if(_stage.hour >= hour)

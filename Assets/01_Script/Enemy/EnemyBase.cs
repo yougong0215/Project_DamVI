@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    [SerializeField] string nameing;
+    [SerializeField] string nameing = "이름없음";
     [Header("적 기본정보")]
     [SerializeField] public float MaxHP = 0;
     [SerializeField] public float HP = 0;
@@ -67,14 +67,21 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        
+        Name.text = $"{nameing}";
+        HPUI.fillAmount = (HP) / (MaxHP);
+      
+    }
+
     private void Update()
     {
-        Name.text = nameing;
         UI.transform.localEulerAngles = cam.transform.localEulerAngles;
+
         _AttackDelayTime -= Time.deltaTime;
         _stunTime -= Time.deltaTime;
         Debug.Log((HP) / (MaxHP));
-        HPUI.fillAmount = (HP) / (MaxHP);
         Score -= Time.deltaTime;
 
         if(Score < MinScore)
