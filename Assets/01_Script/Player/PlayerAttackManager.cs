@@ -176,8 +176,10 @@ public class PlayerAttackManager :  MonoBehaviour
         _timeLine.Play();
         _timeLine.timeUpdateMode = DirectorUpdateMode.UnscaledGameTime;
 
-        PlayableAsset playableAsset = _timeLine.playableAsset;
-        var outputs = playableAsset.outputs.ToList();
+        if (_inter.DistannsEnemy())
+        {
+            transform.localEulerAngles = _inter.DistannsEnemy().localEulerAngles * -1;
+        }
 
         // Although I know that it is always not going to be the first track but here for simplicity we use the first track
         //AnimationPlayableAsset animationPlayableAsset = outputs[5].sourceObject as AnimationPlayableAsset;
@@ -199,6 +201,15 @@ public class PlayerAttackManager :  MonoBehaviour
         yield return new WaitForSecondsRealtime(6.3f);
         Time.timeScale = 1;
         _timeLine.gameObject.SetActive(false);
+
+        Collider[] col = Physics.OverlapBox(transform.position
+        , new Vector3(20f, 20f, 20f), Quaternion.identity, 1 << LayerMask.NameToLayer("Enemy"));
+
+        for(int t =0; t < col.Length; t++)
+        {
+            col[t].GetComponent<EnemyBase>().DamagedCool((int)(500f + Mathf.Pow(ShopState.Instance.AttackAdd, 5) * 100), 2, Vector3.zero, false,0);
+        }
+
     }
     void Aimaing()
     {   
