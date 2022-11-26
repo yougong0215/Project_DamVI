@@ -9,12 +9,14 @@ public class StatCritical : ShopUpgrade
         base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.CriticalAdd = shopOption.upValue;
+        ShopState.Instance.CriticalCount = shopOption.count;
         UpdateText();
     }
 
     public override void UpdateText()
     {
-        if(shopOption.count == shopOption.maxCount)
+        base.UpdateText();
+        if (shopOption.count == shopOption.maxCount)
         {
             ValueText.text = $"+{ShopState.Instance.CriticalAdd * 100}%";
             CoastText.text = "MAX";

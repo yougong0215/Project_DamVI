@@ -9,12 +9,14 @@ public class StatMP : ShopUpgrade
         base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.MPAdd = shopOption.upValue;
+        ShopState.Instance.MPCount = shopOption.count;
         UpdateText();
     }
 
     public override void UpdateText()
     {
-        if(shopOption.count == shopOption.maxCount)
+        base.UpdateText();
+        if (shopOption.count == shopOption.maxCount)
         {
             ValueText.text = $"+{ShopState.Instance.MPAdd}";
             CoastText.text = "MAX";

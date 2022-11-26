@@ -45,7 +45,6 @@ public abstract class ShopUpgrade : MonoBehaviour
             Debug.Log("MAX");
         }
 
-
     }
 
     private void OnEnable()
@@ -78,7 +77,10 @@ public abstract class ShopUpgrade : MonoBehaviour
     }
     public virtual void UpdateText()
     {
-        
+
+        SettingSaveLoad.Instance.SaveShop();
         
     }
+
+
 }

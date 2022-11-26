@@ -80,11 +80,86 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
 
     }
 
+    public void SaveShop()
+    {
+        ShopStateForSave shopState = new ShopStateForSave();
+
+        #region 노가다의 산물
+        shopState.S_attack = ShopState.Instance.AttackAdd;
+        shopState.S_critical = ShopState.Instance.CriticalAdd;
+        shopState.S_Bullet = ShopState.Instance.BulletAdd;
+        shopState.S_hp = ShopState.Instance.HPAdd;
+        shopState.S_Mp = ShopState.Instance.MPAdd;
+        shopState.S_Shield = ShopState.Instance.ShieldAdd;
+        shopState.whill = ShopState.Instance.Willadd;
+        shopState.shoot = ShopState.Instance.ShooGun;
+        shopState.quick = ShopState.Instance.QuickDrowBool;
+        shopState.special = ShopState.Instance.UltBool;
+
+        shopState.attackCount = ShopState.Instance.AttackCount;
+        shopState.criticalCount = ShopState.Instance.CriticalCount;
+        shopState.bulletCount = ShopState.Instance.BulletCount;
+        shopState.hpCount = ShopState.Instance.HPCount;
+        shopState.mpCount = ShopState.Instance.MPCount;
+        shopState.shieldCount = ShopState.Instance.ShieldCount;
+        shopState.whillCount=ShopState.Instance.WhillCount;
+        shopState.shootCount=ShopState.Instance.ShootCount;
+        shopState.quickCount=ShopState.Instance.QuickCount;
+        shopState.specialCount=ShopState.Instance.SpecialCount;
+
+        shopState.S_gold = ShopState.Instance.Gold;
+        #endregion
+
+        string shopJson = JsonUtility.ToJson(shopState);
+
+        string fileName = "Shop";
+        string path = Application.dataPath + "/" + fileName + ".json";
+
+        File.WriteAllText(path, shopJson);
+        Debug.Log("저장완료");
+    }
+
+    public void LoadShop()
+    {
+        string fileName = "Shop";
+        string path = Application.dataPath + "/" + fileName + ".json";
+        string json = File.ReadAllText(path);
+
+        ShopStateForSave shopState = JsonUtility.FromJson<ShopStateForSave>(json);
+
+        #region 노가다의 산물
+        ShopState.Instance.AttackAdd = shopState.S_attack;
+        ShopState.Instance.CriticalAdd = shopState.S_critical;
+        ShopState.Instance.BulletAdd = shopState.S_Bullet;
+        ShopState.Instance.HPAdd = shopState.S_hp;
+        ShopState.Instance.MPAdd = shopState.S_Mp;
+        ShopState.Instance.ShieldAdd = shopState.S_Shield;
+        ShopState.Instance.Willadd = shopState.whill;
+        ShopState.Instance.ShooGun = shopState.shoot;
+        ShopState.Instance.QuickDrowBool = shopState.quick;
+        ShopState.Instance.UltBool = shopState.special;
+
+        ShopState.Instance.AttackCount = shopState.attackCount;
+        ShopState.Instance.CriticalCount = shopState.criticalCount;
+        ShopState.Instance.BulletCount = shopState.bulletCount;
+        ShopState.Instance.HPCount = shopState.hpCount;
+        ShopState.Instance.MPCount = shopState.mpCount;
+        ShopState.Instance.ShieldCount = shopState.shieldCount;
+        ShopState.Instance.WhillCount = shopState.whillCount;
+        ShopState.Instance.ShootCount = shopState.shootCount;
+        ShopState.Instance.QuickCount = shopState.quickCount;
+        ShopState.Instance.SpecialCount = shopState.specialCount;
+
+        ShopState.Instance.Gold = shopState.S_gold;
+        #endregion
+
+    }
     public void Reset()
     {
         List<string> paths = new List<string>();
         paths.Add(Application.dataPath + "/Graphic.json");
         paths.Add(Application.dataPath + "/Audio.json");
+        paths.Add(Application.dataPath + "/Shop.json");
 
         for(int i = 0; i < paths.Count; i++)
         {
