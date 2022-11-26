@@ -9,11 +9,13 @@ public class StatAttack : ShopUpgrade
         base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.AttackAdd = shopOption.upValue;
+        ShopState.Instance.AttackCount = shopOption.count;
         UpdateText();
     }
 
     public override void UpdateText()
     {
+        base.UpdateText();
         if (shopOption.count == shopOption.maxCount)
         {
             ValueText.text = $"+{Mathf.Round((ShopState.Instance.AttackAdd - 1f) * 10) * 0.1f}";

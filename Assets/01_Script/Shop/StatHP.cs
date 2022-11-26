@@ -9,12 +9,14 @@ public class StatHP : ShopUpgrade
         base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.HPAdd = (int)shopOption.upValue;
+        ShopState.Instance.HPCount = shopOption.count;
         UpdateText();
     }
 
     public override void UpdateText()
     {
-        if(shopOption.count == shopOption.maxCount)
+        base.UpdateText();
+        if (shopOption.count == shopOption.maxCount)
         {
             ValueText.text = $"+{ShopState.Instance.HPAdd}";
             CoastText.text = "MAX";

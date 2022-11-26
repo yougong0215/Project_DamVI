@@ -9,12 +9,14 @@ public class SkillWhill : ShopUpgrade
         base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.Willadd = (int)shopOption.upValue;
+        ShopState.Instance.WhillCount = shopOption.count;
         UpdateText();
     }
 
     public override void UpdateText()
     {
-        if(shopOption.count == shopOption.maxCount)
+        base.UpdateText();
+        if (shopOption.count == shopOption.maxCount)
         {
             CoastText.text = "MAX";
             return;

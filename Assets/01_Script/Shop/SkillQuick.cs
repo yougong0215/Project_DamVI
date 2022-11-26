@@ -9,11 +9,13 @@ public class SkillQuick : ShopUpgrade
         base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.QuickDrowBool = (int)shopOption.upValue;
+        ShopState.Instance.QuickCount = shopOption.count;
         UpdateText();
     }
 
     public override void UpdateText()
     {
+        base.UpdateText();
         if(shopOption.count == shopOption.maxCount)
         {
             CoastText.text = "MAX";

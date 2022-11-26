@@ -9,12 +9,14 @@ public class SkillShoot : ShopUpgrade
         base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.ShooGun = (int)shopOption.upValue;
+        ShopState.Instance.ShootCount = shopOption.count;
         UpdateText();
     }
 
     public override void UpdateText()
     {
-        if(shopOption.count == shopOption.maxCount)
+        base.UpdateText();
+        if (shopOption.count == shopOption.maxCount)
         {
             CoastText.text = "MAX";
             return;

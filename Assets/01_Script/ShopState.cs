@@ -16,6 +16,7 @@ public enum ShopEnum
     quick,
     special
 }
+
 public class ShopState : Singleton<ShopState>
 {
     /*
@@ -41,6 +42,11 @@ public class ShopState : Singleton<ShopState>
     필살기 0 -> 1                             -> bool 프러퍼티
      */
 
+    private void Awake()
+    {
+        SettingSaveLoad.Instance.LoadShop();
+    }
+
     private float S_attack = 0;
     private float S_critical = 0;
     private int S_hp = 0;
@@ -53,7 +59,7 @@ public class ShopState : Singleton<ShopState>
     private int quick = 0;
     private int special = 0;
 
-    private int S_gold = 1000000;
+    private int S_gold = 0;
 
     public int Gold
     {
@@ -61,6 +67,7 @@ public class ShopState : Singleton<ShopState>
         set => S_gold += value;
     }
 
+    #region 업그레이드 프로퍼티
     public float AttackAdd
     {
         get
@@ -153,9 +160,103 @@ public class ShopState : Singleton<ShopState>
         }
         set => special = value;
     }
+    #endregion
+    #region 레벨 프로퍼티
+    private int attackCount = 0;
+    private int criticalCount = 0;
+    private int hpCount = 0;
+    private int shieldCount = 0;
+    private int mpCount = 0;
+    private int bulletCount = 0;
 
+    private int whillCount = 0;
+    private int shootCount = 0;
+    private int quickCount = 0;
+    private int specialCount = 0;
+
+    public int AttackCount
+    {
+        get => attackCount;
+        set => attackCount = value;
+    }
+    public int CriticalCount
+    {
+        get => criticalCount;
+        set => criticalCount = value;
+    }
+    public int HPCount
+    {
+        get => hpCount;
+        set => hpCount = value;
+    }
+    public int ShieldCount
+    {
+        get => shieldCount;
+        set => shieldCount = value;
+    }
+    public int MPCount
+    {
+        get => mpCount;
+        set => mpCount = value;
+    }
+    public int BulletCount
+    {
+        get => bulletCount;
+        set => bulletCount = value;
+    }
+
+    public int WhillCount
+    {
+        get => whillCount;
+        set => whillCount = value;
+    }
+    public int ShootCount
+    {
+        get => shootCount;
+        set => shootCount = value;
+    }
+    public int QuickCount
+    {
+        get => quickCount;
+        set => quickCount = value;
+    }
+    public int SpecialCount
+    {
+        get => specialCount;
+        set => specialCount = value;
+    }
+    #endregion
     private void Update()
     {
-        Debug.Log(BulletAdd);
+
     }
+}
+public class ShopStateForSave
+{
+    public float S_attack = 0;
+    public float S_critical = 0;
+    public int S_hp = 0;
+    public int S_Shield = 0;
+    public float S_Mp = 0;
+    public int S_Bullet = 0;
+
+    public int whill = 0;
+    public int shoot = 0;
+    public int quick = 0;
+    public int special = 0;
+
+    public int S_gold = 0;
+
+    public int attackCount = 0;
+    public int criticalCount = 0;
+    public int hpCount = 0;
+    public int shieldCount = 0;
+    public int mpCount = 0;
+    public int bulletCount = 0;
+
+    public int whillCount = 0;
+    public int shootCount = 0;
+    public int quickCount = 0;
+    public int specialCount = 0;
+
 }

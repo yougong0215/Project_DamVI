@@ -9,12 +9,14 @@ public class StatShield : ShopUpgrade
         base.Upgrade();
         if (!isPossible) return;
         ShopState.Instance.ShieldAdd = (int)shopOption.upValue;
+        ShopState.Instance.ShieldCount = shopOption.count;
         UpdateText();
     }
 
     public override void UpdateText()
     {
-        if(shopOption.count == shopOption.maxCount)
+        base.UpdateText();
+        if (shopOption.count == shopOption.maxCount)
         {
             ValueText.text = $"+{ShopState.Instance.ShieldAdd}";
             CoastText.text = "MAX";
