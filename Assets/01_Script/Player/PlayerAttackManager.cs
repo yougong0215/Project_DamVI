@@ -145,9 +145,10 @@ public class PlayerAttackManager :  MonoBehaviour
                 SetStateNone();
             }
         }
-        else
+        else if(PlayerP != PlayerPripoty.Clear)
         {
-            _stage.OnDied();
+            _ani.enabled = false;
+            StopAllCoroutines();
         }
     }
 

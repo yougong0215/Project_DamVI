@@ -105,6 +105,10 @@ public class Bullet : PoolAble
 
     private void OnTriggerEnter(Collider other)
     {
+
+        float a = Random.Range(0, 21) + Random.Range(0, 21) + Random.Range(0, 21) + Random.Range(0, 21) + Random.Range(0, 21);
+        Debug.Log(a);
+
         num = 0;
         if (other.gameObject.layer == 30)
         {
@@ -116,7 +120,12 @@ public class Bullet : PoolAble
             {
                 if (other.GetComponent<EnemyBase>())
                 {
-                    other.GetComponent<EnemyBase>().DamagedCool((int)(damage * PlayerAttackManager.Instance._inter.CalcDamage()), stun, NuckBack, Grab, DelayTime); ;
+                    other.GetComponent<EnemyBase>().DamagedCool((int)(damage * PlayerAttackManager.Instance._inter.CalcDamage()), stun, NuckBack, Grab, DelayTime);
+
+                    if(a < ShopState.Instance.CriticalAdd)
+                    {
+                        other.GetComponent<EnemyBase>().DamagedCool((int)((damage/2) * PlayerAttackManager.Instance._inter.CalcDamage()), stun, NuckBack, Grab, DelayTime);
+                    }
                    // GetComponent<TrailRenderer>().enabled = false;
                    // GetComponent<TrailRenderer>().
                     GetComponentInChildren<VisualEffect>().Play();
