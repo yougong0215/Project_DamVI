@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 459642}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Wall_Arc_90_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   m_Component:
   - component: {fileID: 415766}
   - component: {fileID: 6546602}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Collider_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 3359654}
   - component: {fileID: 2300024}
   - component: {fileID: 6565612}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Wall_Simple_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 482078}
   - component: {fileID: 6595120}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Collider_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 3390038}
   - component: {fileID: 2324496}
   - component: {fileID: 9595346}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Wall_Arc_90_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 3396268}
   - component: {fileID: 2316084}
   - component: {fileID: 6553052}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 475980}
   - component: {fileID: 3319120}
   - component: {fileID: 2320334}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_Angle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466844}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 441182}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Door_Arch_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 446994}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 463114}
   - component: {fileID: 3307014}
   - component: {fileID: 2323384}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 3321568}
   - component: {fileID: 2313840}
   - component: {fileID: 6590744}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,8 +795,7 @@ GameObject:
   - component: {fileID: 403296}
   - component: {fileID: 3323572}
   - component: {fileID: 2326728}
-  - component: {fileID: 1348346649}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Door_Arch_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -869,20 +868,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1348346649
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130788}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: ff2448abfdccb4826856bab7a63c6d68, type: 3}
 --- !u!1 &131140
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,7 +877,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 410862}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_Door_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -924,7 +909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405996}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_Small_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -956,7 +941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 422924}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_Angle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -988,7 +973,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 416876}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1020,7 +1005,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 456282}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,7 +1039,7 @@ GameObject:
   - component: {fileID: 490472}
   - component: {fileID: 3388610}
   - component: {fileID: 2390862}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1138,7 +1123,7 @@ GameObject:
   - component: {fileID: 3399604}
   - component: {fileID: 2353564}
   - component: {fileID: 6582924}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1234,8 +1219,7 @@ GameObject:
   - component: {fileID: 431786}
   - component: {fileID: 3363918}
   - component: {fileID: 2327944}
-  - component: {fileID: 1136478622}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Door_Arch_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1308,20 +1292,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1136478622
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143022}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: ff2448abfdccb4826856bab7a63c6d68, type: 3}
 --- !u!1 &146976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1304,7 @@ GameObject:
   - component: {fileID: 3387688}
   - component: {fileID: 2312058}
   - component: {fileID: 6529854}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1428,7 +1398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400628}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1460,7 +1430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 423216}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1492,7 +1462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 447298}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Wall_Simple_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1524,7 +1494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 489906}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1558,7 +1528,7 @@ GameObject:
   - component: {fileID: 499694}
   - component: {fileID: 3332310}
   - component: {fileID: 2327464}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_Door_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1639,7 +1609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466174}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Wall_Simple_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1674,7 +1644,7 @@ GameObject:
   - component: {fileID: 3376240}
   - component: {fileID: 2399056}
   - component: {fileID: 6568922}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Wall_Simple_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1772,7 +1742,7 @@ GameObject:
   - component: {fileID: 3310404}
   - component: {fileID: 2343612}
   - component: {fileID: 6564966}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1866,7 +1836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 439674}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_Angle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1898,7 +1868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 468868}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Room_Big_Part_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1947,7 +1917,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 424886}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1979,7 +1949,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466428}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Door_Arch_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2013,7 +1983,7 @@ GameObject:
   - component: {fileID: 489646}
   - component: {fileID: 3371822}
   - component: {fileID: 2302960}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Roof_Angle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2097,7 +2067,7 @@ GameObject:
   - component: {fileID: 3313928}
   - component: {fileID: 2303908}
   - component: {fileID: 6533392}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2192,7 +2162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 413278}
   - component: {fileID: 6569214}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Collider_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2236,7 +2206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 499886}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Wall_Arc_90_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2274,7 +2244,7 @@ GameObject:
   - component: {fileID: 3387122}
   - component: {fileID: 2385714}
   - component: {fileID: 9560542}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Wall_Arc_90_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2377,7 +2347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 418460}
   - component: {fileID: 6569284}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Collider_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2422,7 +2392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 491118}
   - component: {fileID: 6529720}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Collider_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2469,7 +2439,7 @@ GameObject:
   - component: {fileID: 3389660}
   - component: {fileID: 2337608}
   - component: {fileID: 6528270}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor_Small_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2564,7 +2534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 448014}
   - component: {fileID: 6593788}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Collider_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
