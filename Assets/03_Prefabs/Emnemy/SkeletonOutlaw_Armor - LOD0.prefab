@@ -3530,6 +3530,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHP
       objectReference: {fileID: 0}
+    - target: {fileID: 6412098722006761559, guid: 8b224a81866f02e4b826276a18ee6434, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6412098722006761561, guid: 8b224a81866f02e4b826276a18ee6434, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

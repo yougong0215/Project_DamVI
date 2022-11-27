@@ -81,7 +81,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         _AttackDelayTime -= Time.deltaTime;
         _stunTime -= Time.deltaTime;
-        Debug.Log((HP) / (MaxHP));
+        //Debug.Log((HP) / (MaxHP));
         Score -= Time.deltaTime;
 
         if(Score < MinScore)
@@ -138,7 +138,7 @@ public abstract class EnemyBase : MonoBehaviour
         else
         {
             _ani.SetBool("Detection", false);
-            Debug.Log($"{_stunTime}, {_AttackDelayTime}");
+            //Debug.Log($"{_stunTime}, {_AttackDelayTime}");
         }
 
     }

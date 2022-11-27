@@ -79,11 +79,14 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Damaged(int dam)
     {
-        HP -= dam;
-        GetComponent<PlayerMove>().LookObject.GetComponent<CameraCollision>().shaking(0.1f, 0.2f, 1);
-        if(_superArrmor == false)
+        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear)
         {
-            arrmor -= dam * Random.Range(1, 11);
+            HP -= dam;
+            GetComponent<PlayerMove>().LookObject.GetComponent<CameraCollision>().shaking(0.1f, 0.2f, 1);
+            if (_superArrmor == false)
+            {
+                arrmor -= dam * Random.Range(1, 11);
+            }
         }
     }
 
@@ -94,9 +97,9 @@ public class PlayerInteraction : MonoBehaviour
         {
             StopCoroutine(hiting);
         }
-        
 
-        PlayerAttackManager.Instance._ani.SetTrigger("Hit");
+
+        PlayerAttackManager.Instance._ani.SetBool("Hit", true);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.hit;
 
         try
@@ -111,17 +114,19 @@ public class PlayerInteraction : MonoBehaviour
         {
 
         }
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
+        PlayerAttackManager.Instance._ani.SetBool("Hit", false);
         _nuckback = false;
     }
 
     IEnumerator hitStat()
     {
-        PlayerAttackManager.Instance._ani.SetTrigger("Block");
+        PlayerAttackManager.Instance._ani.SetBool("Block", true);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.hit;
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
+        PlayerAttackManager.Instance._ani.SetBool("Block", false);
 
     }
 
