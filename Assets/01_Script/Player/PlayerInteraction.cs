@@ -52,6 +52,7 @@ public class PlayerInteraction : MonoBehaviour
         ATK = ShopState.Instance.AttackAdd;
         arrmor = ShopState.Instance.ShieldAdd;
         MP = ShopState.Instance.MPAdd;
+        MP = 100;
         StartCoroutine(Cool());
         StartCoroutine(InteractionCheck());
     }
