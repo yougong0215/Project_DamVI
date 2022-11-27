@@ -5320,13 +5320,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Attack
-
-
-
-
-
-'
+  m_text: "\uACF5\uACA9\uB825\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -8097,7 +8091,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142864301}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -8482,13 +8476,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Bullet
-
-
-
-
-
-'
+  m_text: "\uCD1D\uC54C\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -20758,7 +20746,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skill
+  m_text: "\uC2A4\uD0AC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -23944,7 +23932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &484632998
 Transform:
   m_ObjectHideFlags: 0
@@ -33185,7 +33173,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727350568}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -40008,7 +39996,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "MP Regen \n\n\n\n\n"
+  m_text: "MP \uD68C\uBCF5\uB825 \n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -40587,13 +40575,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Critical
-
-
-
-
-
-'
+  m_text: "\uCE58\uBA85\uC218\uCE58\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -43885,7 +43867,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998946408}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -47382,7 +47364,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061482754}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -53725,13 +53707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HP
-
-
-
-
-
-'
+  m_text: "\uCCB4\uB825\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -54259,7 +54235,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166607214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -55230,13 +55206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Whill
-
-
-
-
-
-'
+  m_text: "\uAD6C\uB974\uAE30\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -56838,7 +56808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1231450437
 Transform:
   m_ObjectHideFlags: 0
@@ -66634,7 +66604,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455193298}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -71982,7 +71952,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565595231}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -79781,7 +79751,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763482714}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -86331,7 +86301,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886140585}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -86945,13 +86915,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Shield
-
-
-
-
-
-'
+  m_text: "\uBC29\uC5B4\uB825\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -88825,7 +88789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stat
+  m_text: "\uB2A5\uB825\uCE58"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -91374,7 +91338,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003503550}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -109037,7 +109001,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6683144575021646684}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -109210,7 +109174,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6683144576191806364}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
