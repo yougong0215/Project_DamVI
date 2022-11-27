@@ -138,10 +138,7 @@ public class CameraCollision : MonoBehaviour
         if (shakeDuration > 0)
         {
             _vcam.transform.position = _hitVec + Random.insideUnitSphere * shakeAmount;
-            if(_aiming == null)
-            {
-                _aiming.transform.position = _aiming.transform.position + Random.insideUnitSphere * shakeAmount;
-            }    
+            _aiming.transform.position = _aiming.transform.position + Random.insideUnitSphere * shakeAmount;
             shakeDuration -= Time.deltaTime * decreaseFactor;
         }
     }
