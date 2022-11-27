@@ -76,6 +76,7 @@ public class Bullet : PoolAble
         GetComponent<TrailRenderer>().time = 2;
         yield return null;
         p = PlayerAttackManager.Instance.PlayerP;
+        Debug.Log(p);
         if (gameObject.name != "ActiveBullet")
         {
             GetComponentInChildren<VisualEffect>().enabled = true;
@@ -119,13 +120,14 @@ public class Bullet : PoolAble
         num = 0;
         if (other.gameObject.layer == 30)
         {
+            if (p == PlayerPripoty.weaponAttack)
+            {
+                StartCoroutine(Attack2(other));
+                return;
+            }
             if (_aimshoot == false)
             {
                 StartCoroutine(Attack(other));
-            }
-            else if (p == PlayerPripoty.weaponAttack)
-            {
-                StartCoroutine(Attack2(other));
             }
             else
             {
@@ -188,31 +190,11 @@ public class Bullet : PoolAble
 
     IEnumerator Attack2(Collider other)
     {
-        col = Physics.OverlapBox(other.transform.position
-        , new Vector3(1.1f, 1.1f, 1.1f), Quaternion.identity, 1 << LayerMask.NameToLayer("Enemy")); ;
-
-        transform.position = other.transform.position;
         dir = Vector2.zero;
+        transform.position = other.transform.position + new Vector3(0, 1.4f, 0);
 
-        for (int i = 0; i < col.Length; i++)
-        {
-            yield return null;
-            try
-            {
-                if (col[i].GetComponent<EnemyBase>())
-                {
-
-                    col[i].GetComponent<EnemyBase>().DamagedCool((int)((damage/20) * Mathf.Pow(ShopState.Instance.AttackAdd,4)), stun, NuckBack, Grab, DelayTime);
-
-
-                    num++;
-                }
-            }
-            catch
-            {
-                num++;
-            }
-        }
+        other.gameObject.GetComponent<EnemyBase>().DamagedCool((int)((damage/20) * Mathf.Pow(ShopState.Instance.AttackAdd,4)), stun, NuckBack, Grab, DelayTime);
+        yield return null;
 
         StartCoroutine(die(other.gameObject.transform));
     }
@@ -235,7 +217,6 @@ public class Bullet : PoolAble
         //GetComponentInChildren<VisualEffect>().transform.localScale = 0.9f;
         GetComponentInChildren<VisualEffect>().Play();
         GetComponent<CapsuleCollider>().enabled = false;
-        transform.position = ts.position + new Vector3(0, 1.4f,0);
         yield return new WaitForSeconds(0.1f);
         GetComponent<TrailRenderer>().time = -100;
         yield return new WaitUntil(() => num != 0);

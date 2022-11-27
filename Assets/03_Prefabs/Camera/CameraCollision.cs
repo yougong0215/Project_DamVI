@@ -64,8 +64,10 @@ public class CameraCollision : MonoBehaviour
             return _player;
         }
     }
-    private void Update()
+    private void OnEnable()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void LateUpdate()
@@ -134,8 +136,6 @@ public class CameraCollision : MonoBehaviour
         _vcam.transform.position = _hitVec;
 
         
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
 
         _originrayY += Input.GetAxis("Mouse X") * _sense * L;
         _originrayX += Input.GetAxisRaw("Mouse Y") * _sense * U;

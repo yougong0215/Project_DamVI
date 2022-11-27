@@ -56,8 +56,8 @@ public class StageClear : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            a = true;
         }
-        a = true;
         sceneName = SceneManager.GetActiveScene().name;
 
         obj = Instantiate(UI);
@@ -74,9 +74,12 @@ public class StageClear : MonoBehaviour
     }
     public void OnClear()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
+        if (a == false)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            a = true;
+        }
         PlayerAttackManager.Instance._ani.enabled = false;
         PlayerAttackManager.Instance.StopAllCoroutines();
         sceneName = SceneManager.GetActiveScene().name;

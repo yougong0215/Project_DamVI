@@ -125,7 +125,7 @@ public class PlayerAttackManager :  MonoBehaviour
                 && PlayerP != PlayerPripoty.doged && PlayerP != PlayerPripoty.aiming
                 && PlayerP != PlayerPripoty.hit && PlayerP != PlayerPripoty.weaponAttack
                 && ShopState.Instance.UltBool == 1 && Input.GetKeyDown(KeyCode.R)
-                && _inter.I_MP >= 10)
+                && _inter.I_MP >= 100)
             {
                 StartCoroutine(Animi());
                 
@@ -157,11 +157,11 @@ public class PlayerAttackManager :  MonoBehaviour
                 _stage.OnDied();
             }
 
-            if (Input.GetKeyDown(KeyCode.Q) && _inter.I_MP >= 20 
+            if (Input.GetKeyDown(KeyCode.Q) && _inter.I_MP >= 33
                 && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight)
                 && ShopState.Instance.ShooGun == 1)
             {
-                _inter.UseMp(20);
+                _inter.UseMp(33);
                 playerpri = PlayerPripoty.weaponAttack;
                 _ani.SetBool("Weapon", true);
             }
@@ -174,15 +174,13 @@ public class PlayerAttackManager :  MonoBehaviour
         else if(PlayerP != PlayerPripoty.Clear)
         {
             _ani.enabled = false;
-            StopAllCoroutines(); Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
         }
     }
     IEnumerator Animi()
     {
         Vector3 save = transform.position;
         _timeLine.gameObject.SetActive(true);
-        _inter.UseMp(10);
+        _inter.UseMp(100);
         _timeLine.Play();
         _timeLine.timeUpdateMode = DirectorUpdateMode.UnscaledGameTime;
 
@@ -214,8 +212,9 @@ public class PlayerAttackManager :  MonoBehaviour
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(6.3f);
         _draw.GetComponent<RectTransform>().position = OriginUIvec;
-        _aimDraw.GetComponent<RectTransform>().position = OriginZoomUIvec;
         Time.timeScale = 1;
+
+        _timeLine.transform.localPosition = new Vector3(0, 0, 0);
         _timeLine.gameObject.SetActive(false);
         ppi.SetActive(true);
         Collider[] col = Physics.OverlapBox(transform.position
