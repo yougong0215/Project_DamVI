@@ -17,6 +17,7 @@ public class EnemyBullet : PoolAble
             return _player;
         }
     }
+
     Quaternion dir = Quaternion.identity;
     float speed = 0.3f;
     int damage = 0;

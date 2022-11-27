@@ -52,7 +52,6 @@ public class PlayerInteraction : MonoBehaviour
         ATK = ShopState.Instance.AttackAdd;
         arrmor = ShopState.Instance.ShieldAdd;
         MP = ShopState.Instance.MPAdd;
-        MP = 100;
         StartCoroutine(Cool());
         StartCoroutine(InteractionCheck());
     }
@@ -99,10 +98,19 @@ public class PlayerInteraction : MonoBehaviour
 
         PlayerAttackManager.Instance._ani.SetTrigger("Hit");
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.hit;
-        transform.rotation = Quaternion.LookRotation(Enemy.position);
 
-        GetComponent<Rigidbody>().AddForce((transform.position - Enemy.position).normalized * 5, ForceMode.VelocityChange);
+        try
+        {
+            transform.rotation = Quaternion.LookRotation(Enemy.position);
 
+            GetComponent<Rigidbody>().AddForce((transform.position - Enemy.position).normalized * 5, ForceMode.VelocityChange);
+
+        }
+
+        catch
+        {
+
+        }
         yield return new WaitForSeconds(0.7f);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
         _nuckback = false;

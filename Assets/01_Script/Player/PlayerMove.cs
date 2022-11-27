@@ -51,6 +51,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(ShopState.Instance.Willadd + " : " + _dogedCount);
         if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.hit 
             && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die
             && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear)

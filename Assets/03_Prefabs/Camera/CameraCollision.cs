@@ -64,31 +64,45 @@ public class CameraCollision : MonoBehaviour
             return _player;
         }
     }
-
+    private void OnEnable()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void LateUpdate()
     {
         if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear
             && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die)
         {
+            Aiming();
             CameraAltitude();
             shake();
-            Aiming();
         }
     }
 
     void Aiming()
     {
-        if(PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming)
+        if (PlayerAttackManager.Instance._inter.DistannsEnemy() && Input.GetMouseButtonDown(1) 
+            && PlayerPripoty.aiming == PlayerAttackManager.Instance.PlayerP)
         {
-            _originrayX = Player.localEulerAngles.x;
+            Vector3 enemy = PlayerAttackManager.Instance._inter.DistannsEnemy().position - Player.transform.position;
+            Debug.Log(enemy);
+            Player.rotation = Quaternion.LookRotation(enemy);
+            // -30 : 30 = 10 : 1
+            Player.rotation = Quaternion.Euler(Player.localEulerAngles + new Vector3(0, -10, 0));
+            Player.localEulerAngles = new Vector3(0, Player.localEulerAngles.y, 0);
+            _originrayX = 0;
             _originrayY = Player.localEulerAngles.y;
+            Debug.Log(_originrayY + " : " + Player.localEulerAngles.y);
+            //Player.rotation = Quaternion.Euler(0, Player.localEulerAngles.y, 0);
         }
     }
 
     void CameraAltitude()
     {
 
+        transform.localEulerAngles = new Vector3(_originrayX, _originrayY, 0);
         // 플레이어 위치는 보통 발바닥임 + 1.4f
         transform.position = Player.position + new Vector3(0.000000000000001f, 1.4f, 0);
 
@@ -118,11 +132,10 @@ public class CameraCollision : MonoBehaviour
             _hitVec = _vcamFake.transform.position;
         }
 
+
         _vcam.transform.position = _hitVec;
 
-        transform.localEulerAngles = new Vector3(_originrayX, _originrayY, 0);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        
 
         _originrayY += Input.GetAxis("Mouse X") * _sense * L;
         _originrayX += Input.GetAxisRaw("Mouse Y") * _sense * U;

@@ -65,7 +65,7 @@ public class AIDogNight : EnemyBase, IEnemyDetection
 
     IEnumerator FalseAttack()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         _ani.SetBool("Attack", false);
     }
 

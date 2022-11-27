@@ -31,6 +31,7 @@ public class StageClear : MonoBehaviour
     int min = 0;
     int hour = 0;
     int Score = 0;
+    bool a =false;
 
     private Transform _player;
     public Transform Player
@@ -51,9 +52,12 @@ public class StageClear : MonoBehaviour
     
     public void OnDied()
     {
-
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        if (a == false)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            a = true;
+        }
         sceneName = SceneManager.GetActiveScene().name;
 
         obj = Instantiate(UI);
@@ -70,9 +74,12 @@ public class StageClear : MonoBehaviour
     }
     public void OnClear()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
+        if (a == false)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            a = true;
+        }
         PlayerAttackManager.Instance._ani.enabled = false;
         PlayerAttackManager.Instance.StopAllCoroutines();
         sceneName = SceneManager.GetActiveScene().name;

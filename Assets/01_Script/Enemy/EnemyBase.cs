@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    [SerializeField] string nameing = "이름없음";
+    [SerializeField] public string nameing = "Enemy";
     [Header("적 기본정보")]
     [SerializeField] public float MaxHP = 0;
     [SerializeField] public float HP = 0;

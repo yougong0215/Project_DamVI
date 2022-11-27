@@ -131,7 +131,7 @@ public class ShopState : Singleton<ShopState>
             whill = Mathf.Clamp(whill, 0, 3);
             return whill;
         }
-        set => whill = value;
+        set => whill += value;
     }
     public int ShooGun
     {
