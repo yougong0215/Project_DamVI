@@ -39,7 +39,7 @@ public class PlayerAttackManager :  MonoBehaviour
     [Header("에니메이션")]
     [SerializeField] public Animator _ani;
     [SerializeField] public PlayableDirector _timeLine;
-    [SerializeField] public AnimationPlayableAsset ppi;
+    [SerializeField] public GameObject ppi;
 
     [Header("적들")]
     [SerializeField] Collider[] hit;
@@ -107,6 +107,11 @@ public class PlayerAttackManager :  MonoBehaviour
         _aimDraw.GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 10000);
     }
 
+    private void LateUpdate()
+    {
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -119,7 +124,7 @@ public class PlayerAttackManager :  MonoBehaviour
             if (PlayerP != PlayerPripoty.Fight && PlayerP != PlayerPripoty.Move 
                 && PlayerP != PlayerPripoty.doged && PlayerP != PlayerPripoty.aiming
                 && PlayerP != PlayerPripoty.hit && PlayerP != PlayerPripoty.weaponAttack
-                && ShopState.Instance.UltBool == 0 && Input.GetKeyDown(KeyCode.R)
+                && ShopState.Instance.UltBool == 1 && Input.GetKeyDown(KeyCode.R)
                 && _inter.I_MP >= 10)
             {
                 StartCoroutine(Animi());
@@ -127,11 +132,13 @@ public class PlayerAttackManager :  MonoBehaviour
 
             }
 
-            //_timeLine.time += (double)Time.unscaledTime;
             if (Input.GetMouseButtonDown(1))
             {
-                //LookEnemy();
+                LookEnemy();
             }
+
+            //_timeLine.time += (double)Time.unscaledTime;
+
 
             if (Input.GetMouseButton(1) == false)
             {
@@ -150,7 +157,9 @@ public class PlayerAttackManager :  MonoBehaviour
                 _stage.OnDied();
             }
 
-            if (Input.GetKeyDown(KeyCode.Q) && _inter.I_MP >= 20 && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight))
+            if (Input.GetKeyDown(KeyCode.Q) && _inter.I_MP >= 20 
+                && (playerpri == PlayerPripoty.Move || playerpri == PlayerPripoty.none || playerpri == PlayerPripoty.Fight)
+                && ShopState.Instance.ShooGun == 1)
             {
                 _inter.UseMp(20);
                 playerpri = PlayerPripoty.weaponAttack;
@@ -165,7 +174,8 @@ public class PlayerAttackManager :  MonoBehaviour
         else if(PlayerP != PlayerPripoty.Clear)
         {
             _ani.enabled = false;
-            StopAllCoroutines();
+            StopAllCoroutines(); Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     IEnumerator Animi()
@@ -195,13 +205,19 @@ public class PlayerAttackManager :  MonoBehaviour
 
         // var clips = animationTrack.GetClips().ToArray();
 
-        Time.timeScale = 0f;
+        ppi.SetActive(false);
 
-        
+        _draw.GetComponent<RectTransform>().position = new Vector3(10000, 10000, 10000);
+
+        _aimDraw.GetComponent<RectTransform>().localPosition = new Vector3(10000, 10000, 10000);
+
+        Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(6.3f);
+        _draw.GetComponent<RectTransform>().position = OriginUIvec;
+        _aimDraw.GetComponent<RectTransform>().position = OriginZoomUIvec;
         Time.timeScale = 1;
         _timeLine.gameObject.SetActive(false);
-
+        ppi.SetActive(true);
         Collider[] col = Physics.OverlapBox(transform.position
         , new Vector3(20f, 20f, 20f), Quaternion.identity, 1 << LayerMask.NameToLayer("Enemy"));
 
@@ -218,7 +234,8 @@ public class PlayerAttackManager :  MonoBehaviour
         {
             _ani.SetTrigger("AimShoot");
         }
-        if (Input.GetKeyDown(KeyCode.R) && _inter.I_MP >= 10)
+        if (Input.GetKeyDown(KeyCode.R) && _inter.I_MP >= 10
+            && ShopState.Instance.QuickDrowBool == 1)
         {
             _inter.UseMp(10);
             Bullet._bulletcount = ShopState.Instance.BulletAdd;
@@ -296,19 +313,19 @@ public class PlayerAttackManager :  MonoBehaviour
         );
     }
 
-    //protected void LookEnemy()
-    //{
-    //    if (_inter.DistannsEnemy())
-    //    {
-    //        Vector3 enemy = (_inter.DistannsEnemy().position - Player.transform.position).normalized;
-    //        Debug.Log(enemy);
-    //        Player.rotation = Quaternion.LookRotation(enemy);
-    //        Player.localEulerAngles = new Vector3(0, Player.localEulerAngles.y, 0);
-    //        //Player.rotation = Quaternion.Euler(0, Player.localEulerAngles.y, 0);
-    //    }
-    //    else
-    //    {
-    //        Player.rotation = Player.GetComponent<PlayerMove>().GetCameraAngel();
-    //    }
-    //}
+    protected void LookEnemy()
+    {
+        if (_inter.DistannsEnemy())
+        {
+            Vector3 enemy = _inter.DistannsEnemy().position - Player.transform.position;
+            Debug.Log(enemy);
+            Player.rotation = Quaternion.LookRotation(enemy);
+            Player.localEulerAngles = new Vector3(0, Player.localEulerAngles.y, 0);
+            //Player.rotation = Quaternion.Euler(0, Player.localEulerAngles.y, 0);
+        }
+        else
+        {
+            Player.rotation = Player.GetComponent<PlayerMove>().GetCameraAngel();
+        }
+    }
 }

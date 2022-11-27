@@ -8717,7 +8717,7 @@ MonoBehaviour:
   playerpri: 0
   _ani: {fileID: 0}
   _timeLine: {fileID: 5302674206526593056}
-  ppi: {fileID: 0}
+  ppi: {fileID: 7540259263989369060}
   hit: []
   _aimDraw: {fileID: 9119195644767618857}
   _draw: {fileID: 1361708292}

@@ -78,6 +78,10 @@ public class SummonObj : MonoBehaviour
                 ene.HP = enemy[Pase].enemy[i].HP;
                 ene.Score = enemy[Pase].enemy[i].Score;
                 ene.MinScore = enemy[Pase].enemy[i].MinScore;
+                if(enemy[Pase].enemy[i].name != "Enemy")
+                {
+                    ene.nameing = enemy[Pase].enemy[i].name;
+                }
             }
         }
       
@@ -98,6 +102,7 @@ public class Enemys
 
     public EnemyBase GameObject = null;
     public Transform SummonPos;
+    public string name = "Enemy";
     public int ATK;
     public int HP;
     public int Score;
