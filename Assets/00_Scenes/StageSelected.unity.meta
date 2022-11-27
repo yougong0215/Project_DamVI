@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Down/_Barking_Dog/Common Scripts.meta
+guid: 01635c8628443394c82392c4aded8daa
+folderAsset: yes
+========
 guid: f53e0711dbad1cc459ef0b75c98b7dda
+>>>>>>>> main:Assets/00_Scenes/StageSelected.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
