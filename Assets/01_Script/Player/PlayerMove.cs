@@ -12,9 +12,12 @@ public class PlayerMove : MonoBehaviour
     float angle;
     float cameraAngle;
 
+    float curtDoged =0 ;
+
     Coroutine co;
 
     int _dogedCount = 0;
+    float cutt = 0;
 
     [Header("ป๓ลย")]
     [SerializeField] bool isDoged = false;
@@ -51,11 +54,36 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(ShopState.Instance.Willadd + " : " + _dogedCount);
+
+        //Debug.Log(ShopState.Instance.Willadd + " : " + _dogedCount);
         if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.hit 
             && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die
             && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear)
         {
+            if (_ani.GetBool("Doged") == true && curtDoged >= 0.8f && isDoged == true)
+            {
+                _dogedCount = 1;
+                _ani.SetBool("Doged", false);
+                isDoged = false;
+            }
+
+            if (isDoged == true)
+                curtDoged += Time.deltaTime;
+            else
+            {
+                curtDoged = 0;
+            }
+            if(_dogedCount == 0)
+            {
+                curtDoged +=Time.deltaTime;
+            }
+            if(curtDoged >= 1.05f * ShopState.Instance.ShootCount)
+            {
+                _dogedCount = ShopState.Instance.ShootCount;
+                curtDoged = 0;
+            }
+
+
             //Debug.Log(_dogedCount);
             PrimaryCamSet();
             MoveDir();
@@ -121,7 +149,9 @@ public class PlayerMove : MonoBehaviour
         if (isDoged == false && Input.GetKeyDown(KeyCode.LeftShift) && _dogedCount > 0 
             && PlayerAttackManager.Instance.playerpri != PlayerPripoty.Fight 
             && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.aiming
-            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.weaponAttack)
+            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.weaponAttack
+            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die
+            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear)
         {
 
             StartCoroutine(Doged());
@@ -272,19 +302,21 @@ public class PlayerMove : MonoBehaviour
         _dogedCount--;
 
         _ani.SetBool("Doged", true);
-
+        curtDoged = 0;
         yield return null;
-
-        if(co != null)
+        curtDoged = 0;
+        if (co != null)
         {
             StopCoroutine(co);
         }
 
         co = StartCoroutine(DogedCountUp());
+        
         yield return new WaitForSeconds(0.55f);
+        curtDoged = 0;
         _ani.SetBool("Doged", false);
         yield return new WaitForSeconds(0.3f);
-
+        curtDoged = 0;
         isDoged = false;
     }
 

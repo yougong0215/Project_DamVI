@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.VFX;
 using Cinemachine;
 
+
 public class Bullet : PoolAble
 {
     [SerializeField] int damage = 0;
@@ -12,6 +13,7 @@ public class Bullet : PoolAble
     [SerializeField] bool Grab;
     [SerializeField] float DelayTime = 0;
     [SerializeField] float _speed = 50f;
+    [SerializeField] BulletType bul;
 
 
     bool _aimshoot = false;
@@ -113,9 +115,15 @@ public class Bullet : PoolAble
 
     private void OnTriggerEnter(Collider other)
     {
-
+        if(bul == BulletType.ActivityBullet)
+        {
+            if(other.gameObject.tag == "EnemyBullet")
+            {
+                PoolManager.Instance.Push(other.GetComponent<PoolAble>());
+            }
+        }
         float a = Random.Range(0, 21) + Random.Range(0, 21) + Random.Range(0, 21) + Random.Range(0, 21) + Random.Range(0, 21);
-        Debug.Log(a);
+        //Debug.Log(a);
 
         num = 0;
         if (other.gameObject.layer == 30)
@@ -185,7 +193,7 @@ public class Bullet : PoolAble
         //    PoolManager.Instance.Push(this);
         //}
 
-        StartCoroutine(die(other.gameObject.transform));
+        StartCoroutine(die());
     }
 
     IEnumerator Attack2(Collider other)
@@ -196,7 +204,7 @@ public class Bullet : PoolAble
         other.gameObject.GetComponent<EnemyBase>().DamagedCool((int)((damage/20) * Mathf.Pow(ShopState.Instance.AttackAdd,4)), stun, NuckBack, Grab, DelayTime);
         yield return null;
 
-        StartCoroutine(die(other.gameObject.transform));
+        StartCoroutine(die());
     }
 
 
@@ -209,7 +217,7 @@ public class Bullet : PoolAble
         PoolManager.Instance.Push(this);
     }
     
-    IEnumerator die(Transform ts)
+    IEnumerator die()
     {
         _stop = true;
         //GetComponent<TrailRenderer>().enabled = false;

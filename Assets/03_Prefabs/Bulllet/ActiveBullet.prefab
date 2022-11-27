@@ -53,6 +53,7 @@ MonoBehaviour:
   Grab: 0
   DelayTime: 0
   _speed: 50
+  bul: 2
 --- !u!136 &4927887938662984997
 CapsuleCollider:
   m_ObjectHideFlags: 0
