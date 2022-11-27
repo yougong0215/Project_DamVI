@@ -8716,7 +8716,7 @@ MonoBehaviour:
   playerStat: 0
   playerpri: 0
   _ani: {fileID: 0}
-  _timeLine: {fileID: 0}
+  _timeLine: {fileID: 5302674206526593056}
   ppi: {fileID: 0}
   hit: []
   _aimDraw: {fileID: 9119195644767618857}
@@ -17930,6 +17930,11 @@ PrefabInstance:
 --- !u!4 &4868464849807710215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5497739022913549814, guid: 12c81d8c763de794197e1cd0f322ce6b, type: 3}
+  m_PrefabInstance: {fileID: 1142689998329556465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!320 &5302674206526593056 stripped
+PlayableDirector:
+  m_CorrespondingSourceObject: {fileID: 5065780366535030225, guid: 12c81d8c763de794197e1cd0f322ce6b, type: 3}
   m_PrefabInstance: {fileID: 1142689998329556465}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6683144575295787338
