@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class AIFacta : EnemyBase, IEnemyDetection
 {
-    [SerializeField] UnityEvent Clear;
+    [SerializeField] StageClear Clear;
 
     [SerializeField] public int Pase = 1;
 
@@ -65,6 +65,22 @@ public class AIFacta : EnemyBase, IEnemyDetection
         }
         Name.text = $"{nameing}";
         HPUI.fillAmount = (HP) / (MaxHP);
+    }
+
+    protected override void DieEvent()
+    {
+        //gameObject.SetActive(false);
+
+        if(Clear != null)
+        {
+            Clear.OnClear();
+        }
+
+        _ani.SetBool("Die", true);
+        if (_nav != null)
+            _nav.enabled = false;
+        PlayerAttackManager.Instance.CurrentScore += (int)Score;
+        Destroy(this.gameObject, 0.5f);
     }
 
 
