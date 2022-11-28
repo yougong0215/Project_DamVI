@@ -45,7 +45,7 @@ public class ShopState : Singleton<ShopState>
     private void Awake()
     {
         SettingSaveLoad.Instance.LoadShop();
-    }
+    }   
 
     private float S_attack = 0;
     private float S_critical = 0;

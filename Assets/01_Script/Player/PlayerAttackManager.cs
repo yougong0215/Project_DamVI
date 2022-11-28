@@ -215,7 +215,7 @@ public class PlayerAttackManager :  MonoBehaviour
         yield return new WaitForSecondsRealtime(6.3f);
         _draw.GetComponent<RectTransform>().position = OriginUIvec;
         Time.timeScale = 1;
-
+        _timeLine.timeUpdateMode = DirectorUpdateMode.GameTime;
         _timeLine.transform.localPosition = new Vector3(0, 0, 0);
         _timeLine.gameObject.SetActive(false);
         ppi.SetActive(true);

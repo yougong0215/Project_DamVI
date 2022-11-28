@@ -72,12 +72,22 @@ public class CameraCollision : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear
-            && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die)
+        if(PauseManager.isPausing == false)
         {
-            Aiming();
-            CameraAltitude();
-            shake();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            if (PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear
+             && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die)
+            {
+                Aiming();
+                CameraAltitude();
+                shake();
+            }
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
