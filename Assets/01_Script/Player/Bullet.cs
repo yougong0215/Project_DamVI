@@ -64,6 +64,10 @@ public class Bullet : PoolAble
         {
             StartCoroutine(timeOut(0.3f));
         }
+        else if (_aimshoot == true)
+        {
+            StartCoroutine(timeOut(4));
+        }
         else
         {
             StartCoroutine(timeOut(1));
