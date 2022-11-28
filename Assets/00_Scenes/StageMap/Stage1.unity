@@ -32202,6 +32202,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2153112526014442936, guid: 60d59eb5804bbb84185cf9254b5a1c46, type: 3}
+      propertyPath: m_Size.x
+      value: 2.23911
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153112526014442936, guid: 60d59eb5804bbb84185cf9254b5a1c46, type: 3}
+      propertyPath: m_Center.x
+      value: -5.3662276
+      objectReference: {fileID: 0}
     - target: {fileID: 2153112526014442949, guid: 60d59eb5804bbb84185cf9254b5a1c46, type: 3}
       propertyPath: m_Name
       value: ObjectSommer

@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     float cutt = 0;
 
     [Header("상태")]
-    [SerializeField] bool isDoged = false;
+    [SerializeField] public bool isDoged = false;
     [SerializeField] bool isRun = false;
 
     [Header("카메라 혹은 락걸때")]

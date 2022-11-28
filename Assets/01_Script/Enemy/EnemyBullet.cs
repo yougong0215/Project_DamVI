@@ -54,7 +54,7 @@ public class EnemyBullet : PoolAble
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Player")
+        if(other.gameObject.name == "Player" && other.GetComponent<PlayerMove>().isDoged== false)
         {
             Player.GetComponent<PlayerInteraction>().Damaged(damage);
             Player.GetComponent<PlayerInteraction>().arrmorBlack(100000, enemy);

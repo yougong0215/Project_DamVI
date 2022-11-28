@@ -79,7 +79,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Damaged(int dam)
     {
-        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear)
+        if(PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear
+            && GetComponent<PlayerMove>().isDoged == false)
         {
             HP -= dam;
             GetComponent<PlayerMove>().LookObject.GetComponent<CameraCollision>().shaking(0.1f, 0.2f, 1);
