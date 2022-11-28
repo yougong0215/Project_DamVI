@@ -11,11 +11,13 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("적 기본정보")]
     [SerializeField] public float MaxHP = 0;
     [SerializeField] public float HP = 0;
-    [SerializeField] public int Barrier = 0;
+    [SerializeField] public float Barrier = 0;
     [SerializeField] public int ATK = 0;
     [SerializeField] public int _reviveCount = 0;
-    
-    
+    [SerializeField] public float MaxBarrier = 0;
+    [SerializeField] public bool BarrierBreak;
+    [SerializeField] public bool BarrierBreaking;
+
 
     [SerializeField] public bool BossMonster = false;
     [SerializeField] public bool _superArrmor = false;
@@ -42,7 +44,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void OnEnable()
     {
-        _nav = GetComponent<NavMeshAgent>();
+        if(GetComponent<NavMeshAgent>())
+            _nav = GetComponent<NavMeshAgent>();
         _rigid = gameObject.GetComponent<Rigidbody>();
         cam = GameObject.Find("Cam");
 
@@ -128,7 +131,7 @@ public abstract class EnemyBase : MonoBehaviour
             {
                 _ani.SetBool("Detection", false);
                 IdleEnemy();
-                if (_ani.GetBool("Die") == false)
+                if (_ani.GetBool("Die") == false && _nav !=null)
                 {
                     _nav.ResetPath();
                     _nav.SetDestination(transform.position);
@@ -146,7 +149,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void MoveEnemy()
     {
-        if (_ani.GetBool("Die") == false)
+        if (_ani.GetBool("Die") == false && _nav != null)
         {
             _nav.SetDestination(Player.position);
             _nav.stoppingDistance = _attackLength - 0.5f;
@@ -189,14 +192,16 @@ public abstract class EnemyBase : MonoBehaviour
             Vector3 force = (transform.position - Player.transform.position).normalized;
             int Grabing = Grab ? -1 : 1;
 
-            _rigid.AddForce(force * 2 * _fiber, ForceMode.VelocityChange);//force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
+            
 
 
-            if (_stunTime > 0)
+            if (_stunTime > 0 && Barrier <= 0)
             {
                 _ani.SetBool("hit", true);
+                _rigid.AddForce(force * 2 * _fiber, ForceMode.VelocityChange);//force.x * NuckBack.x, force.y * NuckBack.y, force.z * NuckBack.z) * Grabing, ForceMode.Impulse);
             }
         }
+
 
         HP -= ATK;
         yield return new WaitForSeconds(0.3f);
@@ -219,7 +224,8 @@ public abstract class EnemyBase : MonoBehaviour
         //gameObject.SetActive(false);
         
         _ani.SetBool("Die", true);
-        _nav.enabled = false;
+        if( _nav != null)
+            _nav.enabled = false;
         PlayerAttackManager.Instance.CurrentScore += (int)Score;
         Destroy(this.gameObject, 0.5f);
     }
@@ -230,7 +236,7 @@ public abstract class EnemyBase : MonoBehaviour
     /// <returns></returns>
     protected virtual int ReviveEvent()
     {
-        int ReviveHP = 0;
+        int ReviveHP = (int)MaxHP;
         _reviveCount--;
 
 

@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnEnable()
     {
+        LookObject = GameObject.Find("Cam").transform;
         isDoged = false;
        _rigid = GetComponent<Rigidbody>();
        _ani = GetComponent<Animator>();

@@ -19,7 +19,7 @@ public class EnemyBullet : PoolAble
     }
 
     Quaternion dir = Quaternion.identity;
-    float speed = 0.3f;
+    public float speed = 0.3f;
     int damage = 0;
 
     Transform enemy;
@@ -40,10 +40,10 @@ public class EnemyBullet : PoolAble
     protected virtual IEnumerator Shoot()
     {
         yield return null;
-        speed = 0.3f;
         yield return new WaitForSeconds(0.2f);
         //dir = (Player.position - transform.position).normalized;
-        speed = 30f;
+        if(speed != 0.3f)
+             speed = 30f;
         StartCoroutine(die());
     }
 
