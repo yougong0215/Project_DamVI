@@ -49,7 +49,16 @@ public class StageClear : MonoBehaviour
 
     string sceneName;
 
-    
+
+    private void Update()
+    {
+        if(a==true)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
     public void OnDied()
     {
         if (a == false)

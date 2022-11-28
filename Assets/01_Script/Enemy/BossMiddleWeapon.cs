@@ -53,7 +53,7 @@ public class BossMiddleWeapon : MonoBehaviour
     public void ShootVelodown(Vector3 vec, float speed)
     {
         
-        transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
+        transform.rotation = Quaternion.LookRotation(Player.position + new Vector3(0,1.2f,0) - transform.position);
         transform.localPosition = vec;
         transform.DOMoveY(1, speed);
     }
@@ -112,7 +112,7 @@ public class BossMiddleWeapon : MonoBehaviour
     {
         if (widthattack == false)
         {
-            transform.rotation = Quaternion.LookRotation(Player.position- transform.position);
+            transform.rotation = Quaternion.LookRotation(Player.position + new Vector3(0, 1.2f, 0) - transform.position);
         }
         if (obsjwhill == true)
         {

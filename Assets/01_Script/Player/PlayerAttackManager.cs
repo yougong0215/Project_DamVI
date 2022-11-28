@@ -173,9 +173,10 @@ public class PlayerAttackManager :  MonoBehaviour
                 SetStateNone();
             }
         }
-        else if(PlayerP != PlayerPripoty.Clear)
+        else
         {
-            _ani.enabled = false;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     IEnumerator Animi()

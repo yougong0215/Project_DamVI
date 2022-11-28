@@ -72,18 +72,19 @@ public class CameraCollision : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(PauseManager.isPausing == false)
+
+
+        if (PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear
+         && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die
+         && PauseManager.isPausing == false)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            if (PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear
-             && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die)
-            {
-                Aiming();
-                CameraAltitude();
-                shake();
-            }
+            Aiming();
+            CameraAltitude();
+            shake();
         }
+
         else
         {
             Cursor.visible = true;
@@ -93,7 +94,7 @@ public class CameraCollision : MonoBehaviour
 
     void Aiming()
     {
-        if (PlayerAttackManager.Instance._inter.DistannsEnemy() && Input.GetMouseButtonDown(1) 
+        if (PlayerAttackManager.Instance._inter.DistannsEnemy() && Input.GetMouseButtonDown(1)
             && PlayerPripoty.aiming == PlayerAttackManager.Instance.PlayerP)
         {
             Vector3 enemy = PlayerAttackManager.Instance._inter.DistannsEnemy().position - Player.transform.position;
@@ -145,7 +146,7 @@ public class CameraCollision : MonoBehaviour
 
         _vcam.transform.position = _hitVec;
 
-        
+
 
         _originrayY += Input.GetAxis("Mouse X") * _sense * L;
         _originrayX += Input.GetAxisRaw("Mouse Y") * _sense * U;
@@ -161,10 +162,10 @@ public class CameraCollision : MonoBehaviour
         if (shakeDuration > 0)
         {
             _vcam.transform.position = _hitVec + Random.insideUnitSphere * shakeAmount;
-            if(_aiming == null)
+            if (_aiming == null)
             {
                 _aiming.transform.position = _aiming.transform.position + Random.insideUnitSphere * shakeAmount;
-            }    
+            }
             shakeDuration -= Time.deltaTime * decreaseFactor;
         }
     }
