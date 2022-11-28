@@ -13,6 +13,6 @@ public class EnemyHP : MonoBehaviour
     }
     private void Update()
     {
-        transform.position = a.position + new Vector3(0,1.6f,0);
+        transform.position = a.position + new Vector3(0,2f,0);
     }
 }

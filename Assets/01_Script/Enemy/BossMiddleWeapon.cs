@@ -50,27 +50,29 @@ public class BossMiddleWeapon : MonoBehaviour
         }
     }
 
-    public void ShootVelodown(Vector3 vec, float speed)
+    public void ShootVelodown(Vector3 vec, float speed, Transform trans)
     {
         
         transform.rotation = Quaternion.LookRotation(Player.position + new Vector3(0,1.2f,0) - transform.position);
+        transform.parent = trans;
         transform.localPosition = vec;
         transform.DOMoveY(1, speed);
+        StartCoroutine(I());
     }
 
     public void ShootUpSide()
     {
         widthattack = true;
-        transform.localEulerAngles = new Vector3(0, 90, 0);
         transform.position = Player.position + new Vector3(0, 10);
         transform.DOMoveY(1, 1f);
-
+        StartCoroutine(I());
     }
 
     public void myWhill()
     {
         obsjwhill = true;
         widthattack = false;
+        StartCoroutine(I());
     }
 
     public void ShootWhill(Vector3 pos)
@@ -78,7 +80,7 @@ public class BossMiddleWeapon : MonoBehaviour
         obsjwhill = true;
         transform.parent = Player.Find("EnemyDetection");
         transform.localPosition = pos;
-        transform.parent = null;
+        StartCoroutine(I());
     }
     public void ShootingWhill(Vector3 pos)
     {
@@ -87,7 +89,7 @@ public class BossMiddleWeapon : MonoBehaviour
         objwhill = true;
         transform.parent = Player.Find("EnemyDetection");
         transform.localPosition = pos;
-        transform.parent = null;
+        StartCoroutine(I());
     }
 
     public void StopWhill(Vector3 pos, Transform e)
@@ -98,6 +100,7 @@ public class BossMiddleWeapon : MonoBehaviour
 
         transform.parent = e;
         transform.localPosition = pos;
+        StartCoroutine(I());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -105,7 +108,14 @@ public class BossMiddleWeapon : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerInteraction>().Damaged(50);
+            other.GetComponent<PlayerInteraction>().arrmorBlack(1000000, transform);
         }
+    }
+
+    IEnumerator I()
+    {
+        yield return new WaitForSeconds(0.1f);
+        transform.parent = null;
     }
 
     private void Update()
@@ -113,6 +123,10 @@ public class BossMiddleWeapon : MonoBehaviour
         if (widthattack == false)
         {
             transform.rotation = Quaternion.LookRotation(Player.position + new Vector3(0, 1.2f, 0) - transform.position);
+        }
+        else
+        {
+            transform.localEulerAngles = new Vector3(0, 90, 0);
         }
         if (obsjwhill == true)
         {
