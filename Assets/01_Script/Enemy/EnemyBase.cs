@@ -44,8 +44,11 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void OnEnable()
     {
-        if(GetComponent<NavMeshAgent>())
+        if (GetComponent<NavMeshAgent>())
             _nav = GetComponent<NavMeshAgent>();
+
+        _nav.enabled = false;
+
         _rigid = gameObject.GetComponent<Rigidbody>();
         cam = GameObject.Find("Cam").transform.GetChild(0).transform;
 
@@ -75,7 +78,7 @@ public abstract class EnemyBase : MonoBehaviour
         
         Name.text = $"{nameing}";
         HPUI.fillAmount = (HP) / (MaxHP);
-      
+        _nav.enabled = true;
     }
 
     private void Update()

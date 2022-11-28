@@ -15,6 +15,8 @@ public class PauseManager : MonoBehaviour
     {
 
         SceneManager.LoadScene("Pause", LoadSceneMode.Additive);
+        Time.timeScale = 1;
+        isPausing = false;
         StartCoroutine(StartOff());
         
         

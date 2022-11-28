@@ -12,9 +12,17 @@ public class AIDogNight : EnemyBase, IEnemyDetection
     {
         if (Vector3.Distance(Player.position, transform.position) >= _attackLength)
         {
-            if (_ani.GetBool("Die") == false) {
-                _nav.SetDestination(Player.position);
-                _nav.stoppingDistance = _attackLength;
+            if (_ani.GetBool("Die") == false) 
+            {
+                try
+                {
+                    _nav.SetDestination(Player.position);
+                    _nav.stoppingDistance = _attackLength;
+                }
+                catch
+                {
+
+                }
             }
             _ani.SetBool("Move", true);
         }

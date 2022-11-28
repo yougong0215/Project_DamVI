@@ -17614,21 +17614,6 @@ MonoBehaviour:
       HP: 500
       Score: 1000
       MinScore: 2000
-  - enemy:
-    - GameObject: {fileID: 8903862334865880318, guid: 80b29025b84a92049865b9ab9d597d1c, type: 3}
-      SummonPos: {fileID: 0}
-      name: Enemy
-      ATK: 0
-      HP: 0
-      Score: 0
-      MinScore: 0
-    - GameObject: {fileID: 7761365999731870710, guid: 824f7cda367d0ce43afe2553840f2577, type: 3}
-      SummonPos: {fileID: 0}
-      name: Enemy
-      ATK: 0
-      HP: 0
-      Score: 0
-      MinScore: 0
   obj: []
   pos: []
   Pase: 0

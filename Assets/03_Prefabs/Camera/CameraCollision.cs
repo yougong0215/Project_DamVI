@@ -72,7 +72,7 @@ public class CameraCollision : MonoBehaviour
 
     private void LateUpdate()
     {
-
+        Debug.Log(PauseManager.isPausing);
 
         if (PlayerAttackManager.Instance.PlayerP != PlayerPripoty.Clear
          && PlayerAttackManager.Instance.PlayerP != PlayerPripoty.die

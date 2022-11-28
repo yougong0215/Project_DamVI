@@ -33,6 +33,8 @@ public class StageClear : MonoBehaviour
     int Score = 0;
     bool a =false;
 
+    public bool infin = false;
+
     private Transform _player;
     public Transform Player
     {
@@ -61,6 +63,12 @@ public class StageClear : MonoBehaviour
 
     public void OnDied()
     {
+        if(infin == true)
+        {
+            OnClear();
+            return;
+        }
+
         if (a == false)
         {
             Cursor.visible = true;
