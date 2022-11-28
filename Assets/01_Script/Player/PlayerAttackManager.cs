@@ -30,6 +30,7 @@ public class PlayerAttackManager :  MonoBehaviour
             return m_Instance;
         }
     }
+    bool died =false;
 
 
     [Header("Enum ต้")]
@@ -150,11 +151,12 @@ public class PlayerAttackManager :  MonoBehaviour
             }
 
 
-            if (_inter.I_HP <= 0)
+            if (_inter.I_HP <= 0 && died == false)
             {
                 _ani.SetBool("Die", true);
                 PlayerAttackManager.Instance.PlayerP = PlayerPripoty.die;
                 _stage.OnDied();
+                died = true;
             }
 
             if (Input.GetKeyDown(KeyCode.Q) && _inter.I_MP >= 33
@@ -222,7 +224,7 @@ public class PlayerAttackManager :  MonoBehaviour
 
         for(int t =0; t < col.Length; t++)
         {
-            col[t].GetComponent<EnemyBase>().DamagedCool((int)(500f + Mathf.Pow(ShopState.Instance.AttackAdd, 5) * 100), 2, Vector3.zero, false,0);
+            col[t].GetComponent<EnemyBase>().DamagedCool((int)(555f * Mathf.Pow(ShopState.Instance.AttackAdd, 5)), 2, Vector3.zero, false,0);
         }
 
     }

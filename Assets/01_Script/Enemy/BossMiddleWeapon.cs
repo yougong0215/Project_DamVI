@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class BossMiddleWeapon : MonoBehaviour
 {
-    [SerializeField] EnemyBullet bul;
+    [SerializeField] WizardBullet bul;
     [SerializeField] Transform ts;
     [SerializeField] Transform pl;
 
@@ -13,18 +13,30 @@ public class BossMiddleWeapon : MonoBehaviour
     {
         pl = Player.Find("EnemyDetection");
     }
-
+    Coroutine co;
     bool widthattack = false;
     bool objwhill = false;
     bool obsjwhill = false;
     public void Fire(int ATK, float speed = 0.3f)
     {
-        EnemyBullet b = PoolManager.Instance.Pop(bul.name) as EnemyBullet;
+        widthattack = true;
+        WizardBullet b = PoolManager.Instance.Pop(bul.name) as WizardBullet;
         b.transform.position = ts.position;
         b.transform.rotation = transform.rotation;
-        b.SetDamage(ATK, transform);
+        b.SetDamage(ATK/5, transform);
         b.speed = speed;
+        if (co != null)
+            StopCoroutine(Stoping());
+        co = StartCoroutine(Stoping());
+
     }
+
+    IEnumerator Stoping()
+    {
+        yield return new WaitForSeconds(0.1f);
+        widthattack = false;
+    }
+
     private Transform _player;
     public Transform Player
     {
@@ -40,12 +52,16 @@ public class BossMiddleWeapon : MonoBehaviour
 
     public void ShootVelodown(Vector3 vec, float speed)
     {
+        
+        transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
         transform.localPosition = vec;
         transform.DOMoveY(1, speed);
     }
 
     public void ShootUpSide()
     {
+        widthattack = true;
+        transform.localEulerAngles = new Vector3(0, 90, 0);
         transform.position = Player.position + new Vector3(0, 10);
         transform.DOMoveY(1, 1f);
 
@@ -53,7 +69,7 @@ public class BossMiddleWeapon : MonoBehaviour
 
     public void myWhill()
     {
-        objwhill = true;
+        obsjwhill = true;
         widthattack = false;
     }
 
@@ -62,6 +78,7 @@ public class BossMiddleWeapon : MonoBehaviour
         obsjwhill = true;
         transform.parent = Player.Find("EnemyDetection");
         transform.localPosition = pos;
+        transform.parent = null;
     }
     public void ShootingWhill(Vector3 pos)
     {
@@ -70,6 +87,7 @@ public class BossMiddleWeapon : MonoBehaviour
         objwhill = true;
         transform.parent = Player.Find("EnemyDetection");
         transform.localPosition = pos;
+        transform.parent = null;
     }
 
     public void StopWhill(Vector3 pos, Transform e)
@@ -77,6 +95,7 @@ public class BossMiddleWeapon : MonoBehaviour
         widthattack = false;
         obsjwhill = false;
         objwhill = false;
+
         transform.parent = e;
         transform.localPosition = pos;
     }
@@ -91,9 +110,9 @@ public class BossMiddleWeapon : MonoBehaviour
 
     private void Update()
     {
-        if(widthattack == false)
+        if (widthattack == false)
         {
-            transform.rotation = Quaternion.LookRotation(Player.position);
+            transform.rotation = Quaternion.LookRotation(Player.position- transform.position);
         }
         if (obsjwhill == true)
         {
@@ -105,9 +124,5 @@ public class BossMiddleWeapon : MonoBehaviour
             transform.localEulerAngles += new Vector3(0, 300, 0) * Time.deltaTime;
         }
 
-    }
-    public void PosReset(Vector3 pos)
-    {
-        transform.localPosition = pos;
     }
 }

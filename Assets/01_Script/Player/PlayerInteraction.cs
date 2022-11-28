@@ -100,7 +100,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
 
-        PlayerAttackManager.Instance._ani.SetBool("Hit", true);
+        PlayerAttackManager.Instance._ani.SetTrigger("Hit");
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.hit;
 
         try
@@ -117,17 +117,15 @@ public class PlayerInteraction : MonoBehaviour
         }
         yield return new WaitForSeconds(0.3f);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
-        PlayerAttackManager.Instance._ani.SetBool("Hit", false);
         _nuckback = false;
     }
 
     IEnumerator hitStat()
     {
-        PlayerAttackManager.Instance._ani.SetBool("Block", true);
+        PlayerAttackManager.Instance._ani.SetTrigger("Block");
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.hit;
         yield return new WaitForSeconds(0.3f);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
-        PlayerAttackManager.Instance._ani.SetBool("Block", false);
 
     }
 

@@ -54,10 +54,7 @@ public class AIFacta : EnemyBase, IEnemyDetection
 
     protected override void EnemyDetection()
     {
-        if(Attacking == true)
-        {
-            _AttackDelayTime += Time.deltaTime;
-        }
+        transform.rotation = Quaternion.LookRotation(Player.position- transform.position);
 
         if(_maxAttackCount >= _nowAttackCount)
         {
@@ -88,7 +85,8 @@ public class AIFacta : EnemyBase, IEnemyDetection
     {
         if(_nowAttackCount >= _maxAttackCount)
         {
-            _AttackDelayTime = 10;
+            _AttackDelayTime = 5;
+            _nowAttackCount = 0;
         }
     }
 
@@ -165,8 +163,10 @@ public class AIFacta : EnemyBase, IEnemyDetection
     /// <returns></returns>
     IEnumerator Pase2MiddleShootUpSide()
     {
-        Left.PosReset(new Vector3(1.4f,0));
-        Right.PosReset(new Vector3(-1.4f, 0));
+
+
+        Left.StopWhill(new Vector3(1.4f, 1.4f), transform);
+        Right.StopWhill(new Vector3(-1.4f, 1.4f), transform);
         yield return new WaitForSeconds(1f);
         Left.ShootUpSide();
         yield return new WaitForSeconds(1.2f);
@@ -178,18 +178,16 @@ public class AIFacta : EnemyBase, IEnemyDetection
         Left.myWhill();
 
 
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < 20; i++)
         {
 
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
             Left.Fire(ATK, 15);
             Right.Fire(ATK, 15);
         }
         yield return new WaitForSeconds(1f);
-        Right.StopWhill(new Vector3(1.4f, 0, 0), transform);
-        Left.StopWhill(new Vector3(-1.4f, 0, 0), transform);
-        Left.PosReset(new Vector3(1.4f, 0));
-        Right.PosReset(new Vector3(-1.4f, 0));
+        Right.StopWhill(new Vector3(1.4f, 1, 0), transform);
+        Left.StopWhill(new Vector3(-1.4f, 1, 0), transform);
         _AttackDelayTime = 1;
         _nowAttackCount++;
         CheckAttack();
@@ -199,24 +197,26 @@ public class AIFacta : EnemyBase, IEnemyDetection
     IEnumerator Pase2WonShootWhillWhill()
     {
         Attacking = true;
-        Left.PosReset(new Vector3(1.4f, 0));
-        Right.PosReset(new Vector3(1.4f, 0));
+
+        Left.StopWhill(new Vector3(1.4f, 1.4f), transform);
+        Right.StopWhill(new Vector3(-1.4f, 1.4f), transform);
+
         yield return new WaitForSeconds(1f);
 
-        Left.ShootVelodown(new Vector3(1.4f, 1, 0),0.4f);
-        Right.ShootVelodown(new Vector3(1.4f, 1, 0),0.4f);
-        for (int i = 0; i < 20; i++)
+        Left.ShootVelodown(new Vector3(1.4f,6, 0),2f);
+        Right.ShootVelodown(new Vector3(-1.4f, 6, 0),2);
+        for (int i = 0; i < 40; i++)
         {
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.05f);
             Left.Fire(ATK, 15);
             Right.Fire(ATK, 15);
         }
-        yield return new WaitForSeconds(0.3f);
-        Left.ShootingWhill(new Vector3(10, 1, 10));
-        Right.ShootingWhill(new Vector3(-10, 1, -10));
+        yield return new WaitForSeconds(2f);
+        Left.ShootingWhill(new Vector3(5, 1, 5));
+        Right.ShootingWhill(new Vector3(-5, 1, -5));
         for (int i = 0; i < 100; i++)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
             Left.Fire(ATK, 15);
             Right.Fire(ATK, 15);
         }
@@ -234,7 +234,8 @@ public class AIFacta : EnemyBase, IEnemyDetection
         a.transform.position = BulletPos.position;
         a.transform.rotation = Quaternion.LookRotation(Player.position);
         a.transform.rotation = Quaternion.Euler(transform.localEulerAngles + new Vector3(x, y, 0));
-        a.GetComponent<EnemyBullet>().SetDamage(ATK, transform);
+        a.GetComponent<WizardBullet>().SetDamage(ATK, transform);
+        
     }
 
 
