@@ -20,7 +20,18 @@ public class Weapon : MonoBehaviour
     [SerializeField] List<AudioClip> Clip = new List<AudioClip>();
     [SerializeField] List<Bullet> Type = new List<Bullet>();
 
-
+    private Transform _player;
+    public Transform Player
+    {
+        get
+        {
+            if (_player == null)
+            {
+                _player = GameObject.Find("Player").GetComponent<Transform>();
+            }
+            return _player;
+        }
+    }
     [SerializeField] AudioSource Source;
 
     bool shoot =false;
@@ -77,6 +88,9 @@ public class Weapon : MonoBehaviour
         PlayerAttackManager.Instance.Rectmove();
         Source.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
         Source.PlayOneShot(Clip[1]);
+
+        Player.GetComponent<PlayerMove>().LookObject.GetComponent<CameraCollision>().shaking(0.08f, 0.15f, 1);
+
     }
 
 

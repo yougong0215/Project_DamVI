@@ -5,9 +5,14 @@ using Cinemachine;
 
 public class EnemyHP : MonoBehaviour
 {
+
+    Transform a;
+    private void Start()
+    {
+        a = transform.parent;
+    }
     private void Update()
     {
-        transform.localEulerAngles -= transform.parent.localEulerAngles;
-        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+        transform.position = a.position + new Vector3(0,1.6f,0);
     }
 }

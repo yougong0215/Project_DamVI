@@ -40,14 +40,14 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] public GameObject UI;
     [SerializeField] public Image HPUI;
     [SerializeField] public TextMeshProUGUI Name;
-    GameObject cam;
+    Transform cam;
 
     private void OnEnable()
     {
         if(GetComponent<NavMeshAgent>())
             _nav = GetComponent<NavMeshAgent>();
         _rigid = gameObject.GetComponent<Rigidbody>();
-        cam = GameObject.Find("Cam");
+        cam = GameObject.Find("Cam").transform.GetChild(0).transform;
 
 
         if (GetComponent<Animator>())
@@ -80,7 +80,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void Update()
     {
-        UI.transform.localEulerAngles = cam.transform.localEulerAngles;
+        UI.transform.rotation = Quaternion.LookRotation(UI.transform.position - cam.position);
+        //UI.transform.localEulerAngles = new Vector3(0, UI.transform.localEulerAngles.y, 0);
 
         _AttackDelayTime -= Time.deltaTime;
         _stunTime -= Time.deltaTime;

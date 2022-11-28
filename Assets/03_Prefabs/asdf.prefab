@@ -9763,6 +9763,10 @@ PlayableDirector:
     value: {fileID: 1975561593152128024}
   - key: {fileID: -694657165591412971, guid: 3e9c9195659d9c74ba64cc53d9b3dd8c, type: 2}
     value: {fileID: 2279378772941208709}
+  - key: {fileID: 5814485119599073723, guid: 3e9c9195659d9c74ba64cc53d9b3dd8c, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5025353477947215250, guid: 3e9c9195659d9c74ba64cc53d9b3dd8c, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - 9b389744143c61e4e903e9ef6d445a8e: {fileID: 6862126309495928590}

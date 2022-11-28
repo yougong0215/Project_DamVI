@@ -45,7 +45,7 @@ public class PlayerAttackFive : PlayerAttackBase
             Player.GetComponent<Weapon>().fire(WeaponType.Left, BulletType.Bulletbase);
         }
 
-        Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.05f, 0.05f);
+        //Player.GetComponent<PlayerMove>().CameraReturn().shaking(0.05f, 0.05f);
     }
 
 
