@@ -178,7 +178,7 @@ public class Bullet : PoolAble
                 if (col[i].GetComponent<EnemyBase>())
                 {
 
-                    col[i].GetComponent<EnemyBase>().DamagedCool((int)Mathf.Pow(PlayerAttackManager.Instance._inter.CalcDamage(), 3) * damage, stun, NuckBack, Grab, DelayTime);
+                    col[i].GetComponent<EnemyBase>().DamagedCool((int)Mathf.Pow(PlayerAttackManager.Instance._inter.CalcDamage(), 2) * damage, stun, NuckBack, Grab, DelayTime);
 
 
                     num++;
