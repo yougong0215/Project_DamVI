@@ -121,37 +121,46 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
 
     public void LoadShop()
     {
-        string fileName = "Shop";
-        string path = Application.dataPath + "/" + fileName + ".json";
-        string json = File.ReadAllText(path);
+        try
+        {
+            string fileName = "Shop";
+            string path = Application.dataPath + "/" + fileName + ".json";
+            string json = File.ReadAllText(path);
 
-        ShopStateForSave shopState = JsonUtility.FromJson<ShopStateForSave>(json);
+            ShopStateForSave shopState = JsonUtility.FromJson<ShopStateForSave>(json);
 
-        #region 노가다의 산물
-        ShopState.Instance.AttackAdd = shopState.S_attack;
-        ShopState.Instance.CriticalAdd = shopState.S_critical;
-        ShopState.Instance.BulletAdd = shopState.S_Bullet;
-        ShopState.Instance.HPAdd = shopState.S_hp;
-        ShopState.Instance.MPAdd = shopState.S_Mp;
-        ShopState.Instance.ShieldAdd = shopState.S_Shield;
-        ShopState.Instance.Willadd = shopState.whill;
-        ShopState.Instance.ShooGun = shopState.shoot;
-        ShopState.Instance.QuickDrowBool = shopState.quick;
-        ShopState.Instance.UltBool = shopState.special;
+            #region 노가다의 산물
+            ShopState.Instance.AttackAdd = shopState.S_attack;
+            ShopState.Instance.CriticalAdd = shopState.S_critical;
+            ShopState.Instance.BulletAdd = shopState.S_Bullet;
+            ShopState.Instance.HPAdd = shopState.S_hp;
+            ShopState.Instance.MPAdd = shopState.S_Mp;
+            ShopState.Instance.ShieldAdd = shopState.S_Shield;
+            ShopState.Instance.Willadd = shopState.whill;
+            ShopState.Instance.ShooGun = shopState.shoot;
+            ShopState.Instance.QuickDrowBool = shopState.quick;
+            ShopState.Instance.UltBool = shopState.special;
 
-        ShopState.Instance.AttackCount = shopState.attackCount;
-        ShopState.Instance.CriticalCount = shopState.criticalCount;
-        ShopState.Instance.BulletCount = shopState.bulletCount;
-        ShopState.Instance.HPCount = shopState.hpCount;
-        ShopState.Instance.MPCount = shopState.mpCount;
-        ShopState.Instance.ShieldCount = shopState.shieldCount;
-        ShopState.Instance.WhillCount = shopState.whillCount;
-        ShopState.Instance.ShootCount = shopState.shootCount;
-        ShopState.Instance.QuickCount = shopState.quickCount;
-        ShopState.Instance.SpecialCount = shopState.specialCount;
+            ShopState.Instance.AttackCount = shopState.attackCount;
+            ShopState.Instance.CriticalCount = shopState.criticalCount;
+            ShopState.Instance.BulletCount = shopState.bulletCount;
+            ShopState.Instance.HPCount = shopState.hpCount;
+            ShopState.Instance.MPCount = shopState.mpCount;
+            ShopState.Instance.ShieldCount = shopState.shieldCount;
+            ShopState.Instance.WhillCount = shopState.whillCount;
+            ShopState.Instance.ShootCount = shopState.shootCount;
+            ShopState.Instance.QuickCount = shopState.quickCount;
+            ShopState.Instance.SpecialCount = shopState.specialCount;
 
-        ShopState.Instance.Gold = shopState.S_gold;
-        #endregion
+            ShopState.Instance.Gold = shopState.S_gold;
+            #endregion
+        }
+        catch
+        {
+
+        }
+
+
 
     }
     public void Reset()

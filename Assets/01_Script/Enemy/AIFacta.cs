@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AIFacta : EnemyBase, IEnemyDetection
 {
+    [SerializeField] StageClear Clear;
+
     [SerializeField] public int Pase = 1;
 
     bool move = false;
@@ -62,6 +65,22 @@ public class AIFacta : EnemyBase, IEnemyDetection
         }
         Name.text = $"{nameing}";
         HPUI.fillAmount = (HP) / (MaxHP);
+    }
+
+    protected override void DieEvent()
+    {
+        //gameObject.SetActive(false);
+
+        if(Clear != null)
+        {
+            Clear.OnClear();
+        }
+
+        _ani.SetBool("Die", true);
+        if (_nav != null)
+            _nav.enabled = false;
+        PlayerAttackManager.Instance.CurrentScore += (int)Score;
+        Destroy(this.gameObject, 0.5f);
     }
 
 
@@ -160,9 +179,10 @@ public class AIFacta : EnemyBase, IEnemyDetection
     /// 
     IEnumerator Pase1ShortAttack()
     {
+        yield return new WaitForSeconds(1f);
         move = true;
-        _ani.SetBool("Short", true);
-        yield return new WaitUntil(() => Vector3.Distance(Player.position, transform.position) < _MeleeLength);
+        _ani.SetTrigger("Short");
+        //yield return new WaitUntil(() => Vector3.Distance(Player.position, transform.position) < _MeleeLength);
         _nav.stoppingDistance = 10000;
         //_rigid.velocity = Vector3.zero;
 
@@ -180,10 +200,10 @@ public class AIFacta : EnemyBase, IEnemyDetection
     }
     IEnumerator Pase2ShortAttack()
     {
-
+        yield return new WaitForSeconds(1f);
         move = true;
-        _ani.SetBool("Short", true);
-        yield return new WaitUntil(() => Vector3.Distance(Player.position, transform.position) < _MeleeLength);
+        _ani.SetTrigger("Short");
+       // yield return new WaitUntil(() => Vector3.Distance(Player.position, transform.position) < _MeleeLength);
         _nav.stoppingDistance = 10000;
         //_rigid.velocity = Vector3.zero;
         move = false;
@@ -211,8 +231,8 @@ public class AIFacta : EnemyBase, IEnemyDetection
     /// <returns></returns>
     IEnumerator Pase1MiddleShootUpSide()
     {
-
-
+        _ani.SetTrigger("Middle");
+        _ani.SetTrigger("ShortAttack");
         Left.StopWhill(new Vector3(1.4f, 1.4f), transform);
         Right.StopWhill(new Vector3(-1.4f, 1.4f), transform);
         yield return new WaitForSeconds(1f);
@@ -240,8 +260,8 @@ public class AIFacta : EnemyBase, IEnemyDetection
     }
     IEnumerator Pase2MiddleShootUpSide()
     {
-
-
+        _ani.SetTrigger("Middle");
+        _ani.SetTrigger("ShortAttack");
         Left.StopWhill(new Vector3(1.4f, 1.4f), transform);
         Right.StopWhill(new Vector3(-1.4f, 1.4f), transform);
         yield return new WaitForSeconds(1f);
@@ -273,8 +293,9 @@ public class AIFacta : EnemyBase, IEnemyDetection
 
     IEnumerator Pase1WonShootWhillWhill()
     {
+        _ani.SetTrigger("Whill");
         Attacking = true;
-
+        _ani.SetTrigger("ShortAttack");
         Left.StopWhill(new Vector3(1.4f, 1.4f), transform);
         Right.StopWhill(new Vector3(-1.4f, 1.4f), transform);
 
@@ -305,6 +326,8 @@ public class AIFacta : EnemyBase, IEnemyDetection
     }
     IEnumerator Pase2WonShootWhillWhill()
     {
+        _ani.SetTrigger("ShortAttack");
+        _ani.SetTrigger("Whill");
         Attacking = true;
 
         Left.StopWhill(new Vector3(1.4f, 1.4f), transform);
