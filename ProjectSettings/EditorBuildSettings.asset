@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Scenes/StageMap/Stage1.unity
     guid: a8b5768c732d2f641895ca4714d54f38
+  - enabled: 1
+    path: Assets/00_Scenes/Pause.unity
+    guid: 6fa10216d492d964883a2aa2fced6a4f
   m_configObjects: {}
