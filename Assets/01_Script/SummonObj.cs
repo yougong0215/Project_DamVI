@@ -16,10 +16,16 @@ public class SummonObj : MonoBehaviour
     [Header("적 리스트")]
     [SerializeField] List<EnemyBase> obj = new List<EnemyBase>();
 
+    [Header("영역지정")]
+    [SerializeField] List<BoxCollider> pos = new List<BoxCollider>();
 
+    private void OnEnable()
+    {
+        ClearPase = enemy.Count;
+    }
 
     public int Pase = 0;
-    public int ClearPase = 1;
+    int ClearPase = 2;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,9 +36,15 @@ public class SummonObj : MonoBehaviour
 
         
     }
-
+    
     IEnumerator Som() 
     {
+        for(int i =0; i < pos.Count; i++)
+        {
+            yield return null;
+            pos[i].gameObject.SetActive(true);
+        }
+
 
         while (true)
         {
@@ -49,6 +61,7 @@ public class SummonObj : MonoBehaviour
                 StartCoroutine(Sommon());
                 if (Pase == ClearPase)
                 {
+
                     break;
                 }
             }
@@ -60,10 +73,16 @@ public class SummonObj : MonoBehaviour
     {
         if(Pase == ClearPase)
         {
-            Clear.OnClear();
-           
-
-            Destroy(this);
+            for (int i = 0; i < pos.Count; i++)
+            {
+                yield return null;
+                pos[i].gameObject.SetActive(false);
+            }
+            if (Clear != null)
+              Clear.OnClear();
+            
+            
+           Destroy(this);
         }
         else
         {

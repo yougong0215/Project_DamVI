@@ -86,7 +86,7 @@ public class PlayerInteraction : MonoBehaviour
             GetComponent<PlayerMove>().LookObject.GetComponent<CameraCollision>().shaking(0.1f, 0.2f, 1);
             if (_superArrmor == false)
             {
-                arrmor -= dam * Random.Range(1, 11);
+                arrmor -= dam/5;
             }
         }
     }

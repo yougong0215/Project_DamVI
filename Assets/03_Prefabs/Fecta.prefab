@@ -4166,7 +4166,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &1903025215
 BoxCollider:
@@ -4194,11 +4194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameing: Enemy
-  MaxHP: 10000
-  HP: 10000
+  MaxHP: 3000
+  HP: 3000
   Barrier: 300
   ATK: 10
-  _reviveCount: 0
+  _reviveCount: 1
   MaxBarrier: 0
   BarrierBreak: 0
   BarrierBreaking: 0
@@ -4218,11 +4218,11 @@ MonoBehaviour:
   UI: {fileID: 6412098722255744020}
   HPUI: {fileID: 6412098723276077696}
   Name: {fileID: 6412098722776441877}
-  Pase: 2
+  Pase: 1
   _maxAttackCount: 5
   _nowAttackCount: 0
   Attacking: 0
-  _MeleeLength: 4
+  _MeleeLength: 3
   BaseBullet: {fileID: -1218289246605036425, guid: b1abb4cfabec66944ad3923ab6828d5b, type: 3}
   BulletPos: {fileID: 1353255697}
   Left: {fileID: 712053019}
@@ -4237,7 +4237,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -8269,6 +8269,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHP
       objectReference: {fileID: 0}
+    - target: {fileID: 6412098722006761559, guid: 8b224a81866f02e4b826276a18ee6434, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6412098722006761561, guid: 8b224a81866f02e4b826276a18ee6434, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8416,7 +8420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4736601740377342, guid: ec18485855dcae942a751b9fb56547e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9659988
+      value: 3.504
       objectReference: {fileID: 0}
     - target: {fileID: 4736601740377342, guid: ec18485855dcae942a751b9fb56547e9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8506,7 +8510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4736601740377342, guid: ec18485855dcae942a751b9fb56547e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9659988
+      value: 3.504
       objectReference: {fileID: 0}
     - target: {fileID: 4736601740377342, guid: ec18485855dcae942a751b9fb56547e9, type: 3}
       propertyPath: m_LocalPosition.z
