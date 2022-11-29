@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WizardBullet : PoolAble
 {
@@ -64,10 +65,12 @@ public class WizardBullet : PoolAble
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Player"
-            && other.GetComponent<PlayerMove>().isDoged == false)
+            && other.GetComponent<PlayerMove>().isDoged == false
+            )
         {
             Player.GetComponent<PlayerInteraction>().Damaged(damage);
-            //Player.GetComponent<PlayerInteraction>().arrmorBlack(100000, enemy);
+            if(SceneManager.GetActiveScene().name == "Loop")
+                Player.GetComponent<PlayerInteraction>().arrmorBlack(100000, enemy);
             PoolManager.Instance.Push(this);
         }
     }

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class BossMiddleWeapon : MonoBehaviour
 {
     [SerializeField] WizardBullet bul;
     [SerializeField] Transform ts;
     [SerializeField] Transform pl;
+    [SerializeField] public AudioSource audios;
+    [SerializeField] public AudioClip clip;
 
     private void OnEnable()
     {
@@ -21,9 +24,19 @@ public class BossMiddleWeapon : MonoBehaviour
     {
         widthattack = true;
         WizardBullet b = PoolManager.Instance.Pop(bul.name) as WizardBullet;
+
+        audios.PlayOneShot(clip);
+
         b.transform.position = ts.position;
         b.transform.rotation = transform.rotation;
-        b.SetDamage(ATK/5, transform);
+        if(ATK / 5 < 1)
+        {
+            b.SetDamage(1, transform);
+        }
+        else
+        {
+            b.SetDamage(ATK / 5, transform);
+        }
         b.speed = speed;
         if (co != null)
             StopCoroutine(Stoping());
@@ -72,6 +85,7 @@ public class BossMiddleWeapon : MonoBehaviour
     {
         obsjwhill = true;
         widthattack = false;
+
         StartCoroutine(I());
     }
 
@@ -80,7 +94,8 @@ public class BossMiddleWeapon : MonoBehaviour
         obsjwhill = true;
         transform.parent = Player.Find("EnemyDetection");
         transform.localPosition = pos;
-        StartCoroutine(I());
+        if (SceneManager.GetActiveScene().name != "Loop")
+            StartCoroutine(I());
     }
     public void ShootingWhill(Vector3 pos)
     {
@@ -89,7 +104,8 @@ public class BossMiddleWeapon : MonoBehaviour
         objwhill = true;
         transform.parent = Player.Find("EnemyDetection");
         transform.localPosition = pos;
-        StartCoroutine(I());
+        if(SceneManager.GetActiveScene().name != "Loop")
+            StartCoroutine(I());
     }
 
     public void StopWhill(Vector3 pos, Transform e)

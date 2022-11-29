@@ -87,6 +87,7 @@ public class AIFacta : EnemyBase, IEnemyDetection
     protected override void EnemyDetection()
     {
         transform.rotation = Quaternion.LookRotation(Player.position - transform.position);
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 
         if (_maxAttackCount >= _nowAttackCount)
         {
@@ -190,7 +191,7 @@ public class AIFacta : EnemyBase, IEnemyDetection
         {
             yield return new WaitForSeconds(0.1f);
             _ani.SetTrigger("ShortAttack");
-            ShootBullet(5, 0, 0);
+            ShootBullet(ATK, 0, 0);
         }
         yield return new WaitForSeconds(1f);
         Attacking = false;

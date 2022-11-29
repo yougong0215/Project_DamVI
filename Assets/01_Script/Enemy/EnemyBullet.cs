@@ -42,7 +42,7 @@ public class EnemyBullet : PoolAble
         yield return null;
         yield return new WaitForSeconds(0.2f);
         //dir = (Player.position - transform.position).normalized;
-        if(speed != 0.3f)
+        if(speed == 0.3f)
              speed = 30f;
         StartCoroutine(die());
     }

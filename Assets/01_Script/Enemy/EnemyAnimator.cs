@@ -43,26 +43,31 @@ public class EnemyAnimator : StateMachineBehaviour
         shot = true;
         yield return new  WaitForSeconds(0.05f);
         _g.Att(15);
+        animator.GetComponent<AudioSource>().PlayOneShot(animator.GetComponent<EnemyBase>().audios);
         yield return null;
         _g.Att(12);
         yield return null;
         _g.Att(9);
+        animator.GetComponent<AudioSource>().PlayOneShot(animator.GetComponent<EnemyBase>().audios);
         yield return null;
         _g.Att(6);
         yield return null;
         _g.Att(3);
         yield return new WaitForSeconds(0.1f);
         _g.Att();
+        animator.GetComponent<AudioSource>().PlayOneShot(animator.GetComponent<EnemyBase>().audios);
         yield return new WaitForSeconds(0.1f);
         _g.Att(-3);
         yield return null;
         _g.Att(-6);
+        animator.GetComponent<AudioSource>().PlayOneShot(animator.GetComponent<EnemyBase>().audios);
         yield return null;
         _g.Att(-9);
         yield return null;
         _g.Att(-12);
         yield return null;
         _g.Att(-15);
+        animator.GetComponent<AudioSource>().PlayOneShot(animator.GetComponent<EnemyBase>().audios);
         _g._rotate = false;
     }
 }

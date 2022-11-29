@@ -61,6 +61,7 @@ public class AIDogNight : EnemyBase, IEnemyDetection
     {
         _ani.SetBool("Attack", true);
         StartCoroutine(FalseAttack());
+        
     }
 
 

@@ -7,7 +7,8 @@ public enum StageEnum
     stage1,
     stage2,
     stage3,
-    stage4
+    stage4,
+    boss
 }
 public class StageButton : MonoBehaviour
 {

@@ -52,6 +52,7 @@ public class SkelAnimeAttack : StateMachineBehaviour
                 Player.GetComponent<MonoBehaviour>().StopAllCoroutines();
             }
         }
+        ani.GetComponent<AudioSource>().PlayOneShot(ani.GetComponent<EnemyBase>().audios);
         ai._AttackDelayTime = 2f;
 
     }

@@ -49,8 +49,10 @@ public class DogAnimeAttack : StateMachineBehaviour
                 ai._AttackDelayTime = 1.4f;
                 ai._rotate = true;
                 Player.GetComponent<MonoBehaviour>().StopAllCoroutines();
+                
             }
         }
+        ani.GetComponent<AudioSource>().PlayOneShot(ani.GetComponent<EnemyBase>().audios);
         ai._AttackDelayTime = 0.8f;
 
     }

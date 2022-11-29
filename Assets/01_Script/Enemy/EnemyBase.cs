@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public abstract class EnemyBase : MonoBehaviour
 {
     [SerializeField] public string nameing = "Enemy";
+    [Header("사운드")]
+    [SerializeField] public AudioClip audios;
+
     [Header("적 기본정보")]
     [SerializeField] public float MaxHP = 0;
     [SerializeField] public float HP = 0;
@@ -60,6 +63,8 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
+    
+
     private Transform _player;
     public Transform Player
     {
@@ -78,14 +83,13 @@ public abstract class EnemyBase : MonoBehaviour
         
         Name.text = $"{nameing}";
         HPUI.fillAmount = (HP) / (MaxHP);
-        _nav.enabled = true;
     }
 
     private void Update()
     {
         UI.transform.rotation = Quaternion.LookRotation(UI.transform.position - cam.position);
         //UI.transform.localEulerAngles = new Vector3(0, UI.transform.localEulerAngles.y, 0);
-
+        _nav.enabled = true;
         _AttackDelayTime -= Time.deltaTime;
         _stunTime -= Time.deltaTime;
         //Debug.Log((HP) / (MaxHP));

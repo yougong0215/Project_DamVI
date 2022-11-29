@@ -9021,6 +9021,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8df49ecd780a1b045b06e6881b3e82c4, type: 3}
+--- !u!114 &324898173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5046273802597183731, guid: 8df49ecd780a1b045b06e6881b3e82c4, type: 3}
+  m_PrefabInstance: {fileID: 324898172}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e711913ef14e344a166c3a0d487263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &325502868
 GameObject:
   m_ObjectHideFlags: 0
@@ -22452,9 +22463,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1903025210, guid: f4693a538989cff4f9bc1e00d72aeb55, type: 3}
-      propertyPath: ATK
-      value: 30
-      objectReference: {fileID: 0}
+      propertyPath: Clear
+      value: 
+      objectReference: {fileID: 324898173}
     - target: {fileID: 3862412359585754190, guid: f4693a538989cff4f9bc1e00d72aeb55, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -22503,14 +22514,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fecta
       objectReference: {fileID: 0}
-    - target: {fileID: 4856350431030789265, guid: f4693a538989cff4f9bc1e00d72aeb55, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7168084943754638900, guid: f4693a538989cff4f9bc1e00d72aeb55, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 369bbd91d32fa864d8b5d5e8a0f905b0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4693a538989cff4f9bc1e00d72aeb55, type: 3}
 --- !u!1 &1923081846

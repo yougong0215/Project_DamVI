@@ -49,6 +49,7 @@ public class WizardShootAnimation : StateMachineBehaviour
         yield return new WaitForSeconds(0.05f);
 
         _wiz.Att(2);
+        animator.GetComponent<AudioSource>().PlayOneShot(animator.GetComponent<EnemyBase>().audios);
         yield return null;
         _wiz.Att();
         yield return null;

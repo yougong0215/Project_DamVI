@@ -58,13 +58,17 @@ public class StageClear : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            PlayerAttackManager.Instance.PlayerP = PlayerPripoty.Clear;
         }
     }
 
     public void OnDied()
     {
+        a = true;
         if(infin == true)
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             OnClear();
             return;
         }
@@ -85,7 +89,11 @@ public class StageClear : MonoBehaviour
         time = PlayerAttackManager.Instance.CurrentClearTime;
         Score = PlayerAttackManager.Instance.CurrentScore;
 
-        Times.text = string.Format("ÇÃ·¹ÀÌ ½Ã°£ : {0:00}:{1:00}:{2:00}", hour, min, (int)time);
+
+        min = (int)time / 60;
+        hour = min / 60;
+        time %= 60;
+        Times.text = $"ÇÃ·¹ÀÌ ½Ã°£ : {hour}:{min}:{(int)time}";
         Gold.text = $"È¹µæ °ñµå : ¾øÀ½";
         Scores.text = $"È¹µæ Á¡¼ö : {Score}";
     }
@@ -115,14 +123,14 @@ public class StageClear : MonoBehaviour
 
         ShopState.Instance.Gold = (int)(Score / time);
 
-        time %= 60;
         min = (int)time / 60;
         hour = min / 60;
+        time %= 60;
 
         Save();
 
 
-        Times.text = string.Format("Å¬¸®¾î ½Ã°£ : {0:00}:{1:00}:{2:00}", hour, min, (int)time);
+        Times.text = $"ÇÃ·¹ÀÌ ½Ã°£ : {hour}:{min}:{(int)time}";
         Scores.text = $"È¹µæ Á¡¼ö : {Score}";
     }
 

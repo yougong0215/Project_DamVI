@@ -205,7 +205,7 @@ public class Bullet : PoolAble
         dir = Vector2.zero;
         transform.position = other.transform.position + new Vector3(0, 1.4f, 0);
 
-        other.gameObject.GetComponent<EnemyBase>().DamagedCool((int)((damage/20) * Mathf.Pow(ShopState.Instance.AttackAdd,4)), stun, NuckBack, Grab, DelayTime);
+        other.gameObject.GetComponent<EnemyBase>().DamagedCool((int)((damage/20) * Mathf.Pow(ShopState.Instance.AttackAdd,2)), stun, NuckBack, Grab, DelayTime);
         yield return null;
 
         StartCoroutine(die());
