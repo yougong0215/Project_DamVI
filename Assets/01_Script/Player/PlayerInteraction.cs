@@ -231,7 +231,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
 
-            MP += 5;//ShopState.Instance.MPAdd;
+            MP += ShopState.Instance.MPAdd;
             arrmor+=5;
         
         }

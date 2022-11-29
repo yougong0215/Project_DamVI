@@ -236,10 +236,10 @@ public class PlayerAttackManager :  MonoBehaviour
         {
             _ani.SetTrigger("AimShoot");
         }
-        if (Input.GetKeyDown(KeyCode.R) && _inter.I_MP >= 10
+        if (Input.GetKeyDown(KeyCode.R) && _inter.I_MP >= 20
             && ShopState.Instance.QuickDrowBool == 1)
         {
-            _inter.UseMp(10);
+            _inter.UseMp(20);
             Bullet._bulletcount = ShopState.Instance.BulletAdd;
         }
 

@@ -35,6 +35,6 @@ public class PlayerUI : MonoBehaviour
         Hp.text = $" HP  {_inter.I_HP}";
         Mp.text = $" MP  {_inter.I_MP}";
         ZoomHp.text = $" HP  {_inter.I_HP}";
-        ZoomMp.text = $" MP  {_inter.I_MP}";
+        ZoomMp.text = $" MP  {(int)_inter.I_MP}";
     }
 }
