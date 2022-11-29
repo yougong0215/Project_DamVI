@@ -1998,6 +1998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameing: "\uC0F7\uAC74\uBBF8\uB124\uC774\uD130"
+  audios: {fileID: 8300000, guid: aacd4998cdab8694894640b0df194f2c, type: 3}
   MaxHP: 1000
   HP: 1000
   Barrier: 0
@@ -2047,7 +2048,7 @@ AudioSource:
   m_GameObject: {fileID: 7294999945535655147}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 281953546973630225, guid: 1965e99fb24bcb0449833f660756f29d, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
