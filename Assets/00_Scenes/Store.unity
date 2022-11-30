@@ -1408,7 +1408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -67, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &270406329
@@ -1431,7 +1431,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "\uC704\uC131\uD1B5\uC2E0.. \uC78A\uC73C\uC2E0\uAC74 \uC544\uB2C8\uC8E0?\n\uBD88\uB7EC\uB9CC
+    \uC8FC\uC2E0\uB2E4\uBA74 \uD544\uB4DC\uC5D0 \uC788\uB294\n\uBAA8\uB4E0 \uC801\uB4E4\uC744
+    \uC12C\uBA78\uD558\uACA0\uC2B5\uB2C8\uB2E4..\n\n- PJ"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -1465,7 +1467,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2775,7 +2777,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &484632998
 Transform:
   m_ObjectHideFlags: 0
@@ -4320,7 +4322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -50, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &872747261
@@ -4343,7 +4345,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "\uC61B\uB0A0\uC61B\uC801 \uB124\uBAA8\uB09C \uAC83\uB9CC\n\uC788\uB358
+    \uC2DC\uC808 \uC804\uC124\uB85C \uB0B4\uB824\uC624\uB294\n\uAE30\uC220\uC774\uB2E4.\n\n\uB9DE\uC73C\uBA74
+    \uCD5C\uC18C \uC804\uCE5830\uC8FC\uC774\uB2E4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -4377,7 +4381,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6345,7 +6349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1231450437
 Transform:
   m_ObjectHideFlags: 0
@@ -10728,7 +10732,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "\uD558\uD558 \uB108\uAC00 \uBCF4\uACE0 \uC788\uB294 \uAC74\n\uACFC\uAC70\uC758
+    \uB098 \uC989 \uC794\uC0C1\uC774\uB2E4!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -10995,7 +11000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -32, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2060171573
@@ -11018,7 +11023,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "\uCE04\uB8E8\uB8E8\uB8E8\uB975 \uCD24\uB77C\uB77C\uB77C\uB77D\n\uB098\uC758
+    \uC7A5\uC804 \uC18D\uB3C4\uB294\n\uBE5B\uACFC \uAC19\uC9C0 \uC544\uC9C1\uB3C4\n\uAC70\uAE30\uC788\uB098?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
   m_sharedMaterial: {fileID: 3119349595911033684, guid: fe370b5e3382c094eb54e359b0a8b267, type: 2}
@@ -11052,7 +11058,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

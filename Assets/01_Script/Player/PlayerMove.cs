@@ -78,9 +78,9 @@ public class PlayerMove : MonoBehaviour
             {
                 curtDoged +=Time.deltaTime;
             }
-            if(curtDoged >= 1.05f * ShopState.Instance.ShootCount)
+            if(curtDoged >= 1.05f * ShopState.Instance.WhillCount)
             {
-                _dogedCount = ShopState.Instance.ShootCount;
+                _dogedCount = ShopState.Instance.WhillCount;
                 curtDoged = 0;
             }
 

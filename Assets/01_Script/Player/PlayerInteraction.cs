@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -111,9 +112,9 @@ public class PlayerInteraction : MonoBehaviour
 
         }
 
-        catch
+        catch (Exception e)
         {
-
+            Debug.LogWarning($"{e.Message}");
         }
         yield return new WaitForSeconds(0.3f);
         PlayerAttackManager.Instance.PlayerP = PlayerPripoty.none;
@@ -180,8 +181,9 @@ public class PlayerInteraction : MonoBehaviour
                         }
                     }
                 }
-                catch
+                catch (Exception e)
                 {
+                    Debug.LogError($"{e.Message} : 근처에 적 삭제됨");
                     _length = null;
                 }
 

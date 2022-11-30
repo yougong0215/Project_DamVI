@@ -865,7 +865,7 @@ MonoBehaviour:
   ts: {fileID: 1972897445}
   pl: {fileID: 0}
   audios: {fileID: 1919165910775804769}
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: e3ffa4668f7b9654b97f5b5fd32b2f7a, type: 3}
 --- !u!82 &1919165910775804769
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   ts: {fileID: 1603084157}
   pl: {fileID: 0}
   audios: {fileID: 1037885493955164806}
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: e3ffa4668f7b9654b97f5b5fd32b2f7a, type: 3}
 --- !u!82 &1037885493955164806
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5265,7 +5265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameing: "\uD329\uD0C0"
-  audios: {fileID: 0}
+  audios: {fileID: 8300000, guid: bfebc75dddbfca34a925254154ef8994, type: 3}
   MaxHP: 3000
   HP: 3000
   Barrier: 300

@@ -5,7 +5,6 @@ using UnityEngine;
 public interface IEnemyDetection
 {
 
-
     void AttackBase();
 
     void AttackCoolBase();
