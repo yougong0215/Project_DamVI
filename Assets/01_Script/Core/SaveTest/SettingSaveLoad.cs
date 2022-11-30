@@ -163,19 +163,5 @@ public class SettingSaveLoad : Singleton<SettingSaveLoad>
 
 
     }
-    public void Reset()
-    {
-        List<string> paths = new List<string>();
-        paths.Add(Application.dataPath + "/Graphic.json");
-        paths.Add(Application.dataPath + "/Audio.json");
-        paths.Add(Application.dataPath + "/Shop.json");
-
-        for(int i = 0; i < paths.Count; i++)
-        {
-            File.Delete(paths[i]);
-        }
-
-
-
-    }
+    
 }
