@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    #region º¯¼öµé
+    #region ë³€ìˆ˜ë“¤
     float h, v;
     Vector3 dir;
     Vector3 dirs;
@@ -19,24 +19,24 @@ public class PlayerMove : MonoBehaviour
     int _dogedCount = 0;
     float cutt = 0;
 
-    [Header("»óÅÂ")]
+    [Header("ìƒíƒœ")]
     [SerializeField] public bool isDoged = false;
     [SerializeField] bool isRun = false;
 
-    [Header("Ä«¸Ş¶ó È¤Àº ¶ô°É¶§")]
+    [Header("ì¹´ë©”ë¼ í˜¹ì€ ë½ê±¸ë•Œ")]
     [SerializeField] public Transform LookObject;
     [SerializeField] public Transform ArrowLook;
     [SerializeField] Transform _front;
     Vector2 _direction;
 
-    [Header("ÀÌµ¿ °ª")]
+    [Header("ì´ë™ ê°’")]
     [SerializeField] float _moveSpeed = 5f;
     [SerializeField] float _sense = 10f;
 
-    [Header("°­·ÂÇÑ °ª")]
+    [Header("ê°•ë ¥í•œ ê°’")]
     [SerializeField] float _inpuseMoveSpeed = 5;
 
-    [Header("±âÅ¸ »óÅÂ È®ÀÎ¿ë ÄÄÆ÷³ÍÆ®")]
+    [Header("ê¸°íƒ€ ìƒíƒœ í™•ì¸ìš© ì»´í¬ë„ŒíŠ¸")]
     [SerializeField] Animator _ani;
     [SerializeField] Rigidbody _rigid;
     #endregion
@@ -90,7 +90,7 @@ public class PlayerMove : MonoBehaviour
             MoveDir();
 
             DogedUse();
-            // ÀÔ·Â X
+            // ì…ë ¥ X
 
 
             if (PlayerAttackManager.Instance.PlayerP == PlayerPripoty.aiming && ArrowLook != null
@@ -109,7 +109,7 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftControl))
                 isRun = isRun ? false : true;
 
-            // ±¸¸£±â °°Àº ¼ø°£ ÀÌµ¿
+            // êµ¬ë¥´ê¸° ê°™ì€ ìˆœê°„ ì´ë™
 
 
             //Debug.Log(_direction);
@@ -124,11 +124,11 @@ public class PlayerMove : MonoBehaviour
         }
 
 
-        // ¸¸¾à¿¡ È°À» ¾´´Ù¸é.. ( ±Ùµ¥ ÃÑ ¶§¹®¿¡ ´Ù½Ã ¾µÁöµµ )
+        // ë§Œì•½ì— í™œì„ ì“´ë‹¤ë©´.. ( ê·¼ë° ì´ ë•Œë¬¸ì— ë‹¤ì‹œ ì“¸ì§€ë„ )
     }
 
     /// <summary>
-    /// ÃÖÃÊ·Î ½ÇÇà µÇ¾î¾ß µÇ´Â Ä£±¸
+    /// ìµœì´ˆë¡œ ì‹¤í–‰ ë˜ì–´ì•¼ ë˜ëŠ” ì¹œêµ¬
     /// </summary>
     private void PrimaryCamSet()
     {
@@ -143,7 +143,7 @@ public class PlayerMove : MonoBehaviour
 
 
     /// <summary>
-    /// ±¸¸£±â ÇßÀ»¶§
+    /// êµ¬ë¥´ê¸° í–ˆì„ë•Œ
     /// </summary>
     private void DogedUse()
     {
@@ -158,7 +158,7 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine(Doged());
             StartCoroutine(DogedTransler());
 
-            Vector3 direction = _front.transform.position - transform.position; // < xÃà±âÁØ
+            Vector3 direction = _front.transform.position - transform.position; // < xì¶•ê¸°ì¤€
 
             //direction.Normalize();
             //Quaternion quaternion = Quaternion.Euler(0, transform.localEulerAngles.y, 0);
@@ -180,7 +180,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     /// <summary>
-    /// ÁÜ
+    /// ì¤Œ
     /// </summary>
     private void ZoomMove()
     {
@@ -207,7 +207,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     /// <summary>
-    /// ¶Ç´Ù¸¥ ÀÔ·Â°ª¼³Á¤
+    /// ë˜ë‹¤ë¥¸ ì…ë ¥ê°’ì„¤ì •
     /// </summary>
     private void MoveDir()
     {
@@ -236,7 +236,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     /// <summary>
-    /// ´Ş¸®±â : ÀÌ°Å ³ªÁß¿¡ Move¶û ÇÕÄ¥¼ö ÀÖÀ½
+    /// ë‹¬ë¦¬ê¸° : ì´ê±° ë‚˜ì¤‘ì— Moveë‘ í•©ì¹ ìˆ˜ ìˆìŒ
     /// </summary>
     private void Move(float t)
     {
